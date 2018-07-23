@@ -314,8 +314,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1" data-path="publish.html"><a href="publish.html#overview-6"><i class="fa fa-check"></i><b>10.1</b> Overview</a></li>
 <li class="chapter" data-level="10.2" data-path="publish.html"><a href="publish.html#bookdown"><i class="fa fa-check"></i><b>10.2</b> Bookdown</a></li>
 <li class="chapter" data-level="10.3" data-path="publish.html"><a href="publish.html#essentials"><i class="fa fa-check"></i><b>10.3</b> Essentials</a></li>
-<li class="chapter" data-level="10.4" data-path="publish.html"><a href="publish.html#trimmings"><i class="fa fa-check"></i><b>10.4</b> Trimmings</a></li>
-<li class="chapter" data-level="10.5" data-path="publish.html"><a href="publish.html#other-resources"><i class="fa fa-check"></i><b>10.5</b> Other Resources</a></li>
+<li class="chapter" data-level="10.4" data-path="publish.html"><a href="publish.html#adding-a-custom-domain-name"><i class="fa fa-check"></i><b>10.4</b> Adding a custom domain name</a></li>
+<li class="chapter" data-level="10.5" data-path="publish.html"><a href="publish.html#make-a-custom-404-page"><i class="fa fa-check"></i><b>10.5</b> Make a custom 404 page</a></li>
+<li class="chapter" data-level="10.6" data-path="publish.html"><a href="publish.html#hooking-up-travis"><i class="fa fa-check"></i><b>10.6</b> Hooking Up Travis</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="publish.html"><a href="publish.html#add-travis-files-to-github-repo"><i class="fa fa-check"></i><b>10.6.1</b> Add Travis files to GitHub repo</a></li>
+<li class="chapter" data-level="10.6.2" data-path="publish.html"><a href="publish.html#add-travis-service"><i class="fa fa-check"></i><b>10.6.2</b> Add Travis service</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="publish.html"><a href="publish.html#other-resources"><i class="fa fa-check"></i><b>10.7</b> Other Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>11</b> GitHub Resources</a><ul>
 <li class="chapter" data-level="11.1" data-path="github.html"><a href="github.html#overview-7"><i class="fa fa-check"></i><b>11.1</b> Overview</a></li>
@@ -429,13 +434,13 @@ function unhover(element) {
 <li><p>Let’s fix that embarrassing typo! We <strong>update the code</strong> right in this editor, <strong>include an explanation</strong> for what we changed/why we made the change, and then <strong>hit the big green button</strong> labeled <strong>Propose file change</strong>. Gotta love those big green buttons!
 <img src="images/excited_student/directly-05.png" />
 <em>Make your edits, include a quick explanation, and hit the big green button.</em></p></li>
-<li><p>Now GitHub is once again helping out by letting us review the changes we made. On this page we can <strong>review our proposed changes</strong> by scrolling down and looking at the <a href="https://git-scm.com/docs/git-diff" target="_blank">diffs</a>. Our fix is very simple so there isn’t much to see. Once again, we are going to <strong>push the big green button</strong>, this time labeled <strong>Create pull request</strong>. This will start the process of letting the <em>edav.info/</em> people know that we would like them to incude our changes (in git-speak, we are <em>requesting</em> that when the <em>edav.info/</em> people do a <code>git pull</code>, they <em>pull</em> in our changes as well. Hence, a pull request).
+<li><p>Now GitHub is once again helping out by letting us review the changes we made. On this page we can <strong>review our proposed changes</strong> by scrolling down and looking at the <a href="https://git-scm.com/docs/git-diff" target="_blank">diffs</a>. Our fix is very simple so there isn’t much to see. Once again, we are going to <strong>push the big green button</strong>, this time labeled <strong>Create pull request</strong>. This will start the process of letting the <em>edav.info/</em> people know that we would like them to include our changes (in git-speak, we are <em>requesting</em> that when the <em>edav.info/</em> people do a <code>git pull</code>, they <em>pull</em> in our changes as well. Hence, a pull request).
 <img src="images/excited_student/directly-06.png" />
 <em>Chance to review your changes. Once satisfied, hit the big green button to start a pull request.</em></p></li>
 <li><p>Here we are at the pull request page. Notice the green checkmark that says “<em>Able to merge</em>” (a good sign that everything is going smoothly). Now we <strong>explain our pull request</strong> with some comments and, once again, <strong>hit the big green button</strong> labeled <strong>Create pull request</strong>. <br><strong>Note</strong>: You may be asking, “Why do I have to type this explanation in again?”. This is because the explanation we wrote in Step 5 (where we edited the file) is a <em>commit</em>. We could have had <em>multiple</em> commits at once that we wanted to bundle into <em>one</em> pull request. This step is a way to explain the pull request as a whole. It is redundant for us because our change is so small and only has one commit. Still totally lost? This <a href="https://guides.github.com/introduction/flow/" target="_blank">GitHub Guide on Understanding the GitHub Flow</a> is an incredibly helpful read and <a href="github.html">our GitHub Resources page</a> also has a lot of helpful links.
 <img src="images/excited_student/directly-14.png" />
 <em>Explain your pull request and hit the big green button.</em></p></li>
-<li><p><strong>Congratulations</strong> are in order! We have <strong>successfully opened a pull request on a GitHub repo!</strong> Now one of the repo owners (like the guy writing this tutorial, for example <i class="fas fa-grin-beam"></i>) has to decide if they want to include your pull request or not. In this case they’ll certainly approve it, but know that they may decide against adding your changes. For more info, read the section of the Open Source Guides on <a href="https://opensource.guide/how-to-contribute/#what-happens-after-you-submit-a-contribution" target="_blank">what happens after you submit a contribution</a>.<br> <strong>Note</strong>: Be aware that the icon shown below may initially be yellow to signal that some tests are being performed to check the conficts of your proposal with the original repo. It should turn green if everything passes.
+<li><p><strong>Congratulations</strong> are in order! We have <strong>successfully opened a pull request on a GitHub repo!</strong> Now one of the repo owners (like the guy writing this tutorial, for example <i class="fas fa-grin-beam"></i>) has to decide if they want to include your pull request or not. In this case they’ll certainly approve it, but know that they may decide against adding your changes. For more info, read the section of the Open Source Guides on <a href="https://opensource.guide/how-to-contribute/#what-happens-after-you-submit-a-contribution" target="_blank">what happens after you submit a contribution</a>.<br> <strong>Note</strong>: Be aware that the icon shown below may initially be yellow to signal that some tests are being performed to check the conflicts of your proposal with the original repo. It should turn green if everything passes.
 <img src="images/excited_student/directly-07.png" />
 <em>We did it! Now the maintainers will review our changes and get back to us…</em></p></li>
 </ol>
@@ -443,9 +448,7 @@ function unhover(element) {
 <center>
 <iframe src="https://giphy.com/embed/l0MYOUI5XfRk4LLWM" width="480" height="361" frameBorder="0" class="giphy-embed" allowFullScreen>
 </iframe>
-<p>
-<a href="https://giphy.com/gifs/warnerarchive-classic-film-warner-archive-l0MYOUI5XfRk4LLWM">via GIPHY</a>
-</p>
+<br /><a href="https://giphy.com/gifs/warnerarchive-classic-film-warner-archive-l0MYOUI5XfRk4LLWM">via GIPHY</a>
 </center>
 <ol start="9" style="list-style-type: decimal">
 <li><p>What’s this!? We have received <strong>an email from one of the repo owners</strong>, Zach Bogart. And it says that they merged the change! Huzzah! We <strong>click on the number</strong> to take us back to the pull request we opened.
@@ -461,7 +464,7 @@ function unhover(element) {
 <em>Look! There’s our merged pull request added to the repo!</em>
 <img src="images/excited_student/directly-12.png" />
 <em>And the edits we made to github_resources.Rmd!</em></p></li>
-<li><p>There it is! We go back to the page we edited and now <strong>our typo has been included!</strong><br><strong>Note</strong>: The changes will take about four to five minutes to appear on the site after notification of a successful merge. This is because we use <a href="https://travis-ci.org/" target="_blank">Travis CI</a> on the backend of our repo and it takes a little time for it to re-render the site pages. If you want to learn more about Travis CI and how it auto-magically generates the site, checkout <a href="not_ready_yet.html">our section on adding Travis to a GitHub bookdown book</a> in the <a href="publish.html">Publishing with R page</a>.
+<li><p>There it is! We go back to the page we edited and now <strong>our typo has been included!</strong><br><strong>Note</strong>: The changes will take about four to five minutes to appear on the site after notification of a successful merge. This is because we use <a href="https://travis-ci.org/" target="_blank">Travis CI</a> on the backend of our repo and it takes a little time for it to re-render the site pages. If you want to learn more about how you can use Travis CI to auto-magically generate your work, checkout <a href="publish.html#hooking-up-travis">our section on adding Travis to a GitHub bookdown book</a> in the <a href="publish.html">Publishing with R page</a>.
 <img src="images/excited_student/directly-13.png" />
 <em>Look at that! It’s published! So many exclamation points!!!</em></p></li>
 </ol>
