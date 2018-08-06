@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="scatter.html">
-<link rel="next" href="iris.html">
+<link rel="prev" href="contribute.html">
+<link rel="next" href="histo.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -415,92 +415,157 @@ function unhover(element) {
 <br><br>
 <a href="index.html"><img src="images/icons/edav_resource_url_no_smile.png" onmouseover="hover(this);" onmouseout="unhover(this);" /></a>
 </center>
-<div id="network" class="section level1">
-<h1><span class="header-section-number">9</span> Networks</h1>
-<p><img src="images/banners/banner_network.png" /></p>
-<!--## ggnetwork (static)-->
-<div id="visnetwork-interactive" class="section level2">
-<h2><span class="header-section-number">9.1</span> visNetwork (interactive)</h2>
-<p><code>visNetwork</code> is a powerful R implementation of the interactive JavaScript <code>vis.js</code> library; it uses <code>tidyverse</code> piping: <a href="https://datastorm-open.github.io/visNetwork/" class="uri">https://datastorm-open.github.io/visNetwork/</a></p>
-<p>–&gt; The Vignette has clear worked-out examples: <a href="https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork.html" class="uri">https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork.html</a></p>
-<p>The <code>visNetwork</code> documentation doesn’t provide the same level of explanation as the original, so it’s worth checking out the <code>vis.js</code> documentation as well:
-<a href="http://visjs.org/index.html" class="uri">http://visjs.org/index.html</a> In particular, the <a href="http://visjs.org/network_examples.html" target="_blank">interactive examples</a> are particularly useful for trying out different options. For example, you can test out physics options with this <a href="http://visjs.org/examples/network/physics/physicsConfiguration.html" target="_blank">network configurator</a>.</p>
-<div id="minimum-working-example" class="section level3">
-<h3><span class="header-section-number">9.1.1</span> Minimum working example</h3>
-<p>Create a <a href="https://datastorm-open.github.io/visNetwork/nodes.html" target="_blank">node data frame</a> with a minimum one of column (must be called <code>id</code>) with node names:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># nodes</span>
-boroughs &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;The Bronx&quot;</span>, <span class="st">&quot;Manhattan&quot;</span>, <span class="st">&quot;Queens&quot;</span>, <span class="st">&quot;Brooklyn&quot;</span>, <span class="st">&quot;Staten Island&quot;</span>))</code></pre>
-<p>Create a separate data frame of <a href="https://datastorm-open.github.io/visNetwork/edges.html" target="_blank">edges</a> with <code>from</code> and <code>to</code> columns.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># edges</span>
-connections &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;The Bronx&quot;</span>, <span class="st">&quot;The Bronx&quot;</span>, <span class="st">&quot;Queens&quot;</span>, <span class="st">&quot;Queens&quot;</span>, <span class="st">&quot;Manhattan&quot;</span>, <span class="st">&quot;Brooklyn&quot;</span>), <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;Manhattan&quot;</span>, <span class="st">&quot;Queens&quot;</span>, <span class="st">&quot;Brooklyn&quot;</span>, <span class="st">&quot;Manhattan&quot;</span>, <span class="st">&quot;Brooklyn&quot;</span>, <span class="st">&quot;Staten Island&quot;</span>))</code></pre>
-<p>Draw the network with <code>visNetwork(nodes, edges)</code></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(visNetwork)
-<span class="kw">visNetwork</span>(boroughs, connections)</code></pre>
-<div id="htmlwidget-96c0c751f427c85e9863" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-96c0c751f427c85e9863">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
-<p>Add labels by adding a label column to <code>nodes</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">boroughs &lt;-<span class="st"> </span>boroughs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">label =</span> id)
-<span class="kw">visNetwork</span>(boroughs, connections)</code></pre>
-<div id="htmlwidget-2e6f7bac6a810bc70429" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2e6f7bac6a810bc70429">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"label":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
+<div id="bar" class="section level1">
+<h1><span class="header-section-number">5</span> Chart: Bar Graph</h1>
+<p><img src="images/banners/banner_bargraph.png" /></p>
+<div id="overview-2" class="section level2">
+<h2><span class="header-section-number">5.1</span> Overview</h2>
+<p>This section covers how to make bar graphs</p>
 </div>
-<div id="performance" class="section level3">
-<h3><span class="header-section-number">9.1.2</span> Performance</h3>
-<p><code>visNetwork</code> can be very slow.</p>
-<p><code>%&gt;% visPhysics(stabilization = FALSE)</code> starts rendering before the stabilization is complete, which does actually speed things up but allows you to see what’s happening, which makes a big difference in user experience. (It’s also fun to watch the network stabilize). Other performance tips are described <a href="https://datastorm-open.github.io/visNetwork/performance.html" target="_blank">here</a>.</p>
-</div>
-<div id="helpful-configuration-tools" class="section level3">
-<h3><span class="header-section-number">9.1.3</span> Helpful configuration tools</h3>
-<p><code>%&gt;% visConfigure(enabled = TRUE)</code> is a useful tool for configuring options interactively. Upon completion, click “generate options” for the code to reproduce the settings. More <a href="https://datastorm-open.github.io/visNetwork/configure.html" target="_blank">here</a> (Note that changing options and then viewing them requires a lot of vertical scrolling in the browser. I’m not sure if anything can be done about this. If you have a solution, let me know!)</p>
-</div>
-<div id="coloring-nodes" class="section level3">
-<h3><span class="header-section-number">9.1.4</span> Coloring nodes</h3>
-<p>Add a column of actual color names to the nodes data frame:</p>
-<pre class="sourceCode r"><code class="sourceCode r">boroughs &lt;-<span class="st"> </span>boroughs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">is.island =</span> <span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">color =</span> <span class="kw">ifelse</span>(is.island, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;yellow&quot;</span>))
-<span class="kw">visNetwork</span>(boroughs, connections)</code></pre>
-<div id="htmlwidget-26e71e09cab0f570955f" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-26e71e09cab0f570955f">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"label":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"is.island":[false,true,false,false,true],"color":["yellow","blue","yellow","yellow","blue"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
-</div>
-<div id="directed-nodes-arrows" class="section level3">
-<h3><span class="header-section-number">9.1.5</span> Directed nodes (arrows)</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">visNetwork</span>(boroughs, connections) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">visEdges</span>(<span class="dt">arrows =</span> <span class="st">&quot;to;from&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>)</code></pre>
-<div id="htmlwidget-c34350840fe9909f496d" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c34350840fe9909f496d">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"label":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"is.island":[false,true,false,false,true],"color":["yellow","blue","yellow","yellow","blue"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"edges":{"arrows":"to;from","color":"green"}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
-</div>
-<div id="turn-off-the-physics-simulation" class="section level3">
-<h3><span class="header-section-number">9.1.6</span> Turn off the physics simulation</h3>
-<p>It’s much faster without the simulation. The nodes are randomly placed and can be moved around without affecting the rest of the network, at least in the case of small networks.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">visNetwork</span>(boroughs, connections) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">visEdges</span>(<span class="dt">physics =</span> <span class="ot">FALSE</span>)</code></pre>
-<div id="htmlwidget-19c41e36e81f9d39c276" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-19c41e36e81f9d39c276">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"label":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"is.island":[false,true,false,false,true],"color":["yellow","blue","yellow","yellow","blue"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"edges":{"physics":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
-</div>
-<div id="grey-out-nodes-far-from-selected-defined-by-degree" class="section level3">
-<h3><span class="header-section-number">9.1.7</span> Grey out nodes far from selected (defined by “degree”)</h3>
-<p>(Click a node to see effect.)</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># defaults to 1 degree</span>
-<span class="kw">visNetwork</span>(boroughs, connections) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">visOptions</span>(<span class="dt">highlightNearest =</span> <span class="ot">TRUE</span>)</code></pre>
-<div id="htmlwidget-e2a6892e2beb4007d351" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e2a6892e2beb4007d351">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"label":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"is.island":[false,true,false,false,true],"color":["yellow","blue","yellow","yellow","blue"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)"},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":false,"fit":false,"resetHighlight":true,"clusterOptions":null}},"evals":[],"jsHooks":[]}</script>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># set degree to 2</span>
-<span class="kw">visNetwork</span>(boroughs, connections) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">visOptions</span>(<span class="dt">highlightNearest =</span> <span class="kw">list</span>(<span class="dt">enabled =</span> <span class="ot">TRUE</span>, 
-                                     <span class="dt">degree =</span> <span class="dv">2</span>))</code></pre>
-<div id="htmlwidget-c887ce15228532b7a1de" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c887ce15228532b7a1de">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"label":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"is.island":[false,true,false,false,true],"color":["yellow","blue","yellow","yellow","blue"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)"},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":2,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":false,"fit":false,"resetHighlight":true,"clusterOptions":null}},"evals":[],"jsHooks":[]}</script>
+<div id="tldr" class="section level2">
+<h2><span class="header-section-number">5.2</span> tl;dr</h2>
+<!-- Gimme example -->
+<p>I want a nice example. Not tomorrow, not <em>after breakfast</em>. NOW!</p>
+<!-- Explanation: -->
+<p>Here’s a bar chart showing the survival rates of passengers aboard the <em>RMS Titanic</em>:</p>
+<p><img src="bargraph_files/figure-html/tldr-show-plot-1.png" width="864" /></p>
+<p>And here’s the code:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(datasets) <span class="co"># data</span>
+<span class="kw">library</span>(ggplot2) <span class="co"># plotting</span>
+<span class="kw">library</span>(dplyr) <span class="co"># manipulation</span>
 
+<span class="co"># Combine Children and Adult stats together</span>
+ship_grouped &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(Titanic) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Class, Sex, Survived) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Total =</span> <span class="kw">sum</span>(Freq))
+
+<span class="kw">ggplot</span>(ship_grouped, <span class="kw">aes</span>(<span class="dt">x =</span> Survived, <span class="dt">y =</span> Total, <span class="dt">fill =</span> Sex)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> Total), <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>), 
+            <span class="dt">vjust =</span> <span class="fl">-0.4</span>, <span class="dt">color =</span> <span class="st">&quot;grey68&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Class) <span class="op">+</span>
+<span class="st">  </span><span class="co"># formatting</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">750</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Don&#39;t Be A Crew Member On The Titanic&quot;</span>,
+          <span class="dt">subtitle =</span> <span class="st">&quot;Survival Rates of Titanic Passengers by Class and Gender&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#b2df8a&quot;</span>, <span class="st">&quot;#a6cee3&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Passenger Count&quot;</span>, <span class="dt">caption =</span> <span class="st">&quot;Source: titanic::titanic_train&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;grey35&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.caption =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> <span class="st">&quot;grey68&quot;</span>))</code></pre>
+<p>For more info on this dataset, type <code>?datasets::Titanic</code> into the console.</p>
 </div>
+<div id="simple-examples" class="section level2">
+<h2><span class="header-section-number">5.3</span> Simple examples</h2>
+<!-- Simplify Note -->
+<p>My eyes were bigger than my stomach. Much simpler please!</p>
+<!-- Simple Explanation of Data: -->
+<p>Let’s use the <code>HairEyeColor</code> dataset. To start, we will just look at the different categories of hair color among females:</p>
+<pre class="sourceCode r"><code class="sourceCode r">colors &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(HairEyeColor)
+
+<span class="co"># just female hair color, using dplyr</span>
+colors_female_hair &lt;-<span class="st"> </span>colors <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Sex <span class="op">==</span><span class="st"> &quot;Female&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Hair) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Total =</span> <span class="kw">sum</span>(Freq))
+
+<span class="co"># take a look at data</span>
+<span class="kw">head</span>(colors_female_hair)</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   Hair  Total
+##   &lt;fct&gt; &lt;dbl&gt;
+## 1 Black    52
+## 2 Brown   143
+## 3 Red      37
+## 4 Blond    81</code></pre>
+<p>Now let’s make some graphs with this data.</p>
+<div id="bar-graph-using-base-r" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Bar graph using base R</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(colors_female_hair[[<span class="st">&quot;Total&quot;</span>]], 
+        <span class="dt">names.arg =</span> colors_female_hair[[<span class="st">&quot;Hair&quot;</span>]],
+        <span class="dt">main =</span> <span class="st">&quot;Bar Graph Using Base R&quot;</span>)</code></pre>
+<p><img src="bargraph_files/figure-html/base-r-1.png" width="672" /></p>
+<!-- Base R Plot Explanation -->
+<p>We recommend using Base R only for simple bar graphs for yourself. Like all of Base R, it is simple to setup. <strong>Note</strong>: Base R expects a vector or matrix, hence the double brackets in the barplot call (gets columns as lists).</p>
+</div>
+<div id="bar-graph-using-ggplot2" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Bar graph using ggplot2</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2) <span class="co"># plotting</span>
+
+<span class="kw">ggplot</span>(colors_female_hair, <span class="kw">aes</span>(<span class="dt">x =</span> Hair, <span class="dt">y =</span> Total)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bar Graph Using ggplot2&quot;</span>)</code></pre>
+<p><img src="bargraph_files/figure-html/ggplot-1.png" width="672" /></p>
+<!-- ggplot2 explanation -->
+<p>Bar plots are very easy in <code>ggplot2</code>. You pass in a dataframe and let it know which parts you want to map to different aesthetics. <strong>Note</strong>: In this case, we have a table of values and want to plot them as explicit bar heights. Because of this, we specify the y aesthetic as the <code>Total</code> column, but we also have to specify <code>stat = &quot;identity&quot;</code> in <code>geom_bar()</code> so it knows to plot them correctly. Often you will have datasets where each row is one observation and you want to group them into bars. In that case, the y aesthetic and <code>stat = &quot;identity&quot;</code> do not have to be specified.</p>
+</div>
+</div>
+<div id="when-to-use" class="section level2">
+<h2><span class="header-section-number">5.4</span> When to use</h2>
+<!-- Quick Note on When to use this plot -->
+<p>Bar Charts are best for <em>categorical data</em>. Often you will have a collection of factors that you want to split into different groups.</p>
+</div>
+<div id="considerations" class="section level2">
+<h2><span class="header-section-number">5.5</span> Considerations</h2>
+<!-- *   List of things to pay attention to with examples -->
+<div id="not-for-continuous-data" class="section level3">
+<h3><span class="header-section-number">5.5.1</span> Not for continuous data</h3>
+<p>If you are finding that your bar graphs aren’t looking right, make sure your data is categorical and not continuous. If you want to plot continuous data using bars, that is what <a href="histo.html">histograms</a> are for!</p>
+</div>
+</div>
+<div id="modifications" class="section level2">
+<h2><span class="header-section-number">5.6</span> Modifications</h2>
+<!-- Things to add on -->
+<!--
+- Flip bars
+- Facet Wrap
+-->
+<p>These modifications assume you are using <code>ggplot2</code>.</p>
+<div id="flip-bars" class="section level3">
+<h3><span class="header-section-number">5.6.1</span> Flip Bars</h3>
+<p>To flip the orientation, just tack on <code>coord_flip()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(colors_female_hair, <span class="kw">aes</span>(<span class="dt">x =</span> Hair, <span class="dt">y =</span> Total)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bar Graph Using ggplot2&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>()</code></pre>
+<p><img src="bargraph_files/figure-html/coord-flip-1.png" width="672" /></p>
+</div>
+<div id="reorder-factor" class="section level3">
+<h3><span class="header-section-number">5.6.2</span> Reorder Factor</h3>
+<p>One way to reorder bar graphs is to reorder the factor:</p>
+<pre class="sourceCode r"><code class="sourceCode r">reordered &lt;-<span class="st"> </span>colors_female_hair
+reordered<span class="op">$</span>Hair &lt;-<span class="st"> </span><span class="kw">ordered</span>(reordered<span class="op">$</span>Hair, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Black&quot;</span>, <span class="st">&quot;Blond&quot;</span>, <span class="st">&quot;Brown&quot;</span>, <span class="st">&quot;Red&quot;</span>))
+
+<span class="kw">ggplot</span>(reordered, <span class="kw">aes</span>(<span class="dt">x =</span> Hair, <span class="dt">y =</span> Total)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bar Graph Using ggplot2&quot;</span>)</code></pre>
+<p><img src="bargraph_files/figure-html/reordering-1.png" width="672" /></p>
+</div>
+<div id="facet-wrap" class="section level3">
+<h3><span class="header-section-number">5.6.3</span> Facet Wrap</h3>
+<p>You can split the graph into small multiples using <code>facet_wrap()</code> (don’t forget the tilde, ~):</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(colors, <span class="kw">aes</span>(<span class="dt">x =</span> Sex, <span class="dt">y =</span> Freq)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Hair)</code></pre>
+<p><img src="bargraph_files/figure-html/small-multiples-1.png" width="672" /></p>
+</div>
+</div>
+<div id="theory" class="section level2">
+<h2><span class="header-section-number">5.7</span> Theory</h2>
+<!-- *Link to textbook -->
+<ul>
+<li>For more info about plotting categorical data, check out <a href="http://www.gradaanwr.net/content/04-displaying-categorial-data/" target="_blank">Chapter 4</a> of the textbook.</li>
+</ul>
+</div>
+<div id="external-resources" class="section level2">
+<h2><span class="header-section-number">5.8</span> External resources</h2>
+<!-- - [](){target="_blank"}: Links to resources with quick blurb -->
+<ul>
+<li><a href="http://www.cookbook-r.com/Manipulating_data/Changing_the_order_of_levels_of_a_factor/" target="_blank">Cookbook for R</a>: Discussion on reordering the levels of a factor.</li>
+<li><a href="https://campus.datacamp.com/courses/data-visualization-with-ggplot2-2/chapter-4-best-practices?ex=4#skiponboarding" target="_blank">DataCamp Exercise</a>: Simple exercise on making bar graphs with <code>ggplot2</code>.</li>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf" target="_blank">ggplot2 cheatsheet</a>: Always good to have close by.</li>
+</ul>
+
 </div>
 </div>
 <!-- 
@@ -526,8 +591,8 @@ Footer
           </div>
         </div>
       </div>
-<a href="scatter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="iris.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="contribute.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="histo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -557,7 +622,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jtr13/EDAV/edit/master/network.Rmd",
+"link": "https://github.com/jtr13/EDAV/edit/master/bargraph.Rmd",
 "text": "Edit"
 },
 "download": null,
