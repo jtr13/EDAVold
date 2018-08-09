@@ -294,7 +294,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5.1" data-path="scatter.html"><a href="scatter.html#overlapping-data"><i class="fa fa-check"></i><b>8.5.1</b> Overlapping data</a></li>
 <li class="chapter" data-level="8.5.2" data-path="scatter.html"><a href="scatter.html#scaling"><i class="fa fa-check"></i><b>8.5.2</b> Scaling</a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="scatter.html"><a href="scatter.html#modifications-1"><i class="fa fa-check"></i><b>8.6</b> Modifications</a></li>
+<li class="chapter" data-level="8.6" data-path="scatter.html"><a href="scatter.html#modifications-1"><i class="fa fa-check"></i><b>8.6</b> Modifications</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="scatter.html"><a href="scatter.html#heat-maps"><i class="fa fa-check"></i><b>8.6.1</b> Heat maps</a></li>
+<li class="chapter" data-level="8.6.2" data-path="scatter.html"><a href="scatter.html#contour-lines"><i class="fa fa-check"></i><b>8.6.2</b> Contour lines</a></li>
+<li class="chapter" data-level="8.6.3" data-path="scatter.html"><a href="scatter.html#scatterplot-matrices"><i class="fa fa-check"></i><b>8.6.3</b> Scatterplot matrices</a></li>
+</ul></li>
 <li class="chapter" data-level="8.7" data-path="scatter.html"><a href="scatter.html#theory-3"><i class="fa fa-check"></i><b>8.7</b> Theory</a></li>
 <li class="chapter" data-level="8.8" data-path="scatter.html"><a href="scatter.html#external-resources-3"><i class="fa fa-check"></i><b>8.8</b> External resources</a></li>
 </ul></li>
@@ -528,7 +532,6 @@ scatter <span class="op">+</span>
 </div>
 <div id="considerations-3" class="section level2">
 <h2><span class="header-section-number">8.5</span> Considerations</h2>
-<p>TODO</p>
 <!-- *   List of things to pay attention to with examples -->
 <div id="overlapping-data" class="section level3">
 <h3><span class="header-section-number">8.5.1</span> Overlapping data</h3>
@@ -536,16 +539,109 @@ scatter <span class="op">+</span>
 </div>
 <div id="scaling" class="section level3">
 <h3><span class="header-section-number">8.5.2</span> Scaling</h3>
-<p>Modify the scales to make it more legible</p>
+<p>Consider how scaling can modify how your data will be perceived:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+num_points &lt;-<span class="st"> </span><span class="dv">100</span>
+wide_x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">100</span>, <span class="dt">sd =</span> <span class="dv">2</span>), 
+            <span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">10</span>, <span class="dt">sd =</span> <span class="dv">2</span>))
+wide_y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> num_points, <span class="dt">mean =</span> <span class="dv">5</span>, <span class="dt">sd =</span> <span class="dv">2</span>)
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(wide_x, wide_y)
+  
+<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(wide_x, wide_y)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Linear X-Axis&quot;</span>)</code></pre>
+<p><img src="scatterplot_files/figure-html/scaling-fix-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(wide_x, wide_y)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Log-10 X-Axis&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_log10</span>()</code></pre>
+<p><img src="scatterplot_files/figure-html/scaling-fix-2.png" width="672" /></p>
 </div>
 </div>
 <div id="modifications-1" class="section level2">
 <h2><span class="header-section-number">8.6</span> Modifications</h2>
-<p>TODO</p>
-<ul>
-<li><p>Scatterplot matrices</p></li>
-<li><p>Contour Lines</p></li>
-</ul>
+<div id="heat-maps" class="section level3">
+<h3><span class="header-section-number">8.6.1</span> Heat maps</h3>
+<p>Heat maps are like a combination of scatterplots and <a href="histo.html">histograms</a>: they allow you to compare different parameters while also seeing their relative distributions.</p>
+<p>For these heat maps, we will use the <code>SpeedSki</code> dataset.</p>
+<div id="heat-map-default" class="section level4">
+<h4><span class="header-section-number">8.6.1.1</span> Heat map: default</h4>
+<p>To create a heat map, simply substitute <code>geom_point()</code> with <code>geom_bin2d()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(SpeedSki, <span class="kw">aes</span>(Year, Speed)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bin2d</span>()</code></pre>
+<p><img src="scatterplot_files/figure-html/heat-map-default-1.png" width="672" /></p>
+</div>
+<div id="heat-map-modify-colorbin-width" class="section level4">
+<h4><span class="header-section-number">8.6.1.2</span> Heat map: modify color/bin width</h4>
+<p>You can change the color palette by specifying it explicitly in your chain of <code>ggplot</code> function calls. The bin width can be added inside the <code>geom_bin2d()</code> function call:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(viridis) <span class="co"># viridis color palette</span>
+
+<span class="co"># create plot</span>
+g1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(SpeedSki, <span class="kw">aes</span>(Year, Speed)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_fill_viridis</span>() <span class="co"># modify color</span>
+
+<span class="co"># show plot</span>
+g1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_bin2d</span>(<span class="dt">binwidth =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>)) <span class="co"># modify bin width</span></code></pre>
+<p><img src="scatterplot_files/figure-html/heat-map-color-bin-width-1.png" width="672" /></p>
+<p>Here are some other examples:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># larger bin width</span>
+g1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_bin2d</span>(<span class="dt">binwidth =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">10</span>)) </code></pre>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># hexagonal bins</span>
+<span class="kw">library</span>(hexbin)
+g1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_hex</span>(<span class="dt">binwidth =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>))</code></pre>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># hexagonal bins + scatterplot layer</span>
+<span class="kw">library</span>(hexbin)
+g1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_hex</span>(<span class="dt">binwidth =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>), <span class="dt">alpha =</span> <span class="fl">.4</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.8</span>)</code></pre>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># hexagonal bins with custom color gradient/bin count</span>
+<span class="kw">library</span>(hexbin)
+<span class="kw">ggplot</span>(SpeedSki, <span class="kw">aes</span>(Year, Speed)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;#cccccc&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;#09005F&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># color</span>
+<span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">bins =</span> <span class="dv">10</span>) <span class="co"># number of bins horizontally/vertically</span></code></pre>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+</div>
+<div id="contour-lines" class="section level3">
+<h3><span class="header-section-number">8.6.2</span> Contour lines</h3>
+<!-- blurb -->
+<p>Contour lines let get a sense of the density of the data at a glance.</p>
+<p>For these contour maps, we will use the <code>SpeedSki</code> dataset.</p>
+<p>Contour lines can be added to the plot call using <code>geom_density_2d()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(SpeedSki, <span class="kw">aes</span>(Year, Speed)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_density_2d</span>() </code></pre>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Contour lines work best when combined with other layers:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(SpeedSki, <span class="kw">aes</span>(Year, Speed)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_density_2d</span>(<span class="dt">bins =</span> <span class="dv">5</span>)</code></pre>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="scatterplot-matrices" class="section level3">
+<h3><span class="header-section-number">8.6.3</span> Scatterplot matrices</h3>
+<p>If you want to compare multiple parameters to each other, consider using a scatterplot matrix. This will allow you to show many comparisons in a compact and efficient manner.</p>
+<p>For these scatterplot matrices, we will use the <code>movies</code> dataset from the <code>ggplot2movies</code> package.</p>
+<p>As a default, the base R <code>plot()</code> function will create a scatterplot matrix when given multiple variables:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2movies) <span class="co"># data</span>
+<span class="kw">library</span>(dplyr) <span class="co"># manipulation</span>
+
+index &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(movies), <span class="dv">500</span>) <span class="co">#sample data</span>
+moviedf &lt;-<span class="st"> </span>movies[index,] <span class="co"># data frame</span>
+
+splomvar &lt;-<span class="st"> </span>moviedf <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(length, budget, votes, rating, year)
+
+<span class="kw">plot</span>(splomvar)</code></pre>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>While this is quite useful for personal exploration of a datset, it is <strong>not</strong> recommended for presentation purposes. Something called the <a href="https://en.wikipedia.org/wiki/Grid_illusion" target="_blank">Hermann grid illusion</a> makes this plot very difficult to examine.</p>
+<p>To remove this problem, consider using the <code>splom()</code> function from the <code>lattice</code> package:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lattice) <span class="co">#sploms</span>
+
+<span class="kw">splom</span>(splomvar)</code></pre>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
 </div>
 <div id="theory-3" class="section level2">
 <h2><span class="header-section-number">8.7</span> Theory</h2>
