@@ -140,7 +140,7 @@ One way to reorder bar graphs is to reorder the factor:
 
 ```r
 reordered <- colors_female_hair
-reordered$Hair <- ordered(reordered$Hair, levels = c("Black", "Blond", "Brown", "Red"))
+reordered$Hair <- ordered(reordered$Hair, levels = c("Red", "Black", "Blond", "Brown"))
 
 ggplot(reordered, aes(x = Hair, y = Total)) +
   geom_bar(stat = "identity") +
