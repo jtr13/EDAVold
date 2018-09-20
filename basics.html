@@ -191,9 +191,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.3" data-path="basics.html"><a href="basics.html#importing-data"><i class="fa fa-check"></i><b>1.3.3</b> Importing data</a></li>
 <li class="chapter" data-level="1.3.4" data-path="basics.html"><a href="basics.html#r-markdown-knitr"><i class="fa fa-check"></i><b>1.3.4</b> R Markdown &amp; Knitr</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="basics.html"><a href="basics.html#getting-help"><i class="fa fa-check"></i><b>1.4</b> Getting help</a><ul>
-<li class="chapter" data-level="1.4.1" data-path="basics.html"><a href="basics.html#things-to-try"><i class="fa fa-check"></i><b>1.4.1</b> Things to try</a></li>
-<li class="chapter" data-level="1.4.2" data-path="basics.html"><a href="basics.html#help-me-r-community"><i class="fa fa-check"></i><b>1.4.2</b> Help me, R community!</a></li>
+<li class="chapter" data-level="1.4" data-path="basics.html"><a href="basics.html#submitting-assignments"><i class="fa fa-check"></i><b>1.4</b> Submitting Assignments</a></li>
+<li class="chapter" data-level="1.5" data-path="basics.html"><a href="basics.html#getting-help"><i class="fa fa-check"></i><b>1.5</b> Getting help</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="basics.html"><a href="basics.html#things-to-try"><i class="fa fa-check"></i><b>1.5.1</b> Things to try</a></li>
+<li class="chapter" data-level="1.5.2" data-path="basics.html"><a href="basics.html#help-me-r-community"><i class="fa fa-check"></i><b>1.5.2</b> Help me, R community!</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i><b>2</b> Final Project Notes</a><ul>
@@ -527,24 +528,45 @@ function unhover(element) {
 </div>
 <div id="r-markdown-knitr" class="section level3">
 <h3><span class="header-section-number">1.3.4</span> R Markdown &amp; Knitr</h3>
-<p>R Markdown is how you will be writing assignments for this course and Knitr is how you will generate an output file for submission. In general, they’re a great way to communicate your findings to others.</p>
+<p>R Markdown is how you will be writing assignments for this course and Knitr is how you will generate an output file for submission. In general, they’re a great way to communicate your findings to others (for the python-lovers among you, this is the <a href="http://jupyter.org/" target="_blank">Jupyter Notebook</a> of the R world)</p>
 <ul>
 <li><p>Don’t know about R Markdown? <a href="https://www.datacamp.com/courses/reporting-with-r-markdown" target="_blank">DataCamp course</a> to the rescue! We will be using html formatting so focus on that. There is also an <a href="https://www.rstudio.com/resources/webinars/getting-started-with-r-%20markdown/" target="_blank">RStudio webinar</a> about it.</p></li>
-<li><p>Don’t know about Knitr? Here’s <a href="" target="_blank">the specific section on Knitr</a> from the DataCamp course cited above. With this package, you can generate output documents from R Markdown files.</p></li>
+<li><p>Don’t know about Knitr? Here’s <a href="https://campus.datacamp.com/courses/reporting-with-r-markdown/chapter-two-embedding-code?ex=1" target="_blank">the specific section on Knitr</a> from the DataCamp course cited above. With this package, you can embed code directly into your R Markdown files and generate output documents. Make sure to go through the later exercises to learn about <a href="https://rmarkdown.rstudio.com/lesson-3.html" target="_blank">code chunks</a> and <a href="http://yihui.name/knitr/options/" target="_blank">chunk options</a> so you can fine-tune your final output document with ease.</p></li>
 </ul>
 <p><em>More Advanced</em>: The <a href="https://rmarkdown.rstudio.com/" target="_blank">R Markdown page</a> from RStudio has <a href="https://rmarkdown.rstudio.com/lesson-1.html" target="_blank">lessons</a> with extensive info. Also, more cheatsheets.</p>
-<p><em>More Advanced</em>: Want to jump right in? Open a new R Markdown file (File &gt; New File &gt; R Markdown…), and set its <em>Default Output Format</em> to HTML. You will get a R Markdown template you can tinker with. Try knitting the document to see what everything does.</p>
+<p><em>More Advanced</em>: Want to jump right in? Open a new R Markdown file (<em>File &gt; New File &gt; R Markdown…</em>), and set its <code>Default Output Format</code> to <code>HTML</code>. You will get a R Markdown template you can tinker with. Try knitting the document to see what everything does.</p>
 </div>
+</div>
+<div id="submitting-assignments" class="section level2">
+<h2><span class="header-section-number">1.4</span> Submitting Assignments</h2>
+<p>Here’s a quick run-down of how to submit your assignments using <a href="basics.html#r-markdown-knitr">R Markdown and Knitr</a>.</p>
+<ul>
+<li><strong>Create R Markdown file with PDF output format</strong>: We will often provide you with a template, and feel free to add on to it directly, but <strong>make sure its output format is set to <code>pdf_document</code></strong>. Write out your explanations and insert code chunks to answer the questions provided. If you want to make a new file, go to <em>File &gt; New File &gt; R Markdown…</em> and set the <code>Default Output Format</code> to <code>PDF</code>. Either way, the header of the <code>.Rmd</code> file should look something like this:</li>
+</ul>
+<p><img src="images/markdown_meta_header_example.png" /></p>
+<ul>
+<li><strong>Add PDF Dependencies</strong>: As stated when you create a new R Markdown file, the PDF output format requires TeX:</li>
+</ul>
+<p><img src="images/pdf_output_info.png" /></p>
+<ul>
+<li>Make sure you download TeX for your machine. Here are some Medium articles on the process of creating PDF reports (they cover starting from scratch with no installs at all, but you can skip over to installing TeX only):
+<ul>
+<li><a href="https://medium.com/@sorenlind/create-pdf-reports-using-r-r-markdown-latex-and-knitr-on-macos-high-sierra-e7b5705c9fd" target="_blank"><strong>Mac OS</strong></a></li>
+<li><a href="https://medium.com/@sorenlind/create-pdf-reports-using-r-r-markdown-latex-and-knitr-on-windows-10-952b0c48bfa9" target="_blank"><strong>Windows</strong></a></li>
+</ul></li>
+</ul>
+<p>This can be a little complicated, but it will make that Knit button near the top of the IDE magically generate a PDF for you.</p>
+<p>If you are in a rush and want a shortcut, you can instead set the <code>Default Output Format</code> to <code>HTML</code>. when you open the file in your browser, you can save it as a PDF. It will not be as nicely formatted, but it will still work.</p>
 </div>
 <div id="getting-help" class="section level2">
-<h2><span class="header-section-number">1.4</span> Getting help</h2>
+<h2><span class="header-section-number">1.5</span> Getting help</h2>
 <div class="figure">
 <img src="images/halp_me_orly.png" alt="via https://dev.to/rly" />
 <p class="caption">via <a href="https://dev.to/rly" class="uri">https://dev.to/rly</a></p>
 </div>
 <p>First off…breeeeeeathe. We can fix this. There are a bunch of resources out there that can help you.</p>
 <div id="things-to-try" class="section level3">
-<h3><span class="header-section-number">1.4.1</span> Things to try</h3>
+<h3><span class="header-section-number">1.5.1</span> Things to try</h3>
 <ul>
 <li><p>Remember: Always try to help yourself! <a href="https://www.r-project.org/help.html" target="_blank">This article</a> has a great list of tools to help you learn about anything you may be confused by. This includes learning about functions and packages as well as searching for info about a function/package/problem/etc. This is the perfect place to learn how to get the info you need.</p></li>
 <li><p>The RStudio Help menu (in the top toolbar) is a fantastic place to go for understanding/fixing any problems. There are links to documentation and manuals as well as cheatsheets and a lovely collection of keyboard shortcuts.</p></li>
@@ -559,7 +581,7 @@ function unhover(element) {
 <p><em>More Advanced</em>: Learn to love debugger mode. Debugging can have a steep learning curve, but huge payoffs. Take a look at these videos about <a href="https://campus.datacamp.com/courses/working-with-the-rstudio-ide-part-1/programming?ex=20" target="_blank">debugging with R</a>. Topics include running the debugger, setting breakpoints, customizing preferences, and more. <strong>Note</strong>: R Markdown files have some limitations for debugging, as discussed in <a href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio#debugging-in-r-markdown-documents" target="_blank">this article</a>. You could also consider working out your code in a <code>.R</code> file before including it in your R Markdown homework submission.</p>
 </div>
 <div id="help-me-r-community" class="section level3">
-<h3><span class="header-section-number">1.4.2</span> Help me, R community!</h3>
+<h3><span class="header-section-number">1.5.2</span> Help me, R community!</h3>
 <p>Relax. There are a bunch of people using the same tools you are.</p>
 <ul>
 <li><p>Your fellow classmates are a good place to start! Post questions to <a href="https://piazza.com/" target="_blank">Piazza</a> to see how they could help.</p></li>
