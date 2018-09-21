@@ -185,13 +185,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.2" data-path="basics.html"><a href="basics.html#use-rstudio-like-a-pro"><i class="fa fa-check"></i><b>1.2.2</b> Use RStudio like a pro</a></li>
 <li class="chapter" data-level="1.2.3" data-path="basics.html"><a href="basics.html#learning-about-r"><i class="fa fa-check"></i><b>1.2.3</b> Learning about R</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="basics.html"><a href="basics.html#getting-more-specific"><i class="fa fa-check"></i><b>1.3</b> Getting more specific</a><ul>
+<li class="chapter" data-level="1.3" data-path="basics.html"><a href="basics.html#packages-and-imports"><i class="fa fa-check"></i><b>1.3</b> Packages and imports</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="basics.html"><a href="basics.html#installing-packages"><i class="fa fa-check"></i><b>1.3.1</b> Installing packages</a></li>
 <li class="chapter" data-level="1.3.2" data-path="basics.html"><a href="basics.html#tidyverse"><i class="fa fa-check"></i><b>1.3.2</b> Tidyverse</a></li>
 <li class="chapter" data-level="1.3.3" data-path="basics.html"><a href="basics.html#importing-data"><i class="fa fa-check"></i><b>1.3.3</b> Importing data</a></li>
-<li class="chapter" data-level="1.3.4" data-path="basics.html"><a href="basics.html#r-markdown-knitr"><i class="fa fa-check"></i><b>1.3.4</b> R Markdown &amp; Knitr</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="basics.html"><a href="basics.html#submitting-assignments"><i class="fa fa-check"></i><b>1.4</b> Submitting Assignments</a></li>
+<li class="chapter" data-level="1.4" data-path="basics.html"><a href="basics.html#communicating-results"><i class="fa fa-check"></i><b>1.4</b> Communicating Results</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="basics.html"><a href="basics.html#r-markdown-knitr"><i class="fa fa-check"></i><b>1.4.1</b> R Markdown &amp; Knitr</a></li>
+<li class="chapter" data-level="1.4.2" data-path="basics.html"><a href="basics.html#submitting-assignments"><i class="fa fa-check"></i><b>1.4.2</b> Submitting Assignments</a></li>
+</ul></li>
 <li class="chapter" data-level="1.5" data-path="basics.html"><a href="basics.html#getting-help"><i class="fa fa-check"></i><b>1.5</b> Getting help</a><ul>
 <li class="chapter" data-level="1.5.1" data-path="basics.html"><a href="basics.html#things-to-try"><i class="fa fa-check"></i><b>1.5.1</b> Things to try</a></li>
 <li class="chapter" data-level="1.5.2" data-path="basics.html"><a href="basics.html#help-me-r-community"><i class="fa fa-check"></i><b>1.5.2</b> Help me, R community!</a></li>
@@ -498,8 +500,8 @@ function unhover(element) {
 <p>General advice: don’t get caught up in the details. Keep a list of questions and move on.</p>
 </div>
 </div>
-<div id="getting-more-specific" class="section level2">
-<h2><span class="header-section-number">1.3</span> Getting more specific</h2>
+<div id="packages-and-imports" class="section level2">
+<h2><span class="header-section-number">1.3</span> Packages and imports</h2>
 <div id="installing-packages" class="section level3">
 <h3><span class="header-section-number">1.3.1</span> Installing packages</h3>
 <p>A lot of the cool stuff comes from installing packages into R.</p>
@@ -526,8 +528,11 @@ function unhover(element) {
 </ul>
 <p><em>More Advanced</em>: Importing every data format under the sun you say? I want to know how to do that. Here’s <a href="https://www.datacamp.com/courses/importing-data-in-r-part-1" target="_blank">Part 1</a>, as well as <a href="https://www.datacamp.com/courses/importing-data-in-r-part-2" target="_blank">Part 2</a>, which focuses on databases and HTTP requests. Go nuts.</p>
 </div>
+</div>
+<div id="communicating-results" class="section level2">
+<h2><span class="header-section-number">1.4</span> Communicating Results</h2>
 <div id="r-markdown-knitr" class="section level3">
-<h3><span class="header-section-number">1.3.4</span> R Markdown &amp; Knitr</h3>
+<h3><span class="header-section-number">1.4.1</span> R Markdown &amp; Knitr</h3>
 <p>R Markdown is how you will be writing assignments for this course and Knitr is how you will generate an output file for submission. In general, they’re a great way to communicate your findings to others (for the python-lovers among you, this is the <a href="http://jupyter.org/" target="_blank">Jupyter Notebook</a> of the R world).</p>
 <ul>
 <li><p>Want a simple description of R Markdown? Checkout <a href="https://rmarkdown.rstudio.com/articles_intro.html" target="_blank">this RStudio article</a> for a description on how to combine text, source code, and output into one document.</p></li>
@@ -537,9 +542,8 @@ function unhover(element) {
 <p><em>More Advanced</em>: The <a href="https://rmarkdown.rstudio.com/" target="_blank">R Markdown page</a> from RStudio has <a href="https://rmarkdown.rstudio.com/lesson-1.html" target="_blank">lessons</a> with extensive info. Also, more cheatsheets.</p>
 <p><em>More Advanced</em>: Want to jump right in? Open a new R Markdown file (<em>File &gt; New File &gt; R Markdown…</em>), and set its <code>Default Output Format</code> to <code>HTML</code>. You will get a R Markdown template you can tinker with. Try knitting the document to see what everything does. For more info on what is happening behind the scenes, checkout this <a href="https://rmarkdown.rstudio.com/authoring_quick_tour.html" target="_blank">R Markdown Quick Tour</a>.</p>
 </div>
-</div>
-<div id="submitting-assignments" class="section level2">
-<h2><span class="header-section-number">1.4</span> Submitting Assignments</h2>
+<div id="submitting-assignments" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Submitting Assignments</h3>
 <p>Here’s a quick run-down of how to submit your assignments using <a href="basics.html#r-markdown-knitr">R Markdown and Knitr</a>.</p>
 <ul>
 <li><strong>Create R Markdown file with PDF output format</strong>: We will often provide you with a template, and feel free to add on to it directly, but <strong>make sure its output format is set to <code>pdf_document</code></strong>. Write out your explanations and insert code chunks to answer the questions provided. If you want to make a new file, go to <em>File &gt; New File &gt; R Markdown…</em> and set the <code>Default Output Format</code> to <code>PDF</code>. Either way, the header of the <code>.Rmd</code> file should look something like this:</li>
@@ -558,6 +562,7 @@ function unhover(element) {
 </ul>
 <p>This can be a little complicated, but it will make that Knit button near the top of the IDE magically generate a PDF for you.</p>
 <p>If you are in a rush and want a shortcut, you can instead set the <code>Default Output Format</code> to <code>HTML</code>. When you open the file in your browser, you can save it as a PDF. It will not be as nicely formatted, but it will still work.</p>
+</div>
 </div>
 <div id="getting-help" class="section level2">
 <h2><span class="header-section-number">1.5</span> Getting help</h2>
