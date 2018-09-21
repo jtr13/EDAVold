@@ -126,6 +126,10 @@ scatter +
 <!-- ggplot2 explanation -->
 `ggplot2` makes it very easy to create scatterplots. Using `geom_point()`, you can easily plot two different aesthetics in one graph. It also is simple to add on extra formatting to make your plots look nice (All that is really necessary is the data, the aesthetics, and the geom).
 
+## Theory
+<!-- *Link to textbook -->
+*   For more info about adding lines/contours, comparing groups, and plotting continuous variables check out [Chapter 5](http://www.gradaanwr.net/content/ch05/){target="_blank"} of the textbook.
+
 ## When to use
 <!-- Quick Note on When to use this plot -->
 Scatterplots are great for exploring relationships between variables. Basically, if you are interested in how variables relate to each other, the scatterplot is a great place to start.
@@ -294,10 +298,6 @@ splom(splomvar)
 ```
 
 <img src="scatterplot_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-
-## Theory
-<!-- *Link to textbook -->
-*   For more info about adding lines/contours, comparing groups, and plotting continuous variables check out [Chapter 5](http://www.gradaanwr.net/content/ch05/){target="_blank"} of the textbook. 
 
 ## External resources
 <!-- - []](){target="_blank"}: Links to resources with quick blurb -->

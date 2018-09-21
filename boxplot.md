@@ -93,6 +93,12 @@ g1
 
 `ggplot2` requires data to be mapped to the `x` and `y` aesthetics. Here we use the `stack` function to combine each column of the `airquality` dataframe. Reading the documentation for the `stack` function (`?utils::stack`), we see the new stacked dataframe has two columns: `values` and `ind`, which we use to create the boxplots. **Notice**: `ggplot2` warns us that it is ignoring "non-finite values", which are the NA's in the dataset.
 
+## Theory
+
+<!-- *   TODO Outliers  -->
+
+*   For more info about boxplots and continuous variables, check out [Chapter 3](http://www.gradaanwr.net/content/03-examining-continuous-variables/){target="_blank"} of the textbook. 
+
 ## When to use
 Boxplots should be used to display *continuous variables*. They are particularly useful for identifying outliers and comparing different groups. 
 
@@ -144,12 +150,6 @@ plot + theme
 ```
 
 <img src="boxplot_files/figure-html/bad-boxplots-1.png" width="672" />
-
-## Theory
-
-<!-- *   TODO Outliers  -->
-
-*   For more info about boxplots and continuous variables, check out [Chapter 3](http://www.gradaanwr.net/content/03-examining-continuous-variables/){target="_blank"} of the textbook. 
 
 ## External resources
 

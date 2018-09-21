@@ -84,6 +84,10 @@ The ggplot version is a little more complicated on the surface, but you get more
 
 make sure you are using a dataframe.
 
+## Theory
+
+*   For more info about histograms and continuous variables, check out [Chapter 3](http://www.gradaanwr.net/content/03-examining-continuous-variables/){target="_blank"} of the textbook. 
+
 ## Types of histrograms
 
 Use a histogram to show the distribution of *one continuous variable*. The y-scale can be represented in a variety of ways to express different results:
@@ -197,10 +201,6 @@ grid.arrange(p3, p4, ncol = 2)
 <img src="histogram_files/figure-html/alignment-fix-1.png" width="672" />
 
 **Note**: Don't use both `boundary` *and* `center` for bin alignment. Just pick one.
-
-## Theory
-
-*   For more info about histograms and continuous variables, check out [Chapter 3](http://www.gradaanwr.net/content/03-examining-continuous-variables/){target="_blank"} of the textbook. 
 
 ## External resources
 
