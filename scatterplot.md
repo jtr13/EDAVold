@@ -213,7 +213,6 @@ g1 + geom_bin2d(binwidth = c(10, 10))
 
 ```r
 # hexagonal bins
-library(hexbin)
 g1 + geom_hex(binwidth = c(5, 5))
 ```
 
@@ -222,7 +221,6 @@ g1 + geom_hex(binwidth = c(5, 5))
 
 ```r
 # hexagonal bins + scatterplot layer
-library(hexbin)
 g1 + geom_hex(binwidth = c(5, 5), alpha = .4) + 
   geom_point(size = 2, alpha = 0.8)
 ```
@@ -232,7 +230,6 @@ g1 + geom_hex(binwidth = c(5, 5), alpha = .4) +
 
 ```r
 # hexagonal bins with custom color gradient/bin count
-library(hexbin)
 ggplot(SpeedSki, aes(Year, Speed)) + 
   scale_fill_gradient(low = "#cccccc", high = "#09005F") + # color
   geom_hex(bins = 10) # number of bins horizontally/vertically
