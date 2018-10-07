@@ -295,7 +295,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="heatmap.html"><a href="heatmap.html"><i class="fa fa-check"></i><b>7</b> Chart: Heatmap</a><ul>
 <li class="chapter" data-level="7.1" data-path="heatmap.html"><a href="heatmap.html#overview-5"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
 <li class="chapter" data-level="7.2" data-path="heatmap.html"><a href="heatmap.html#tldr-3"><i class="fa fa-check"></i><b>7.2</b> tl;dr</a></li>
-<li class="chapter" data-level="7.3" data-path="heatmap.html"><a href="heatmap.html#simple-examples-2"><i class="fa fa-check"></i><b>7.3</b> Simple examples</a></li>
+<li class="chapter" data-level="7.3" data-path="heatmap.html"><a href="heatmap.html#simple-examples-2"><i class="fa fa-check"></i><b>7.3</b> Simple examples</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="heatmap.html"><a href="heatmap.html#heat-map-of-two-dimensional-bin-counts"><i class="fa fa-check"></i><b>7.3.1</b> Heat map of two-dimensional bin counts</a></li>
+<li class="chapter" data-level="7.3.2" data-path="heatmap.html"><a href="heatmap.html#modifications-1"><i class="fa fa-check"></i><b>7.3.2</b> Modifications</a></li>
+</ul></li>
 <li class="chapter" data-level="7.4" data-path="heatmap.html"><a href="heatmap.html#theory-2"><i class="fa fa-check"></i><b>7.4</b> Theory</a></li>
 <li class="chapter" data-level="7.5" data-path="heatmap.html"><a href="heatmap.html#external-resources-2"><i class="fa fa-check"></i><b>7.5</b> External resources</a></li>
 </ul></li>
@@ -333,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.6.1" data-path="scatter.html"><a href="scatter.html#overlapping-data-1"><i class="fa fa-check"></i><b>9.6.1</b> Overlapping data</a></li>
 <li class="chapter" data-level="9.6.2" data-path="scatter.html"><a href="scatter.html#scaling"><i class="fa fa-check"></i><b>9.6.2</b> Scaling</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="scatter.html"><a href="scatter.html#modifications-1"><i class="fa fa-check"></i><b>9.7</b> Modifications</a><ul>
+<li class="chapter" data-level="9.7" data-path="scatter.html"><a href="scatter.html#modifications-2"><i class="fa fa-check"></i><b>9.7</b> Modifications</a><ul>
 <li class="chapter" data-level="9.7.1" data-path="scatter.html"><a href="scatter.html#heat-maps"><i class="fa fa-check"></i><b>9.7.1</b> Heat maps</a></li>
 <li class="chapter" data-level="9.7.2" data-path="scatter.html"><a href="scatter.html#contour-lines"><i class="fa fa-check"></i><b>9.7.2</b> Contour lines</a></li>
 <li class="chapter" data-level="9.7.3" data-path="scatter.html"><a href="scatter.html#scatterplot-matrices"><i class="fa fa-check"></i><b>9.7.3</b> Scatterplot matrices</a></li>
@@ -588,20 +591,20 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(wide_x, wide
 <p><img src="scatterplot_files/figure-html/scaling-fix-2.png" width="672" /></p>
 </div>
 </div>
-<div id="modifications-1" class="section level2">
+<div id="modifications-2" class="section level2">
 <h2><span class="header-section-number">9.7</span> Modifications</h2>
 <div id="heat-maps" class="section level3">
 <h3><span class="header-section-number">9.7.1</span> Heat maps</h3>
 <p>Heat maps are like a combination of scatterplots and <a href="histo.html">histograms</a>: they allow you to compare different parameters while also seeing their relative distributions.</p>
 <p>For these heat maps, we will use the <code>SpeedSki</code> dataset.</p>
-<div id="heat-map-default-1" class="section level4">
+<div id="heat-map-default" class="section level4">
 <h4><span class="header-section-number">9.7.1.1</span> Heat map: default</h4>
 <p>To create a heat map, simply substitute <code>geom_point()</code> with <code>geom_bin2d()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(SpeedSki, <span class="kw">aes</span>(Year, Speed)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_bin2d</span>()</code></pre>
 <p><img src="scatterplot_files/figure-html/heat-map-default-1.png" width="672" /></p>
 </div>
-<div id="heat-map-modify-colorbin-width-1" class="section level4">
+<div id="heat-map-modify-colorbin-width" class="section level4">
 <h4><span class="header-section-number">9.7.1.2</span> Heat map: modify color/bin width</h4>
 <p>You can change the color palette by specifying it explicitly in your chain of <code>ggplot</code> function calls. The bin width can be added inside the <code>geom_bin2d()</code> function call:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(viridis) <span class="co"># viridis color palette</span>

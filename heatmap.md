@@ -24,7 +24,10 @@ Too complicated! [Simplify, man!](https://www.youtube.com/watch?v=PlsW2hd06R0){t
 
 For these heat maps, we will use the `SpeedSki` dataset.
 
-#### Heat map: default
+### Heat map of two-dimensional bin counts
+
+Only two variables, `x` and `y` are needed for two-dimensional bin count heat maps. The third variable--i.e., the color--represents the bin count of points in the region it covers. Think of it as a two-dimensional histogram.
+
 To create a heat map, simply substitute `geom_point()` with `geom_bin2d()`:
 
 ```r
@@ -37,7 +40,8 @@ ggplot(SpeedSki, aes(Year, Speed)) +
 
 <img src="heatmap_files/figure-html/heat-map-default-1.png" width="672" />
 
-#### Heat map: modify color/bin width
+### Modifications
+
 You can change the color palette by specifying it explicitly in your chain of `ggplot` function calls. The bin width can be added inside the `geom_bin2d()` function call:
 
 ```r
