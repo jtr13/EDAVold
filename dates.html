@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="histo.html">
-<link rel="next" href="dates.html">
+<link rel="prev" href="network.html">
+<link rel="next" href="general.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -453,86 +453,158 @@ function unhover(element) {
 <br><br>
 <a href="index.html"><img src="images/icons/edav_resource_url_no_smile.png" onmouseover="hover(this);" onmouseout="unhover(this);" /></a>
 </center>
-<div id="network" class="section level1">
-<h1><span class="header-section-number">10</span> Networks</h1>
-<p><img src="images/banners/banner_network.png" /></p>
-<!--## ggnetwork (static)-->
-<div id="visnetwork-interactive" class="section level2">
-<h2><span class="header-section-number">10.1</span> visNetwork (interactive)</h2>
-<p><code>visNetwork</code> is a powerful R implementation of the interactive JavaScript <code>vis.js</code> library; it uses <code>tidyverse</code> piping: <a href="https://datastorm-open.github.io/visNetwork/" class="uri">https://datastorm-open.github.io/visNetwork/</a></p>
-<p>–&gt; The Vignette has clear worked-out examples: <a href="https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork.html" class="uri">https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork.html</a></p>
-<p>The <code>visNetwork</code> documentation doesn’t provide the same level of explanation as the original, so it’s worth checking out the <code>vis.js</code> documentation as well:
-<a href="http://visjs.org/index.html" class="uri">http://visjs.org/index.html</a> In particular, the <a href="http://visjs.org/network_examples.html" target="_blank">interactive examples</a> are particularly useful for trying out different options. For example, you can test out physics options with this <a href="http://visjs.org/examples/network/physics/physicsConfiguration.html" target="_blank">network configurator</a>.</p>
-<div id="minimum-working-example" class="section level3">
-<h3><span class="header-section-number">10.1.1</span> Minimum working example</h3>
-<p>Create a <a href="https://datastorm-open.github.io/visNetwork/nodes.html" target="_blank">node data frame</a> with a minimum one of column (must be called <code>id</code>) with node names:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># nodes</span>
-boroughs &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;The Bronx&quot;</span>, <span class="st">&quot;Manhattan&quot;</span>, <span class="st">&quot;Queens&quot;</span>, <span class="st">&quot;Brooklyn&quot;</span>, <span class="st">&quot;Staten Island&quot;</span>))</code></pre>
-<p>Create a separate data frame of <a href="https://datastorm-open.github.io/visNetwork/edges.html" target="_blank">edges</a> with <code>from</code> and <code>to</code> columns.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># edges</span>
-connections &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;The Bronx&quot;</span>, <span class="st">&quot;The Bronx&quot;</span>, <span class="st">&quot;Queens&quot;</span>, <span class="st">&quot;Queens&quot;</span>, <span class="st">&quot;Manhattan&quot;</span>, <span class="st">&quot;Brooklyn&quot;</span>), <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;Manhattan&quot;</span>, <span class="st">&quot;Queens&quot;</span>, <span class="st">&quot;Brooklyn&quot;</span>, <span class="st">&quot;Manhattan&quot;</span>, <span class="st">&quot;Brooklyn&quot;</span>, <span class="st">&quot;Staten Island&quot;</span>))</code></pre>
-<p>Draw the network with <code>visNetwork(nodes, edges)</code></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(visNetwork)
-<span class="kw">visNetwork</span>(boroughs, connections)</code></pre>
-<div id="htmlwidget-ac706e33aa3dad405639" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ac706e33aa3dad405639">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
-<p>Add labels by adding a label column to <code>nodes</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-boroughs &lt;-<span class="st"> </span>boroughs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">label =</span> id)
-<span class="kw">visNetwork</span>(boroughs, connections)</code></pre>
-<div id="htmlwidget-436da48fec7e7ebacca2" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-436da48fec7e7ebacca2">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"label":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
+<div id="dates" class="section level1">
+<h1><span class="header-section-number">11</span> Dates in R</h1>
+<p><img src="images/banners/banner_dates.png" /></p>
+<div id="introduction-2" class="section level2">
+<h2><span class="header-section-number">11.1</span> Introduction</h2>
+<p>Working with dates and time can be very frustrating. In general, work with the least cumbersome class. That means if your variable is <em>years</em>, store it as an integer; there’s no reason to use a date or date-time class. If your variable does not involve time, use the <code>Date</code> class in R.</p>
 </div>
-<div id="performance" class="section level3">
-<h3><span class="header-section-number">10.1.2</span> Performance</h3>
-<p><code>visNetwork</code> can be very slow.</p>
-<p><code>%&gt;% visPhysics(stabilization = FALSE)</code> starts rendering before the stabilization is complete, which does actually speed things up but allows you to see what’s happening, which makes a big difference in user experience. (It’s also fun to watch the network stabilize). Other performance tips are described <a href="https://datastorm-open.github.io/visNetwork/performance.html" target="_blank">here</a>.</p>
+<div id="converting-to-date-class" class="section level2">
+<h2><span class="header-section-number">11.2</span> Converting to <code>Date</code> class</h2>
+<p>You can convert character data to <code>Date</code> class with <code>as.Date()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">dchar &lt;-<span class="st"> &quot;2018-10-12&quot;</span>
+ddate &lt;-<span class="st"> </span><span class="kw">as.Date</span>(dchar)</code></pre>
+<p>Note that the two appear the same, although the class is different:</p>
+<pre class="sourceCode r"><code class="sourceCode r">dchar</code></pre>
+<pre><code>## [1] &quot;2018-10-12&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">ddate</code></pre>
+<pre><code>## [1] &quot;2018-10-12&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(dchar)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(ddate)</code></pre>
+<pre><code>## [1] &quot;Date&quot;</code></pre>
+<p>If the date is not in YYYY-MM-DD or YYYY/MM/DD form, you will need to specify the format to convert to <code>Date</code> class, using conversion specifications that begin with <code>%</code>, such as:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Date</span>(<span class="st">&quot;Thursday, January 6, 2005&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;%A, %B %d, %Y&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;2005-01-06&quot;</code></pre>
+<p>For a list of the conversion specifications available in R, see <code>?strptime</code>.</p>
+<p>The tidyverse <strong>lubridate</strong> makes it to convert dates that are not in standard format with <code>ymd()</code>, <code>ydm()</code>, <code>mdy()</code>, <code>myd()</code>, <code>dmy()</code>, and <code>dym()</code> (among many other useful date-time functions):</p>
+<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">mdy</span>(<span class="st">&quot;April 13, 1907&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;1907-04-13&quot;</code></pre>
+<p>Try <code>as.Date(&quot;April 13, 1907&quot;)</code> and you will see the benefit of using a <strong>lubridate</strong> function.</p>
 </div>
-<div id="helpful-configuration-tools" class="section level3">
-<h3><span class="header-section-number">10.1.3</span> Helpful configuration tools</h3>
-<p><code>%&gt;% visConfigure(enabled = TRUE)</code> is a useful tool for configuring options interactively. Upon completion, click “generate options” for the code to reproduce the settings. More <a href="https://datastorm-open.github.io/visNetwork/configure.html" target="_blank">here</a> (Note that changing options and then viewing them requires a lot of vertical scrolling in the browser. I’m not sure if anything can be done about this. If you have a solution, let me know!)</p>
+<div id="working-with-date-class" class="section level2">
+<h2><span class="header-section-number">11.3</span> Working with <code>Date</code> Class</h2>
+<p>It is well worth the effort to convert to <code>Date</code> class, because there’s a lot you can do with dates in <code>Date</code> class that you can’t do if you store the dates as character data.</p>
+<p>Number of day between dates:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Date</span>(<span class="st">&quot;2017-11-02&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2017-01-01&quot;</span>)</code></pre>
+<pre><code>## Time difference of 305 days</code></pre>
+<p>Compare dates:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Date</span>(<span class="st">&quot;2017-11-12&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2017-3-3&quot;</span>)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Note that <code>Sys.Date()</code> returns today’s date in <code>Date</code> class:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.Date</span>()</code></pre>
+<pre><code>## [1] &quot;2018-10-12&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="kw">Sys.Date</span>())</code></pre>
+<pre><code>## [1] &quot;Date&quot;</code></pre>
+<p>R has functions to pull particular pieces of information from a date:</p>
+<pre class="sourceCode r"><code class="sourceCode r">today &lt;-<span class="st"> </span><span class="kw">Sys.Date</span>()
+<span class="kw">weekdays</span>(today)</code></pre>
+<pre><code>## [1] &quot;Friday&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">weekdays</span>(today, <span class="dt">abbreviate =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## [1] &quot;Fri&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">months</span>(today)</code></pre>
+<pre><code>## [1] &quot;October&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">months</span>(today, <span class="dt">abbreviate =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## [1] &quot;Oct&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quarters</span>(today)</code></pre>
+<pre><code>## [1] &quot;Q4&quot;</code></pre>
+<p>The <strong>lubridate</strong> package provides additional functions to extract information from a date:</p>
+<pre class="sourceCode r"><code class="sourceCode r">today &lt;-<span class="st"> </span><span class="kw">Sys.Date</span>()
+lubridate<span class="op">::</span><span class="kw">year</span>(today)</code></pre>
+<pre><code>## [1] 2018</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">yday</span>(today)</code></pre>
+<pre><code>## [1] 285</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">month</span>(today)</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">month</span>(today, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## [1] Oct
+## 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">mday</span>(today)</code></pre>
+<pre><code>## [1] 12</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">week</span>(today)</code></pre>
+<pre><code>## [1] 41</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">wday</span>(today)</code></pre>
+<pre><code>## [1] 6</code></pre>
 </div>
-<div id="coloring-nodes" class="section level3">
-<h3><span class="header-section-number">10.1.4</span> Coloring nodes</h3>
-<p>Add a column of actual color names to the nodes data frame:</p>
-<pre class="sourceCode r"><code class="sourceCode r">boroughs &lt;-<span class="st"> </span>boroughs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">is.island =</span> <span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">color =</span> <span class="kw">ifelse</span>(is.island, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;yellow&quot;</span>))
-<span class="kw">visNetwork</span>(boroughs, connections)</code></pre>
-<div id="htmlwidget-9761a2d1a4af432f5df8" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9761a2d1a4af432f5df8">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"label":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"is.island":[false,true,false,false,true],"color":["yellow","blue","yellow","yellow","blue"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
+<div id="plotting-with-a-date-class-variable" class="section level2">
+<h2><span class="header-section-number">11.4</span> Plotting with a <code>Date</code> class variable</h2>
+<p>Both base R graphics and <strong>ggplot2</strong> “know” how to work with a <code>Date</code> class variable, and label the axes properly:</p>
+<div id="base-r" class="section level3">
+<h3><span class="header-section-number">11.4.1</span> base R</h3>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;mortgage.csv&quot;</span>)
+df<span class="op">$</span>DATE &lt;-<span class="st"> </span><span class="kw">as.Date</span>(df<span class="op">$</span>DATE)
+<span class="kw">plot</span>(df<span class="op">$</span>DATE, df<span class="op">$</span>X5.<span class="fl">1.</span>ARM, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre>
+<p><img src="dates_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(df<span class="op">$</span>DATE[<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>], df<span class="op">$</span>X5.<span class="fl">1.</span>ARM[<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre>
+<p><img src="dates_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<p>Note the the change in x-axis labels in the second graph.</p>
 </div>
-<div id="directed-nodes-arrows" class="section level3">
-<h3><span class="header-section-number">10.1.5</span> Directed nodes (arrows)</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">visNetwork</span>(boroughs, connections) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">visEdges</span>(<span class="dt">arrows =</span> <span class="st">&quot;to;from&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>)</code></pre>
-<div id="htmlwidget-21de0cdcbc04bf1ae7df" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-21de0cdcbc04bf1ae7df">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"label":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"is.island":[false,true,false,false,true],"color":["yellow","blue","yellow","yellow","blue"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"edges":{"arrows":"to;from","color":"green"}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
+<div id="ggplot2" class="section level3">
+<h3><span class="header-section-number">11.4.2</span> ggplot2</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># readr </span>
+<span class="kw">library</span>(tidyverse)</code></pre>
+<p>Note that unlike base R<code>read.csv()</code>, <code>readr::read_csv()</code> automatically reads DATE in <code>Date</code> class since it’s in YYYY-MM-DD format:</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;mortgage.csv&quot;</span>)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   DATE = col_date(format = &quot;&quot;),
+##   `5/1 ARM` = col_double(),
+##   `15 YR FIXED` = col_double(),
+##   `30 YR FIXED` = col_double()
+## )</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(DATE, <span class="st">`</span><span class="dt">30 YR FIXED</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_grey</span>(<span class="dv">14</span>)
+
+g</code></pre>
+<p><img src="dates_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(DATE <span class="op">&lt;</span><span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2006-01-01&quot;</span>)), 
+       <span class="kw">aes</span>(DATE, <span class="st">`</span><span class="dt">30 YR FIXED</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_grey</span>(<span class="dv">14</span>)</code></pre>
+<p><img src="dates_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
+<p>Again, when the data is filtered, the x-axis labels switch from years to months.</p>
+<div id="breaks-limits-labels" class="section level4">
+<h4><span class="header-section-number">11.4.2.1</span> Breaks, limits, labels</h4>
+<p>We can control the x-axis breaks, limits, and labels with <code>scale_x_date()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
+g <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_date</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="kw">ymd</span>(<span class="st">&quot;2008-01-01&quot;</span>), <span class="kw">ymd</span>(<span class="st">&quot;2008-12-31&quot;</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;limits = c(ymd(</span><span class="ch">\&quot;</span><span class="st">2008-01-01</span><span class="ch">\&quot;</span><span class="st">), ymd(</span><span class="ch">\&quot;</span><span class="st">2008-12-31</span><span class="ch">\&quot;</span><span class="st">))&quot;</span>)</code></pre>
+<pre><code>## Warning: Removed 588 rows containing missing values (geom_path).</code></pre>
+<p><img src="dates_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">g <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_date</span>(<span class="dt">date_breaks =</span> <span class="st">&quot;4 years&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;scale_x_date(date_breaks = </span><span class="ch">\&quot;</span><span class="st">4 years</span><span class="ch">\&quot;</span><span class="st">)&quot;</span>)</code></pre>
+<p><img src="dates_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">g <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_date</span>(<span class="dt">date_labels =</span> <span class="st">&quot;%Y-%m&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;scale_x_date(date_labels = </span><span class="ch">\&quot;</span><span class="st">%Y-%m</span><span class="ch">\&quot;</span><span class="st">)&quot;</span>)</code></pre>
+<p><img src="dates_files/figure-html/unnamed-chunk-13-3.png" width="672" /></p>
+<p>(Yes, even in the tidyverse we cannot completely escape the <code>%</code> conversion specification notation. Remember <code>?strptime</code> for help.)</p>
 </div>
-<div id="turn-off-the-physics-simulation" class="section level3">
-<h3><span class="header-section-number">10.1.6</span> Turn off the physics simulation</h3>
-<p>It’s much faster without the simulation. The nodes are randomly placed and can be moved around without affecting the rest of the network, at least in the case of small networks.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">visNetwork</span>(boroughs, connections) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">visEdges</span>(<span class="dt">physics =</span> <span class="ot">FALSE</span>)</code></pre>
-<div id="htmlwidget-2bca81091822c8de2498" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2bca81091822c8de2498">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"label":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"is.island":[false,true,false,false,true],"color":["yellow","blue","yellow","yellow","blue"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"edges":{"physics":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
-</div>
-<div id="grey-out-nodes-far-from-selected-defined-by-degree" class="section level3">
-<h3><span class="header-section-number">10.1.7</span> Grey out nodes far from selected (defined by “degree”)</h3>
-<p>(Click a node to see effect.)</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># defaults to 1 degree</span>
-<span class="kw">visNetwork</span>(boroughs, connections) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">visOptions</span>(<span class="dt">highlightNearest =</span> <span class="ot">TRUE</span>)</code></pre>
-<div id="htmlwidget-008efc5758b499d19b51" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-008efc5758b499d19b51">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"label":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"is.island":[false,true,false,false,true],"color":["yellow","blue","yellow","yellow","blue"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)"},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":false,"fit":false,"resetHighlight":true,"clusterOptions":null}},"evals":[],"jsHooks":[]}</script>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># set degree to 2</span>
-<span class="kw">visNetwork</span>(boroughs, connections) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">visOptions</span>(<span class="dt">highlightNearest =</span> <span class="kw">list</span>(<span class="dt">enabled =</span> <span class="ot">TRUE</span>, 
-                                     <span class="dt">degree =</span> <span class="dv">2</span>))</code></pre>
-<div id="htmlwidget-05a7be27998eeab866fb" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-05a7be27998eeab866fb">{"x":{"nodes":{"id":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"label":["The Bronx","Manhattan","Queens","Brooklyn","Staten Island"],"is.island":[false,true,false,false,true],"color":["yellow","blue","yellow","yellow","blue"]},"edges":{"from":["The Bronx","The Bronx","Queens","Queens","Manhattan","Brooklyn"],"to":["Manhattan","Queens","Brooklyn","Manhattan","Brooklyn","Staten Island"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)"},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":2,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":false,"fit":false,"resetHighlight":true,"clusterOptions":null}},"evals":[],"jsHooks":[]}</script>
+<div id="annotations" class="section level4">
+<h4><span class="header-section-number">11.4.2.2</span> Annotations</h4>
+<p>We can use <code>geom_vline()</code> with <code>annotate()</code> to mark specific events in a time series:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(DATE, <span class="st">`</span><span class="dt">30 YR FIXED</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">ymd</span>(<span class="st">&quot;2008-09-29&quot;</span>), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="kw">ymd</span>(<span class="st">&quot;2008-09-29&quot;</span>), <span class="dt">y =</span> <span class="fl">3.75</span>, 
+           <span class="dt">label =</span> <span class="st">&quot; Market crash</span><span class="ch">\n</span><span class="st"> 9/29/08&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>, 
+           <span class="dt">hjust =</span> <span class="dv">0</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="kw">ymd</span>(<span class="st">&quot;2008-01-01&quot;</span>), <span class="kw">ymd</span>(<span class="st">&quot;2009-12-31&quot;</span>)),
+               <span class="dt">date_breaks =</span> <span class="st">&quot;1 year&quot;</span>, 
+               <span class="dt">date_labels =</span> <span class="st">&quot;%Y&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_grey</span>(<span class="dv">16</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;`geom_vline()` with `annotate()`&quot;</span>)</code></pre>
+<pre><code>## Warning: Removed 536 rows containing missing values (geom_path).</code></pre>
+<p><img src="dates_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 
 </div>
 </div>
 </div>
+</div>
+
+
+
 <!-- 
 Footer 
   - included at the end of every page
@@ -556,8 +628,8 @@ Footer
           </div>
         </div>
       </div>
-<a href="histo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dates.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="network.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="general.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -587,7 +659,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jtr13/EDAV/edit/master/network.Rmd",
+"link": "https://github.com/jtr13/EDAV/edit/master/dates.Rmd",
 "text": "Edit"
 },
 "download": null,
