@@ -169,74 +169,6 @@ ggplot(df, aes(wide_x, wide_y)) +
 
 ## Modifications
 
-### Heat maps
-
-Heat maps are like a combination of scatterplots and [histograms](histo.html): they allow you to compare different parameters while also seeing their relative distributions.
-
-For these heat maps, we will use the `SpeedSki` dataset.
-
-#### Heat map: default
-To create a heat map, simply substitute `geom_point()` with `geom_bin2d()`:
-
-```r
-ggplot(SpeedSki, aes(Year, Speed)) + 
-  geom_bin2d()
-```
-
-<img src="scatterplot_files/figure-html/heat-map-default-1.png" width="672" />
-
-#### Heat map: modify color/bin width
-You can change the color palette by specifying it explicitly in your chain of `ggplot` function calls. The bin width can be added inside the `geom_bin2d()` function call:
-
-```r
-library(viridis) # viridis color palette
-
-# create plot
-g1 <- ggplot(SpeedSki, aes(Year, Speed)) + 
-  scale_fill_viridis() # modify color
-
-# show plot
-g1 + geom_bin2d(binwidth = c(5, 5)) # modify bin width
-```
-
-<img src="scatterplot_files/figure-html/heat-map-color-bin-width-1.png" width="672" />
-
-Here are some other examples:
-
-```r
-# larger bin width
-g1 + geom_bin2d(binwidth = c(10, 10)) 
-```
-
-<img src="scatterplot_files/figure-html/unnamed-chunk-1-1.png" width="672" />
-
-
-```r
-# hexagonal bins
-g1 + geom_hex(binwidth = c(5, 5))
-```
-
-<img src="scatterplot_files/figure-html/unnamed-chunk-2-1.png" width="672" />
-
-
-```r
-# hexagonal bins + scatterplot layer
-g1 + geom_hex(binwidth = c(5, 5), alpha = .4) + 
-  geom_point(size = 2, alpha = 0.8)
-```
-
-<img src="scatterplot_files/figure-html/unnamed-chunk-3-1.png" width="672" />
-
-
-```r
-# hexagonal bins with custom color gradient/bin count
-ggplot(SpeedSki, aes(Year, Speed)) + 
-  scale_fill_gradient(low = "#cccccc", high = "#09005F") + # color
-  geom_hex(bins = 10) # number of bins horizontally/vertically
-```
-
-<img src="scatterplot_files/figure-html/unnamed-chunk-4-1.png" width="672" />
-
 ### Contour lines
 <!-- blurb -->
 Contour lines give a sense of the density of the data at a glance.
@@ -250,7 +182,7 @@ ggplot(SpeedSki, aes(Year, Speed)) +
   geom_density_2d() 
 ```
 
-<img src="scatterplot_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="scatterplot_files/figure-html/unnamed-chunk-1-1.png" width="672" />
 
 Contour lines work best when combined with other layers:
 
@@ -260,7 +192,7 @@ ggplot(SpeedSki, aes(Year, Speed)) +
   geom_density_2d(bins = 5)
 ```
 
-<img src="scatterplot_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="scatterplot_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 ### Scatterplot matrices
 If you want to compare multiple parameters to each other, consider using a scatterplot matrix. This will allow you to show many comparisons in a compact and efficient manner.
@@ -282,7 +214,7 @@ splomvar <- moviedf %>%
 plot(splomvar)
 ```
 
-<img src="scatterplot_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="scatterplot_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 While this is quite useful for personal exploration of a datset, it is **not** recommended for presentation purposes. Something called the [Hermann grid illusion](https://en.wikipedia.org/wiki/Grid_illusion){target="_blank"} makes this plot very difficult to examine.
 
@@ -294,7 +226,7 @@ library(lattice) #sploms
 splom(splomvar)
 ```
 
-<img src="scatterplot_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="scatterplot_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 ## External resources
 <!-- - []](){target="_blank"}: Links to resources with quick blurb -->
