@@ -64,7 +64,7 @@ as.Date("Thursday, January 6, 2005", format = "%A, %B %d, %Y")
 
 For a list of the conversion specifications available in R, see `?strptime`.
 
-The tidyverse **lubridate** makes it to convert dates that are not in standard format with `ymd()`, `ydm()`, `mdy()`, `myd()`, `dmy()`, and `dym()` (among many other useful date-time functions):
+The tidyverse **lubridate** makes it easy to convert dates that are not in standard format with `ymd()`, `ydm()`, `mdy()`, `myd()`, `dmy()`, and `dym()` (among many other useful date-time functions):
 
 
 ```r
@@ -79,9 +79,9 @@ Try `as.Date("April 13, 1907")` and you will see the benefit of using a **lubrid
 
 ## Working with `Date` Class
 
-It is well worth the effort to convert to `Date` class, because there's a lot you can do with dates in `Date` class that you can't do if you store the dates as character data.
+It is well worth the effort to convert to `Date` class, because there's a lot you can do with dates in a `Date` class that you can't do if you store the dates as character data.
 
-Number of day between dates:
+Number of days between dates:
 
 
 ```r
@@ -102,7 +102,7 @@ as.Date("2017-11-12") > as.Date("2017-3-3")
 ## [1] TRUE
 ```
 
-Note that `Sys.Date()` returns today's date in `Date` class:
+Note that `Sys.Date()` returns today's date as a `Date` class:
 
 
 ```r
@@ -110,7 +110,7 @@ Sys.Date()
 ```
 
 ```
-## [1] "2018-10-13"
+## [1] "2018-10-15"
 ```
 
 ```r
@@ -130,7 +130,7 @@ weekdays(today)
 ```
 
 ```
-## [1] "Saturday"
+## [1] "Monday"
 ```
 
 ```r
@@ -138,7 +138,7 @@ weekdays(today, abbreviate = TRUE)
 ```
 
 ```
-## [1] "Sat"
+## [1] "Mon"
 ```
 
 ```r
@@ -182,7 +182,7 @@ lubridate::yday(today)
 ```
 
 ```
-## [1] 286
+## [1] 288
 ```
 
 ```r
@@ -207,7 +207,7 @@ lubridate::mday(today)
 ```
 
 ```
-## [1] 13
+## [1] 15
 ```
 
 ```r
@@ -215,7 +215,7 @@ lubridate::week(today)
 ```
 
 ```
-## [1] 41
+## [1] 42
 ```
 
 ```r
@@ -223,7 +223,7 @@ lubridate::wday(today)
 ```
 
 ```
-## [1] 7
+## [1] 2
 ```
 
 ## Plotting with a `Date` class variable
@@ -236,13 +236,13 @@ Both base R graphics and **ggplot2** "know" how to work with a `Date` class vari
 ```r
 df <- read.csv("mortgage.csv")
 df$DATE <- as.Date(df$DATE)
-plot(df$DATE, df$X5.1.ARM, type = "l")
+plot(df$DATE, df$X5.1.ARM, type = "l") # on the order of years
 ```
 
 <img src="dates_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 ```r
-plot(df$DATE[1:30], df$X5.1.ARM[1:30], type = "l")
+plot(df$DATE[1:30], df$X5.1.ARM[1:30], type = "l") # switch to months
 ```
 
 <img src="dates_files/figure-html/unnamed-chunk-10-2.png" width="672" />
@@ -257,7 +257,7 @@ Note the the change in x-axis labels in the second graph.
 library(tidyverse)
 ```
 
-Note that unlike base R`read.csv()`, `readr::read_csv()` automatically reads DATE in `Date` class since it's in YYYY-MM-DD format:
+Note that unlike base R`read.csv()`, `readr::read_csv()` automatically reads DATE in as a `Date` class since it's in YYYY-MM-DD format:
 
 
 ```r
@@ -307,10 +307,6 @@ g + scale_x_date(limits = c(ymd("2008-01-01"), ymd("2008-12-31"))) +
   ggtitle("limits = c(ymd(\"2008-01-01\"), ymd(\"2008-12-31\"))")
 ```
 
-```
-## Warning: Removed 588 rows containing missing values (geom_path).
-```
-
 <img src="dates_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 ```r
@@ -346,10 +342,6 @@ ggplot(df, aes(DATE, `30 YR FIXED`)) +
                date_labels = "%Y") + 
   theme_grey(16) +
   ggtitle("`geom_vline()` with `annotate()`")
-```
-
-```
-## Warning: Removed 536 rows containing missing values (geom_path).
 ```
 
 <img src="dates_files/figure-html/unnamed-chunk-14-1.png" width="672" />
