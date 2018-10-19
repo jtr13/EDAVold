@@ -25,7 +25,7 @@
 <meta name="author" content="Zach Bogart, Joyce Robbins">
 
 
-<meta name="date" content="2018-10-15">
+<meta name="date" content="2018-10-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -48,7 +48,7 @@
 
 
 
-<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
 <link href="libs/vis-4.20.1/vis.css" rel="stylesheet" />
 <script src="libs/vis-4.20.1/vis.min.js"></script>
 <script src="libs/visNetwork-binding-2.0.4/visNetwork.js"></script>
@@ -207,11 +207,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.2" data-path="project.html"><a href="project.html#teams"><i class="fa fa-check"></i><b>2.2.2</b> Teams</a></li>
 <li class="chapter" data-level="2.2.3" data-path="project.html"><a href="project.html#topics"><i class="fa fa-check"></i><b>2.2.3</b> Topics</a></li>
 <li class="chapter" data-level="2.2.4" data-path="project.html"><a href="project.html#data"><i class="fa fa-check"></i><b>2.2.4</b> Data</a></li>
-<li class="chapter" data-level="2.2.5" data-path="project.html"><a href="project.html#analysis"><i class="fa fa-check"></i><b>2.2.5</b> Analysis</a></li>
-<li class="chapter" data-level="2.2.6" data-path="project.html"><a href="project.html#feedback"><i class="fa fa-check"></i><b>2.2.6</b> Feedback</a></li>
-<li class="chapter" data-level="2.2.7" data-path="project.html"><a href="project.html#peer-review"><i class="fa fa-check"></i><b>2.2.7</b> Peer review</a></li>
-<li class="chapter" data-level="2.2.8" data-path="project.html"><a href="project.html#report-format"><i class="fa fa-check"></i><b>2.2.8</b> Report format</a></li>
-<li class="chapter" data-level="2.2.9" data-path="project.html"><a href="project.html#a-note-on-style"><i class="fa fa-check"></i><b>2.2.9</b> A note on style</a></li>
+<li class="chapter" data-level="2.2.5" data-path="project.html"><a href="project.html#code"><i class="fa fa-check"></i><b>2.2.5</b> Code</a></li>
+<li class="chapter" data-level="2.2.6" data-path="project.html"><a href="project.html#analysis"><i class="fa fa-check"></i><b>2.2.6</b> Analysis</a></li>
+<li class="chapter" data-level="2.2.7" data-path="project.html"><a href="project.html#feedback"><i class="fa fa-check"></i><b>2.2.7</b> Feedback</a></li>
+<li class="chapter" data-level="2.2.8" data-path="project.html"><a href="project.html#peer-review"><i class="fa fa-check"></i><b>2.2.8</b> Peer review</a></li>
+<li class="chapter" data-level="2.2.9" data-path="project.html"><a href="project.html#report-format"><i class="fa fa-check"></i><b>2.2.9</b> Report format</a></li>
+<li class="chapter" data-level="2.2.10" data-path="project.html"><a href="project.html#a-note-on-style"><i class="fa fa-check"></i><b>2.2.10</b> A note on style</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="project.html"><a href="project.html#outline"><i class="fa fa-check"></i><b>2.3</b> Outline</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="project.html"><a href="project.html#introduction-1"><i class="fa fa-check"></i><b>2.3.1</b> Introduction</a></li>
@@ -495,15 +496,15 @@ ddate &lt;-<span class="st"> </span><span class="kw">as.Date</span>(dchar)</code
 <pre><code>## [1] TRUE</code></pre>
 <p>Note that <code>Sys.Date()</code> returns today’s date as a <code>Date</code> class:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.Date</span>()</code></pre>
-<pre><code>## [1] &quot;2018-10-15&quot;</code></pre>
+<pre><code>## [1] &quot;2018-10-19&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="kw">Sys.Date</span>())</code></pre>
 <pre><code>## [1] &quot;Date&quot;</code></pre>
 <p>R has functions to pull particular pieces of information from a date:</p>
 <pre class="sourceCode r"><code class="sourceCode r">today &lt;-<span class="st"> </span><span class="kw">Sys.Date</span>()
 <span class="kw">weekdays</span>(today)</code></pre>
-<pre><code>## [1] &quot;Monday&quot;</code></pre>
+<pre><code>## [1] &quot;Friday&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">weekdays</span>(today, <span class="dt">abbreviate =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre><code>## [1] &quot;Mon&quot;</code></pre>
+<pre><code>## [1] &quot;Fri&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">months</span>(today)</code></pre>
 <pre><code>## [1] &quot;October&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">months</span>(today, <span class="dt">abbreviate =</span> <span class="ot">TRUE</span>)</code></pre>
@@ -515,18 +516,18 @@ ddate &lt;-<span class="st"> </span><span class="kw">as.Date</span>(dchar)</code
 lubridate<span class="op">::</span><span class="kw">year</span>(today)</code></pre>
 <pre><code>## [1] 2018</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">yday</span>(today)</code></pre>
-<pre><code>## [1] 288</code></pre>
+<pre><code>## [1] 292</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">month</span>(today)</code></pre>
 <pre><code>## [1] 10</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">month</span>(today, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## [1] Oct
 ## 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">mday</span>(today)</code></pre>
-<pre><code>## [1] 15</code></pre>
+<pre><code>## [1] 19</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">week</span>(today)</code></pre>
 <pre><code>## [1] 42</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">wday</span>(today)</code></pre>
-<pre><code>## [1] 2</code></pre>
+<pre><code>## [1] 6</code></pre>
 </div>
 <div id="plotting-with-a-date-class-variable" class="section level2">
 <h2><span class="header-section-number">10.4</span> Plotting with a <code>Date</code> class variable</h2>
