@@ -25,7 +25,7 @@
 <meta name="author" content="Zach Bogart, Joyce Robbins">
 
 
-<meta name="date" content="2018-10-19">
+<meta name="date" content="2018-10-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -200,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5.2" data-path="basics.html"><a href="basics.html#help-me-r-community"><i class="fa fa-check"></i><b>1.5.2</b> Help me, R community!</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i><b>2</b> Final Project Notes</a><ul>
+<li class="chapter" data-level="2" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i><b>2</b> Final Project Assignment</a><ul>
 <li class="chapter" data-level="2.1" data-path="project.html"><a href="project.html#overview"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
 <li class="chapter" data-level="2.2" data-path="project.html"><a href="project.html#general-info"><i class="fa fa-check"></i><b>2.2</b> General info</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="project.html"><a href="project.html#goal"><i class="fa fa-check"></i><b>2.2.1</b> Goal</a></li>
@@ -496,15 +496,15 @@ ddate &lt;-<span class="st"> </span><span class="kw">as.Date</span>(dchar)</code
 <pre><code>## [1] TRUE</code></pre>
 <p>Note that <code>Sys.Date()</code> returns today’s date as a <code>Date</code> class:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.Date</span>()</code></pre>
-<pre><code>## [1] &quot;2018-10-19&quot;</code></pre>
+<pre><code>## [1] &quot;2018-10-20&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="kw">Sys.Date</span>())</code></pre>
 <pre><code>## [1] &quot;Date&quot;</code></pre>
 <p>R has functions to pull particular pieces of information from a date:</p>
 <pre class="sourceCode r"><code class="sourceCode r">today &lt;-<span class="st"> </span><span class="kw">Sys.Date</span>()
 <span class="kw">weekdays</span>(today)</code></pre>
-<pre><code>## [1] &quot;Friday&quot;</code></pre>
+<pre><code>## [1] &quot;Saturday&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">weekdays</span>(today, <span class="dt">abbreviate =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre><code>## [1] &quot;Fri&quot;</code></pre>
+<pre><code>## [1] &quot;Sat&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">months</span>(today)</code></pre>
 <pre><code>## [1] &quot;October&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">months</span>(today, <span class="dt">abbreviate =</span> <span class="ot">TRUE</span>)</code></pre>
@@ -516,18 +516,18 @@ ddate &lt;-<span class="st"> </span><span class="kw">as.Date</span>(dchar)</code
 lubridate<span class="op">::</span><span class="kw">year</span>(today)</code></pre>
 <pre><code>## [1] 2018</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">yday</span>(today)</code></pre>
-<pre><code>## [1] 292</code></pre>
+<pre><code>## [1] 293</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">month</span>(today)</code></pre>
 <pre><code>## [1] 10</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">month</span>(today, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## [1] Oct
 ## 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">mday</span>(today)</code></pre>
-<pre><code>## [1] 19</code></pre>
+<pre><code>## [1] 20</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">week</span>(today)</code></pre>
 <pre><code>## [1] 42</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">wday</span>(today)</code></pre>
-<pre><code>## [1] 6</code></pre>
+<pre><code>## [1] 7</code></pre>
 </div>
 <div id="plotting-with-a-date-class-variable" class="section level2">
 <h2><span class="header-section-number">10.4</span> Plotting with a <code>Date</code> class variable</h2>
