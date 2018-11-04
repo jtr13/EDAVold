@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="scatter.html">
-<link rel="next" href="maps.html">
+<link rel="prev" href="histo.html">
+<link rel="next" href="ridgeline.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -509,151 +509,195 @@ function unhover(element) {
 <br><br>
 <a href="index.html"><img src="images/icons/edav_resource_url_no_smile.png" onmouseover="hover(this);" onmouseout="unhover(this);" /></a>
 </center>
-<div id="dates" class="section level1">
-<h1><span class="header-section-number">12</span> Dates in R</h1>
-<p><img src="images/banners/banner_dates.png" /></p>
-<div id="introduction-2" class="section level2">
-<h2><span class="header-section-number">12.1</span> Introduction</h2>
-<p>Working with dates and time can be very frustrating. In general, work with the least cumbersome class. That means if your variable is <em>years</em>, store it as an integer; there’s no reason to use a date or date-time class. If your variable does not involve time, use the <code>Date</code> class in R.</p>
+<div id="mosaic" class="section level1">
+<h1><span class="header-section-number">9</span> Chart: Mosaic</h1>
+<!-- Chapter Banner -->
+<p><img src="images/banners/banner_mosaic.png" />
+<em>This chapter originated as a community contribtuion proposed by <a href="https://github.com/harin" target="_blank">harin</a></em></p>
+<p><em>This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider <a href="contribute.html">contributing to our repo</a>.</em></p>
+<div id="overview-7" class="section level2">
+<h2><span class="header-section-number">9.1</span> Overview</h2>
+<p>This section covers how to make Mosaic plots</p>
 </div>
-<div id="converting-to-date-class" class="section level2">
-<h2><span class="header-section-number">12.2</span> Converting to <code>Date</code> class</h2>
-<p>You can convert character data to <code>Date</code> class with <code>as.Date()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">dchar &lt;-<span class="st"> &quot;2018-10-12&quot;</span>
-ddate &lt;-<span class="st"> </span><span class="kw">as.Date</span>(dchar)</code></pre>
-<p>Note that the two appear the same, although the class is different:</p>
-<pre class="sourceCode r"><code class="sourceCode r">dchar</code></pre>
-<pre><code>## [1] &quot;2018-10-12&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">ddate</code></pre>
-<pre><code>## [1] &quot;2018-10-12&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(dchar)</code></pre>
-<pre><code>## [1] &quot;character&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(ddate)</code></pre>
-<pre><code>## [1] &quot;Date&quot;</code></pre>
-<p>If the date is not in YYYY-MM-DD or YYYY/MM/DD form, you will need to specify the format to convert to <code>Date</code> class, using conversion specifications that begin with <code>%</code>, such as:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Date</span>(<span class="st">&quot;Thursday, January 6, 2005&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;%A, %B %d, %Y&quot;</span>)</code></pre>
-<pre><code>## [1] &quot;2005-01-06&quot;</code></pre>
-<p>For a list of the conversion specifications available in R, see <code>?strptime</code>.</p>
-<p>The tidyverse <strong>lubridate</strong> makes it easy to convert dates that are not in standard format with <code>ymd()</code>, <code>ydm()</code>, <code>mdy()</code>, <code>myd()</code>, <code>dmy()</code>, and <code>dym()</code> (among many other useful date-time functions):</p>
-<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">mdy</span>(<span class="st">&quot;April 13, 1907&quot;</span>)</code></pre>
-<pre><code>## [1] &quot;1907-04-13&quot;</code></pre>
-<p>Try <code>as.Date(&quot;April 13, 1907&quot;)</code> and you will see the benefit of using a <strong>lubridate</strong> function.</p>
+<div id="tldr-5" class="section level2">
+<h2><span class="header-section-number">9.2</span> tl;dr</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(vcd)
+<span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, 
+       <span class="dt">labeling =</span> <span class="kw">labeling_border</span>(
+         <span class="dt">abbreviate_labs =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">6</span>),
+         <span class="dt">rot_labels=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">45</span>)
+       ),
+       <span class="dt">direction=</span><span class="kw">c</span>(<span class="st">&#39;v&#39;</span>,<span class="st">&#39;v&#39;</span>,<span class="st">&#39;h&#39;</span>), <span class="co"># Age = Vertical, Music = Vertical, Favoriate = Horizonal (a.k.a DoubleDecker)</span>
+       <span class="dt">gp =</span> <span class="kw">gpar</span>(<span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&#39;lightblue&#39;</span>, <span class="st">&#39;gray&#39;</span>)),
+       df)</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
-<div id="working-with-date-class" class="section level2">
-<h2><span class="header-section-number">12.3</span> Working with <code>Date</code> Class</h2>
-<p>It is well worth the effort to convert to <code>Date</code> class, because there’s a lot you can do with dates in a <code>Date</code> class that you can’t do if you store the dates as character data.</p>
-<p>Number of days between dates:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Date</span>(<span class="st">&quot;2017-11-02&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2017-01-01&quot;</span>)</code></pre>
-<pre><code>## Time difference of 305 days</code></pre>
-<p>Compare dates:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Date</span>(<span class="st">&quot;2017-11-12&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2017-3-3&quot;</span>)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<p>Note that <code>Sys.Date()</code> returns today’s date as a <code>Date</code> class:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.Date</span>()</code></pre>
-<pre><code>## [1] &quot;2018-11-04&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="kw">Sys.Date</span>())</code></pre>
-<pre><code>## [1] &quot;Date&quot;</code></pre>
-<p>R has functions to pull particular pieces of information from a date:</p>
-<pre class="sourceCode r"><code class="sourceCode r">today &lt;-<span class="st"> </span><span class="kw">Sys.Date</span>()
-<span class="kw">weekdays</span>(today)</code></pre>
-<pre><code>## [1] &quot;Sunday&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">weekdays</span>(today, <span class="dt">abbreviate =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre><code>## [1] &quot;Sun&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">months</span>(today)</code></pre>
-<pre><code>## [1] &quot;November&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">months</span>(today, <span class="dt">abbreviate =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre><code>## [1] &quot;Nov&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quarters</span>(today)</code></pre>
-<pre><code>## [1] &quot;Q4&quot;</code></pre>
-<p>The <strong>lubridate</strong> package provides additional functions to extract information from a date:</p>
-<pre class="sourceCode r"><code class="sourceCode r">today &lt;-<span class="st"> </span><span class="kw">Sys.Date</span>()
-lubridate<span class="op">::</span><span class="kw">year</span>(today)</code></pre>
-<pre><code>## [1] 2018</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">yday</span>(today)</code></pre>
-<pre><code>## [1] 308</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">month</span>(today)</code></pre>
-<pre><code>## [1] 11</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">month</span>(today, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre><code>## [1] Nov
-## 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">mday</span>(today)</code></pre>
-<pre><code>## [1] 4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">week</span>(today)</code></pre>
-<pre><code>## [1] 44</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">wday</span>(today)</code></pre>
-<pre><code>## [1] 1</code></pre>
+<div id="simple-example-walkthrough" class="section level2">
+<h2><span class="header-section-number">9.3</span> Simple Example Walkthrough</h2>
+<div id="order-of-splits" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> Order of splits</h3>
+<p>It is best to draw mosaic plots incrementally: start with splitting on one variable and then add additional variables one at a time. The full mosaic plot will have one split per variable.</p>
+<p>Important: if your data is in a data frame (see above), <strong>the count column must be called <code>Freq</code></strong>.</p>
+<p>Split on <code>Age</code> only:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(vcd)
+<span class="kw">mosaic</span>(<span class="op">~</span>Age, df)</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Split on <code>Age</code>, then <code>Music</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Music <span class="op">~</span><span class="st"> </span>Age, df)</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Note that the <em>first</em> split is between “young” and “old”, while the second set of splits divides each age group into “classical” and “rock”.</p>
+<p>Split on <code>Age</code>, then <code>Music</code>, then <code>Favorite</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, df)</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
-<div id="plotting-with-a-date-class-variable" class="section level2">
-<h2><span class="header-section-number">12.4</span> Plotting with a <code>Date</code> class variable</h2>
-<p>Both base R graphics and <strong>ggplot2</strong> “know” how to work with a <code>Date</code> class variable, and label the axes properly:</p>
-<div id="base-r" class="section level3">
-<h3><span class="header-section-number">12.4.1</span> base R</h3>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;mortgage.csv&quot;</span>)
-df<span class="op">$</span>DATE &lt;-<span class="st"> </span><span class="kw">as.Date</span>(df<span class="op">$</span>DATE)
-<span class="kw">plot</span>(df<span class="op">$</span>DATE, df<span class="op">$</span>X5.<span class="fl">1.</span>ARM, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>) <span class="co"># on the order of years</span></code></pre>
-<p><img src="dates_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(df<span class="op">$</span>DATE[<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>], df<span class="op">$</span>X5.<span class="fl">1.</span>ARM[<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>) <span class="co"># switch to months</span></code></pre>
-<p><img src="dates_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
-<p>Note the the change in x-axis labels in the second graph.</p>
+<div id="direction-of-splits" class="section level3">
+<h3><span class="header-section-number">9.3.2</span> Direction of splits</h3>
+<p>Note that in the previous example, the direction of the splits is as follows:</p>
+<ol style="list-style-type: decimal">
+<li><p><code>Age</code> – horizontal split</p></li>
+<li><p><code>Music</code> – vertical split</p></li>
+<li><p><code>Favorite</code> – horizontal split</p></li>
+</ol>
+<p>This is the default direction pattern: alternating directions beginning with horizontal. Therefore we get the same plot with the following:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, 
+       <span class="dt">direction =</span> <span class="kw">c</span>(<span class="st">&quot;h&quot;</span>, <span class="st">&quot;v&quot;</span>, <span class="st">&quot;h&quot;</span>), df)</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The directions can be altered as desired. For example, to create a doubledecker plot, make all splits vertical except the last one:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music,
+       <span class="dt">direction =</span> <span class="kw">c</span>(<span class="st">&quot;v&quot;</span>, <span class="st">&quot;v&quot;</span>, <span class="st">&quot;h&quot;</span>), df)</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Note that the direction vector is in order of splits (<code>Age</code>, <code>Music</code>, <code>Favorite</code>), not in the order in which the variables appear in the formula, where the last variable to be split is listed first, before the “~”.</p>
 </div>
-<div id="ggplot2" class="section level3">
-<h3><span class="header-section-number">12.4.2</span> ggplot2</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># readr </span>
-<span class="kw">library</span>(tidyverse)</code></pre>
-<p>Note that unlike base R<code>read.csv()</code>, <code>readr::read_csv()</code> automatically reads DATE in as a <code>Date</code> class since it’s in YYYY-MM-DD format:</p>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;mortgage.csv&quot;</span>)</code></pre>
-<pre><code>## Parsed with column specification:
-## cols(
-##   DATE = col_date(format = &quot;&quot;),
-##   `5/1 ARM` = col_double(),
-##   `15 YR FIXED` = col_double(),
-##   `30 YR FIXED` = col_double()
-## )</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(DATE, <span class="st">`</span><span class="dt">30 YR FIXED</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">theme_grey</span>(<span class="dv">14</span>)
+<div id="options" class="section level3">
+<h3><span class="header-section-number">9.3.3</span> Options</h3>
+<div id="fill-color" class="section level4">
+<h4><span class="header-section-number">9.3.3.1</span> Fill color:</h4>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grid) <span class="co"># needed for gpar</span>
+<span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, 
+       <span class="dt">gp =</span> <span class="kw">gpar</span>(<span class="dt">fill =</span> <span class="kw">c</span>(<span class="st">&quot;lightblue&quot;</span>, <span class="st">&quot;blue&quot;</span>)),
+       df)</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="rotate-labels" class="section level4">
+<h4><span class="header-section-number">9.3.3.2</span> Rotate labels:</h4>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, 
+       <span class="dt">labeling =</span> <span class="kw">labeling_border</span>(<span class="dt">rot_labels =</span> <span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">-45</span>, <span class="dv">0</span>, <span class="dv">0</span>)),
+       df)</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>The <code>rot_labels =</code> vector sets the rotation in degrees on the four sides of the plot in this order: <em>top, right, bottom, left</em>. (Different from the typical base graphics order!) The default is <code>rot_labels = c(0, 90, 0, 90)</code>.</p>
+</div>
+<div id="abbreviate-labels" class="section level4">
+<h4><span class="header-section-number">9.3.3.3</span> Abbreviate labels:</h4>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, 
+       <span class="dt">labeling =</span> <span class="kw">labeling_border</span>(<span class="dt">abbreviate_labs =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">6</span>)), 
+       df)</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Labels are abbreviated in the order of the splits (as for <code>direction =</code>). The abbreviation algorithm appears to return the specified number of characters after vowels are eliminated (if necessary).</p>
+<p>For more formatting options, see <code>&gt;?vcd::labeling_border</code>.</p>
+</div>
+<div id="remove-spacing-between-cells" class="section level4">
+<h4><span class="header-section-number">9.3.3.4</span> Remove spacing between cells</h4>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music,
+       <span class="dt">spacing =</span> <span class="kw">spacing_equal</span>(<span class="dt">sp =</span> <span class="kw">unit</span>(<span class="dv">0</span>, <span class="st">&quot;lines&quot;</span>)),
+       df)</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>For more details, see <code>&gt;?vcd::spacings</code></p>
+</div>
+<div id="change-border-color-must-also-set-fill" class="section level4">
+<h4><span class="header-section-number">9.3.3.5</span> Change border color (must also set fill(?))</h4>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music,
+       <span class="dt">gp =</span> <span class="kw">gpar</span>(<span class="dt">fill =</span> <span class="kw">c</span>(<span class="st">&quot;lightblue&quot;</span>, <span class="st">&quot;blue&quot;</span>),
+                 <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>),
+       <span class="dt">spacing =</span> <span class="kw">spacing_equal</span>(<span class="dt">sp =</span> <span class="kw">unit</span>(<span class="dv">0</span>, <span class="st">&quot;lines&quot;</span>)),
+       df)</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="mosaic-using-base-r" class="section level2">
+<h2><span class="header-section-number">9.4</span> Mosaic using base R</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(vcdExtra)
+<span class="kw">mosaicplot</span>(<span class="kw">xtabs</span>(count <span class="op">~</span><span class="st"> </span>lake <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data=</span>Alligator), <span class="dt">main=</span><span class="st">&quot;&quot;</span>)</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="kw">xtabs</span>(Freq <span class="op">~</span><span class="st"> </span>Favorite <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, <span class="dt">data=</span>df), <span class="dt">main=</span><span class="st">&quot;&quot;</span>,
+           <span class="dt">dir=</span><span class="kw">c</span>(<span class="st">&#39;h&#39;</span>, <span class="st">&#39;v&#39;</span>, <span class="st">&#39;v&#39;</span>))</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div id="mosaic-using-vcddoubledecker" class="section level3">
+<h3><span class="header-section-number">9.4.1</span> Mosaic using vcd::doubledecker</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Arthritis)
+vcd<span class="op">::</span><span class="kw">doubledecker</span>(Improved <span class="op">~</span><span class="st"> </span>Treatment <span class="op">+</span><span class="st"> </span>Sex, <span class="dt">data=</span>Arthritis)</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">vcd<span class="op">::</span><span class="kw">doubledecker</span>(Music <span class="op">~</span><span class="st"> </span>Favorite <span class="op">+</span><span class="st"> </span>Age, 
+                  <span class="kw">xtabs</span>(Freq <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music <span class="op">+</span><span class="st"> </span>Favorite, df))</code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+</div>
+<div id="mosaic-using-ggplot" class="section level2">
+<h2><span class="header-section-number">9.5</span> Mosaic using ggplot</h2>
+<p>For a comprehensive overview of mosaic plot in ggplot check out the link below.
+<a href="https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html" class="uri" target="_blank">https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggmosaic)
 
-g</code></pre>
-<p><img src="dates_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(DATE <span class="op">&lt;</span><span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2006-01-01&quot;</span>)), 
-       <span class="kw">aes</span>(DATE, <span class="st">`</span><span class="dt">30 YR FIXED</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">theme_grey</span>(<span class="dv">14</span>)</code></pre>
-<p><img src="dates_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
-<p>Again, when the data is filtered, the x-axis labels switch from years to months.</p>
-<div id="breaks-limits-labels" class="section level4">
-<h4><span class="header-section-number">12.4.2.1</span> Breaks, limits, labels</h4>
-<p>We can control the x-axis breaks, limits, and labels with <code>scale_x_date()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
-g <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_date</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="kw">ymd</span>(<span class="st">&quot;2008-01-01&quot;</span>), <span class="kw">ymd</span>(<span class="st">&quot;2008-12-31&quot;</span>))) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;limits = c(ymd(</span><span class="ch">\&quot;</span><span class="st">2008-01-01</span><span class="ch">\&quot;</span><span class="st">), ymd(</span><span class="ch">\&quot;</span><span class="st">2008-12-31</span><span class="ch">\&quot;</span><span class="st">))&quot;</span>)</code></pre>
-<p><img src="dates_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">g <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_date</span>(<span class="dt">date_breaks =</span> <span class="st">&quot;4 years&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;scale_x_date(date_breaks = </span><span class="ch">\&quot;</span><span class="st">4 years</span><span class="ch">\&quot;</span><span class="st">)&quot;</span>)</code></pre>
-<p><img src="dates_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">g <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_date</span>(<span class="dt">date_labels =</span> <span class="st">&quot;%Y-%m&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;scale_x_date(date_labels = </span><span class="ch">\&quot;</span><span class="st">%Y-%m</span><span class="ch">\&quot;</span><span class="st">)&quot;</span>)</code></pre>
-<p><img src="dates_files/figure-html/unnamed-chunk-13-3.png" width="672" /></p>
-<p>(Yes, even in the tidyverse we cannot completely escape the <code>%</code> conversion specification notation. Remember <code>?strptime</code> for help.)</p>
+<span class="co"># equivalent to doing Favorite ~ Age + Music in vcd::mosaic with doubledecker style cut</span>
+<span class="kw">ggplot</span>(df) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_mosaic</span>(
+    <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">product</span>(Favorite, Age, Music), <span class="co"># cut from right to left </span>
+        <span class="dt">weight=</span>Freq,
+        <span class="dt">fill=</span>Favorite
+        ),
+    <span class="dt">divider=</span><span class="kw">c</span>(<span class="st">&quot;vspine&quot;</span> , <span class="st">&quot;hspine&quot;</span>, <span class="st">&quot;hspine&quot;</span>) <span class="co"># equivalent to divider=ddecker()</span>
+  ) </code></pre>
+<p><img src="mosaic_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 </div>
-<div id="annotations" class="section level4">
-<h4><span class="header-section-number">12.4.2.2</span> Annotations</h4>
-<p>We can use <code>geom_vline()</code> with <code>annotate()</code> to mark specific events in a time series:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(DATE, <span class="st">`</span><span class="dt">30 YR FIXED</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">ymd</span>(<span class="st">&quot;2008-09-29&quot;</span>), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="kw">ymd</span>(<span class="st">&quot;2008-09-29&quot;</span>), <span class="dt">y =</span> <span class="fl">3.75</span>, 
-           <span class="dt">label =</span> <span class="st">&quot; Market crash</span><span class="ch">\n</span><span class="st"> 9/29/08&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>, 
-           <span class="dt">hjust =</span> <span class="dv">0</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="kw">ymd</span>(<span class="st">&quot;2008-01-01&quot;</span>), <span class="kw">ymd</span>(<span class="st">&quot;2009-12-31&quot;</span>)),
-               <span class="dt">date_breaks =</span> <span class="st">&quot;1 year&quot;</span>, 
-               <span class="dt">date_labels =</span> <span class="st">&quot;%Y&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">theme_grey</span>(<span class="dv">16</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;`geom_vline()` with `annotate()`&quot;</span>)</code></pre>
-<p><img src="dates_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div id="theory-4" class="section level2">
+<h2><span class="header-section-number">9.6</span> Theory</h2>
+</div>
+<div id="when-to-use-2" class="section level2">
+<h2><span class="header-section-number">9.7</span> When to use</h2>
+<p>When you want to see the relationships in Multivariate Categorical Data</p>
+</div>
+<div id="considerations-2" class="section level2">
+<h2><span class="header-section-number">9.8</span> Considerations</h2>
+<div id="labels" class="section level3">
+<h3><span class="header-section-number">9.8.1</span> Labels</h3>
+<p>Legibility of the labels is problematic in mosaic plot especially when there are a lot of dimensions. This can be alleviated by
+- Abbreviate names
+- Rotating the labels</p>
+</div>
+<div id="aspect-ratio" class="section level3">
+<h3><span class="header-section-number">9.8.2</span> Aspect Ratio</h3>
+<ul>
+<li>lengths are easier to judge than area, so try to use rectangles with same width or height</li>
+<li>Taller thinner rectangles are better (we are better at distinguishing length than area)</li>
+</ul>
+</div>
+<div id="gaps-between-rectangles" class="section level3">
+<h3><span class="header-section-number">9.8.3</span> Gaps between rectangles</h3>
+<ul>
+<li>No gap = most efficient</li>
+</ul>
+<p>However, a gap can help improve legibility, so try out different combinations</p>
+<ul>
+<li>Can have a gap at splits</li>
+<li>Can Vary gap size down the hierarchy</li>
+</ul>
+</div>
+<div id="color" class="section level3">
+<h3><span class="header-section-number">9.8.4</span> Color</h3>
+<ul>
+<li>good for rates in the subgroup</li>
+<li>displaying residual</li>
+<li>emphasizing particular subgroup</li>
+</ul>
+</div>
+</div>
+<div id="external-resources-4" class="section level2">
+<h2><span class="header-section-number">9.9</span> External resources</h2>
+<ul>
+<li><p>Chapter 7 of <a href="https://www.crcpress.com/Graphical-Data-Analysis-with-R/Unwin/p/book/9781498715232" target="_blank">Graphical data analysis with R by Anthony Unwin</a></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html" target="_blank">Link</a>: A comprehensive overview of mosaic plot in ggplot check out the link below.</p></li>
+</ul>
 
-</div>
-</div>
 </div>
 </div>
 <!-- 
@@ -679,8 +723,8 @@ Footer
           </div>
         </div>
       </div>
-<a href="scatter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="maps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="histo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ridgeline.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -710,7 +754,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jtr13/EDAV/edit/master/dates.Rmd",
+"link": "https://github.com/jtr13/EDAV/edit/master/mosaic.Rmd",
 "text": "Edit"
 },
 "download": null,
