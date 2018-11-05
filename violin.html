@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="basics.html">
+<link rel="prev" href="scatter.html">
+<link rel="next" href="dates.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -520,85 +520,73 @@ function unhover(element) {
 <br><br>
 <a href="index.html"><img src="images/icons/edav_resource_url_no_smile.png" onmouseover="hover(this);" onmouseout="unhover(this);" /></a>
 </center>
-<div id="header">
-<h1 class="title">edav.info/</h1>
-<p class="author"><em>Zach Bogart, Joyce Robbins</em></p>
-<p class="date"><em>2018-11-05</em></p>
+<div id="violin" class="section level1">
+<h1><span class="header-section-number">12</span> Chart: Violin Plot</h1>
+<p><img src="images/banners/banner_violin.png" />
+<em>This chapter originated as a community contribution created by <a href="https://github.com/AshwinJay101" target="_blank">AshwinJay101</a></em></p>
+<p><em>This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider <a href="contribute.html">contributing to our repo</a>.</em></p>
+<div id="overview-10" class="section level2">
+<h2><span class="header-section-number">12.1</span> Overview</h2>
+<p>This section covers how to make violin plots.</p>
 </div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="images/banners/banner_intro.png" /></p>
-<div id="everything-you-need-for-edav" class="section level2">
-<h2><span class="header-section-number">0.1</span> Everything you need for EDAV</h2>
-<p>This resource has everything you need and more to be successful with R, this EDAV course, and beyond. Let’s get started!</p>
-<p>With this resource, we try to give you a <strong>curated collection of tools and references</strong> that will make it easier to learn how to work with data in R.</p>
-<p>In addition, we include sections on <strong>basic chart types/tools</strong> so you can learn by doing.</p>
-<p>There are also <strong>several walkthroughs</strong> where we work with data and discuss problems as well as some tips/tricks that will help you.</p>
-<p>We hope this resource serves you well!</p>
-<p>This resource is specifically tailored to the GR5702 Exploratory Data Analysis and Visualization course offered at <a href="https://www.columbia.edu/" target="_blank">Columbia University</a>. However, anyone interested in working with data in R will benefit from perusing these pages.</p>
+<div id="some-examples-in-r" class="section level2">
+<h2><span class="header-section-number">12.2</span> Some Examples in R</h2>
+<p>Let’s use the <code>chickwts</code> dataset from the <code>datasets</code> package to plot a violin plot using <code>ggplot2</code>.</p>
+<p><img src="violin_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Here’s the code for that:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># import ggplot and the Datasets Package</span>
+<span class="kw">library</span>(datasets)
+<span class="kw">library</span>(ggplot2)
+
+supps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;horsebean&quot;</span>, <span class="st">&quot;linseed&quot;</span>, <span class="st">&quot;soybean&quot;</span>, <span class="st">&quot;meatmeal&quot;</span>, <span class="st">&quot;sunflower&quot;</span>, <span class="st">&quot;casein&quot;</span>)
+
+<span class="co"># plot data</span>
+
+<span class="kw">ggplot</span>(chickwts, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(feed, <span class="dt">levels =</span> supps), 
+                     <span class="dt">y =</span> weight)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># plotting</span>
+<span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;lightBlue&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;#473e2c&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Feed Supplement&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Chick Weight (g)&quot;</span>)</code></pre>
 </div>
-<div id="how-this-resource-is-structured" class="section level2">
-<h2><span class="header-section-number">0.2</span> How this resource is structured</h2>
-<p>This resource is split into four color-coded sections, each of which provides different kinds of assistance. Below is an explanation of each section:</p>
-<div id="section-i-information-blue" class="section level3">
-<h3><span class="header-section-number">0.2.1</span> Section I: Information (Blue)</h3>
-<p><img src="images/banners/banner_blue.png" /></p>
-<p>Pages in the <strong>blue section</strong> contain basic <strong>information</strong>. Examples of blue pages include this introduction page and the <a href="basics.html">basics page</a>, which explains how to setup R/RStudio as well as ways to get help if you need it. Blue pages are the help desk of this resource: look to them if you are lost and need to find your way.</p>
+<div id="adding-statistics-to-the-violin-plot" class="section level2">
+<h2><span class="header-section-number">12.3</span> Adding Statistics to the Violin Plot</h2>
+<div id="adding-the-median-and-the-interquartile-range" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> Adding the median and the interquartile range</h3>
+<p>We can add the median and the interquartile range to the violin plot</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(chickwts, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(feed, <span class="dt">levels =</span> supps), 
+                     <span class="dt">y =</span> weight)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># plotting</span>
+<span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;lightBlue&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;#473e2c&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Feed Supplement&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Chick Weight (g)&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">geom_boxplot</span>(<span class="dt">width=</span><span class="fl">0.1</span>)</code></pre>
+<p><img src="violin_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>To get the result, we just add a boxplot geom.</p>
 </div>
-<div id="section-ii-walkthroughs-red" class="section level3">
-<h3><span class="header-section-number">0.2.2</span> Section II: Walkthroughs (Red)</h3>
-<p><img src="images/banners/banner_red.png" /></p>
-<p>Pages in the <strong>red section</strong> contain more extensive <strong>walkthroughs</strong>. An example of a red page is the <a href="iris.html">iris walkthrough</a>, where a well-known dataset is presented as a pretty scatterplot and steps are shown from start to finish. This page type is the most thorough: it tries to provide full documentation, explanations of design choices, and advice on best practices. It’s like going to office hours and having a great clarifying chat with a course assistant…in article form. If you would like to see a fully-worked-through example of something with a lot of guidance along the way, check out the red pages.</p>
-</div>
-<div id="section-iii-documentation-green" class="section level3">
-<h3><span class="header-section-number">0.2.3</span> Section III: Documentation (Green)</h3>
-<p><img src="images/banners/banner_green.png" /></p>
-<p>Pages in the <strong>green section</strong> contain more compact <strong>documentation</strong>. An example of a green page is the <a href="histo.html">histogram page</a>, which includes simple examples of how to create histograms, when to use them, and things to be aware of/watch out for. The green pages hold your hand much less than the red pages: they explain how to use a chart/tool using examples and simple terms. If you have an idea in mind and are just wondering how to execute it, the green pages will help fill in those gaps.</p>
-</div>
-<div id="section-iv-references-yellow" class="section level3">
-<h3><span class="header-section-number">0.2.4</span> Section IV: References (Yellow)</h3>
-<p><img src="images/banners/banner_yellow.png" /></p>
-<p>Pages in the <strong>yellow section</strong> contain simple collections of <strong>references</strong>. An example of a yellow page is the <a href="general.html">external resources page</a>, which is a list of materials that you can look through and learn from. Yellow pages have the least amount of hand-holding: they are collections of resources and bare-boned tutorials that will help you learn about new things.</p>
-</div>
-</div>
-<div id="help-improve-edav.info" class="section level2">
-<h2><span class="header-section-number">0.3</span> Help improve <em>edav.info/</em></h2>
-<p>Not finding what you are looking for? Think a section could be made clearer? Consider helping improve <em>edav.info/</em> by submitting a pull request to the <a href="https://github.com/jtr13/EDAV" target="_blank">github page</a>. Don’t understand that last sentence? We have a <a href="contribute.html">page on how you can contribute to <em>edav.info/</em></a>.</p>
-</div>
-<div id="fun-stuff" class="section level2">
-<h2><span class="header-section-number">0.4</span> Fun stuff</h2>
-<div id="t-shirts" class="section level3">
-<h3><span class="header-section-number">0.4.1</span> T-shirts</h3>
-<p>Zach Bogart has made a few t-shirts available on <a href="https://teespring.com/stores/edav" target="_blank">Teespring</a> so you can show your love for EDAV and R. Hope you enjoy!</p>
-<center>
-<a href="https://teespring.com/edav-info" class="active-banner" target="_blank"><img src="images/blue_edav_shirt.png" alt="White EDAV Logo Shirt" /></a>
-<a href="https://teespring.com/r-edav-info" class="active-banner" target="_blank"><img src="images/blue-r-shirt.png" alt="R Shirt" /></a>
-</center>
-<p><em>P.S. Designing a cool shirt or sticker is a great addition to your community contribution. It has to be cool, though <i class="far fa-smile"></i></em></p>
-<!-- Contact -->
+<div id="displaying-data-as-dots" class="section level3">
+<h3><span class="header-section-number">12.3.2</span> Displaying data as dots</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(chickwts, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(feed, <span class="dt">levels =</span> supps), 
+                     <span class="dt">y =</span> weight)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># plotting</span>
+<span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;lightBlue&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;#473e2c&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Feed Supplement&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Chick Weight (g)&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="dt">binaxis=</span><span class="st">&#39;y&#39;</span>, <span class="dt">dotsize=</span><span class="fl">0.5</span>, <span class="dt">stackdir=</span><span class="st">&#39;center&#39;</span>)</code></pre>
+<p><img src="violin_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 </div>
-<div id="contact" class="section level2">
-<h2><span class="header-section-number">0.5</span> Contact</h2>
-<p>Zach Bogart:
-<a href="https://zachbogart.com/" target="_blank">Website</a>
-/
-<a href="https://twitter.com/zachbogart" target="_blank">Twitter</a>
-/
-<a href="https://github.com/zachbogart" target="_blank">GitHub</a></p>
-<p>Joyce Robbins:
-<a href="http://stat.columbia.edu/department-directory/name/joyce-robbins/" target="_blank">Columbia Profile</a>
-/
-<a href="http://www.joyce-robbins.com/" target="_blank">Website</a>
-/
-<a href="https://twitter.com/jtrnyc" target="_blank">Twitter</a>
-/
-<a href="https://github.com/jtr13" target="_blank">GitHub</a></p>
-<!-- License -->
+<div id="description" class="section level2">
+<h2><span class="header-section-number">12.4</span> Description</h2>
+<p>Violin plots are similar to box plots. The advantage they have over box plots is that they allow us to visualize the distribution of the data <em>and</em> the probability density. We can think of violin plots as a combination of <a href="box.html">boxplots</a> and density plots.</p>
+<p>This plot type allows us to see whether the data is unimodal, bimodal or multimodal. These simple details will be hidden in the boxplot. The distribution can be seen through the width of the violin plot.</p>
 </div>
-<div id="license" class="section level2">
-<h2><span class="header-section-number">0.6</span> License</h2>
-<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+<div id="when-to-use-5" class="section level2">
+<h2><span class="header-section-number">12.5</span> When to use</h2>
+<p>Violin plots should be used to display continuous variables only.</p>
+</div>
+<div id="external-resources-7" class="section level2">
+<h2><span class="header-section-number">12.6</span> External Resources</h2>
+<ul>
+<li><a href="http://www.sthda.com/english/wiki/ggplot2-violin-plot-quick-start-guide-r-software-and-data-visualization" target="_blank">ggplot2 Violin Plot</a>: Excellent resource for showing the various customizations that can be added to the violin plot.</li>
+</ul>
 
 </div>
 </div>
@@ -625,8 +613,8 @@ Footer
           </div>
         </div>
       </div>
-
-<a href="basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="scatter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dates.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -656,7 +644,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jtr13/EDAV/edit/master/index.Rmd",
+"link": "https://github.com/jtr13/EDAV/edit/master/violin.Rmd",
 "text": "Edit"
 },
 "download": null,
