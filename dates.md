@@ -234,7 +234,7 @@ Both base R graphics and **ggplot2** "know" how to work with a `Date` class vari
 
 
 ```r
-df <- read.csv("mortgage.csv")
+df <- read.csv("data/mortgage.csv")
 df$DATE <- as.Date(df$DATE)
 plot(df$DATE, df$X5.1.ARM, type = "l") # on the order of years
 ```
@@ -261,7 +261,7 @@ Note that unlike base R`read.csv()`, `readr::read_csv()` automatically reads DAT
 
 
 ```r
-df <- readr::read_csv("mortgage.csv")
+df <- readr::read_csv("data/mortgage.csv")
 ```
 
 ```

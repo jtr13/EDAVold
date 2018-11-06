@@ -610,7 +610,7 @@ lubridate<span class="op">::</span><span class="kw">year</span>(today)</code></p
 <p>Both base R graphics and <strong>ggplot2</strong> “know” how to work with a <code>Date</code> class variable, and label the axes properly:</p>
 <div id="base-r" class="section level3">
 <h3><span class="header-section-number">14.4.1</span> base R</h3>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;mortgage.csv&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/mortgage.csv&quot;</span>)
 df<span class="op">$</span>DATE &lt;-<span class="st"> </span><span class="kw">as.Date</span>(df<span class="op">$</span>DATE)
 <span class="kw">plot</span>(df<span class="op">$</span>DATE, df<span class="op">$</span>X5.<span class="fl">1.</span>ARM, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>) <span class="co"># on the order of years</span></code></pre>
 <p><img src="dates_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
@@ -623,7 +623,7 @@ df<span class="op">$</span>DATE &lt;-<span class="st"> </span><span class="kw">a
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># readr </span>
 <span class="kw">library</span>(tidyverse)</code></pre>
 <p>Note that unlike base R<code>read.csv()</code>, <code>readr::read_csv()</code> automatically reads DATE in as a <code>Date</code> class since it’s in YYYY-MM-DD format:</p>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;mortgage.csv&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;data/mortgage.csv&quot;</span>)</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   DATE = col_date(format = &quot;&quot;),
