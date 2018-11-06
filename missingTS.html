@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="network.html">
-<link rel="next" href="percept.html">
+<link rel="prev" href="iris.html">
+<link rel="next" href="bar.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -531,41 +531,244 @@ function unhover(element) {
 <br><br>
 <a href="index.html"><img src="images/icons/edav_resource_url_no_smile.png" onmouseover="hover(this);" onmouseout="unhover(this);" /></a>
 </center>
-<div id="general" class="section level1">
-<h1><span class="header-section-number">18</span> General Resources</h1>
-<p><img src="images/banners/banner_resources.png" /></p>
-<p>This is a long list of helpful general resources related to EDAV. If you have come across a good resource you don’t see here, consider adding it with a pull request (see the <a href="contribute.html">contribute page</a> for more info).</p>
-<div id="books" class="section level2">
-<h2><span class="header-section-number">18.1</span> Books</h2>
-<p>A lot of these are available for students through <a href="http://library.columbia.edu/" target="_blank">Columbia Libraries</a>, in both physical and e-book formats.</p>
-<ul>
-<li><p><a href="http://rosuda.org/GDA" target="_blank">Graphical Data Analysis with R</a>: This book systematically goes through the different types of data, including categorical variables, continuous variables, and time series. The author shows different examples of plotting techniques using ggplot and promoting the “grammar of graphics” model. Code snippets included and available at the <a href="http://rosuda.org/GDA" target="_blank">book’s website</a>.</p></li>
-<li><p><a href="http://r4ds.had.co.nz/" target="_blank">R for Data Science</a>: The classic. Everything from data types, programming, modeling, communicating, and those keyboard shortcuts you keep forgetting. To quote the book, “this book will teach you how to do data science with R.” Nuff said.</p></li>
-</ul>
+<div id="missingTS" class="section level1">
+<h1><span class="header-section-number">5</span> Time Series with Missing Data</h1>
+<p><img src="images/banners/banner_missing_time_series.png" />
+<em>This chapter originated as a community contribution created by <a href="https://github.com/Somendratripathi/" target="_blank">sdt2134</a></em></p>
+<p><em>This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider <a href="contribute.html">contributing to our repo</a>.</em></p>
+<div id="overview-3" class="section level2">
+<h2><span class="header-section-number">5.1</span> Overview</h2>
+<p>For data scientists, data preparation could easily be the second most frustrating task, right after explaining their models to other departments. Missing value treatment is a key part of data preparation and knowing how to handle it well can reduce the excruciating pain one feels after seeing a poor <a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation" target="_blank">RMSE</a>.
+The chapter on <a href="https://edav.info/missing.html">missing data</a> talks about some of the ways you could handle missing data in your dataset; this walkthrough takes it further focusing specifically on timeseries data.</p>
 </div>
-<div id="cheatsheets" class="section level2">
-<h2><span class="header-section-number">18.2</span> Cheatsheets</h2>
-<ul>
-<li><p><a href="https://paulvanderlaken.com/author/lakenp/" target="_blank">Cheatsheet of cheatsheets</a>: Paul van der Laken has put together a large collection of R resource links, including cheat sheets, style guides, package info, blogs, and other helpful resources.</p></li>
-<li><p><a href="https://www.rstudio.com/resources/cheatsheets/" target="_blank">RStudio Cheatsheet Collection</a>: Collection of downloadable cheatsheets from RStudio. Includes ones on R Markdown, Data Transformation (<code>dplyr</code>), and Data Visualization (<code>ggplot2</code>). They also have a R Markdown Reference Guide, which is great for remembering that one chunk option that’s on the tip of your tongue.</p></li>
-<li><p><a href="https://github.com/jtr13/codehelp/blob/master/R/BaseGraphicsCheatsheet.pdf" target="_blank">R Base Graphics Cheatsheet</a>: Oddly enough, despite the length of time it’s been around, it’s hard to find a base graphics cheatsheet. Joyce put this one together to help you out if you’re using base graphics.</p></li>
-</ul>
+<div id="motivation" class="section level2">
+<h2><span class="header-section-number">5.2</span> Motivation</h2>
+<p><strong>Why should you care when you have mean, median &amp; mode?</strong></p>
+<p>You should care because time series problems are not that straight-forward. Most often time series are accompanied by forecasting tasks and most algorithms won’t allow missing data. Imputation using mean, median &amp; mode might hide trends or seasonal patterns whereas removing missing data points altogether might reduce information contained in other features for those cases. <code>ImputeTS</code> in R provides a bunch of functions to visualize and approximate missing values with high precision.</p>
+<p>But first you must ask yourself two questions:</p>
+<ol style="list-style-type: decimal">
+<li>Is there any identifiable reason for it?</li>
+<li>Are they missing at random?</li>
+</ol>
+<p><strong>Is there any identifiable reason for it?</strong> Let’s take the example of a bakery. You are forecasting daily cake sales and find missing data is linked to holidays. How to impute? One way could be to fill with zeroes and create a flag that could help your forecasting algorithm understand this pattern.</p>
+<p>If sales are missing if your cakes were out of stock or the baker was on leave such flags won’t work as you cannot predict these events in the future. Imputation is ideal for treating such cases.</p>
+<p><strong>What if they are missing at random?</strong> You have only one option - imputation.</p>
+<p>Let’s go through a time series exercise where we have to decompose it when missing values are present.</p>
+<p>Dataset : a10 “Monthly anti-diabetic drug sales in Australia from 1992 to 2008”
+For this walkthrough we will use two copies of the a10 dataset.</p>
+<p>Here’s the original dataset from the <code>fpp</code> package</p>
+<pre class="sourceCode r"><code class="sourceCode r">complete_a10 &lt;-<span class="st"> </span>fpp<span class="op">::</span>a10</code></pre>
+<p>Let’s create missing values and check the performance of various imputation functions on hidden values.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">134</span>)
+missatrand_a10 &lt;-<span class="st"> </span>complete_a10
+missatrand_a10[<span class="kw">sample</span>(<span class="kw">length</span>(complete_a10),<span class="fl">0.2</span><span class="op">*</span><span class="kw">length</span>(complete_a10))] &lt;-<span class="st"> </span><span class="ot">NA</span> </code></pre>
+<div id="lets-analyse-this-timeseries-graphically" class="section level4">
+<h4><span class="header-section-number">5.2.0.1</span> Let’s analyse this timeseries graphically</h4>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(missatrand_a10)</code></pre>
+<p><img src="timeseries_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Looks like the series has <a href="https://otexts.org/fpp2/classical-decomposition.html">multiplicative seasonality</a>.
+Let’s transform it into additive to see if seasonality appears more clearly.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">log</span>(missatrand_a10))</code></pre>
+<p><img src="timeseries_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Wow, it shows a clear seasonal pattern with an increasing trend.</p>
 </div>
-<div id="articles" class="section level2">
-<h2><span class="header-section-number">18.3</span> Articles</h2>
-<ul>
-<li><p><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833" target="_blank">Ten Simple Rules for Better Figures</a>: A helpful article discussing how to make the best figures possible by following ten basic rules such as “Avoid ‘chartjunk’” and “Know Your Audience”. Good to keep these rules in mind.</p></li>
-<li><p><a href="http://toddwschneider.com/posts/the-simpsons-by-the-data/" target="_blank">The Simpsons by the Data</a>: Nice example of telling a story with data (histograms, scatterplots, etc.). Also, it’s subject is everybody’s favorite TV family.</p></li>
-</ul>
+<div id="what-if-we-decompose-it-into-into-its-components" class="section level4">
+<h4><span class="header-section-number">5.2.0.2</span> What if we decompose it into into its components</h4>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">decompose</span>(missatrand_a10, <span class="dt">type =</span> <span class="st">&quot;multiplicative&quot;</span>))</code></pre>
+<pre><code>## Error in na.omit.ts(x): time series contains internal NAs</code></pre>
+<p>Not so fast. As mentioned above, we must treat the missing values before we do this.
+Enough said let’s impute this missing piece into our toolkit!</p>
 </div>
-<div id="meetups" class="section level2">
-<h2><span class="header-section-number">18.4</span> Meetups</h2>
+</div>
+<div id="visualizing-missing-values" class="section level2">
+<h2><span class="header-section-number">5.3</span> Visualizing missing values</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(imputeTS)
+
+<span class="kw">plotNA.distribution</span>(missatrand_a10)</code></pre>
+<p><img src="timeseries_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Let’s get a summary of the missing values.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">statsNA</span>(missatrand_a10)</code></pre>
+<pre><code>## [1] &quot;Length of time series:&quot;
+## [1] 204
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Number of Missing Values:&quot;
+## [1] 40
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Percentage of Missing Values:&quot;
+## [1] &quot;19.6%&quot;
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Stats for Bins&quot;
+## [1] &quot;  Bin 1 (51 values from 1 to 51) :      13 NAs (25.5%)&quot;
+## [1] &quot;  Bin 2 (51 values from 52 to 102) :      8 NAs (15.7%)&quot;
+## [1] &quot;  Bin 3 (51 values from 103 to 153) :      10 NAs (19.6%)&quot;
+## [1] &quot;  Bin 4 (51 values from 154 to 204) :      9 NAs (17.6%)&quot;
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Longest NA gap (series of consecutive NAs)&quot;
+## [1] &quot;3 in a row&quot;
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Most frequent gap size (series of consecutive NA series)&quot;
+## [1] &quot;1 NA in a row (occuring 29 times)&quot;
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Gap size accounting for most NAs&quot;
+## [1] &quot;1 NA in a row (occuring 29 times, making up for overall 29 NAs)&quot;
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Overview NA series&quot;
+## [1] &quot;  1 NA in a row: 29 times&quot;
+## [1] &quot;  2 NA in a row: 4 times&quot;
+## [1] &quot;  3 NA in a row: 1 times&quot;</code></pre>
+<p>Are there any patterns in missingness, how many consecutive NA’s are there (gapsize), and how many missing values are accounted by a specific gapsize?</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotNA.gapsize</span>(missatrand_a10)</code></pre>
+<p><img src="timeseries_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="imputing-missing-values" class="section level2">
+<h2><span class="header-section-number">5.4</span> Imputing missing values</h2>
+<div id="generic-methods-independent-of-time-series-temporal-properties" class="section level3">
+<h3><span class="header-section-number">5.4.1</span> Generic methods : independent of time series’ temporal properties</h3>
+<div id="mean-median-and-mode" class="section level4">
+<h4><span class="header-section-number">5.4.1.1</span> Mean, median and mode</h4>
+<p>This is a straight forward and simple method for interpolation. But given we are imputing the missing value by calculating the mean, we end up losing information around the trend and seasonality, leading to huge errors in imputation. Because of this reason, this method is best suited for data that is stationary. This function also allows us to use other measures like median and mode.</p>
+<div id="method-1" class="section level6">
+<h6><span class="header-section-number">5.4.1.1.0.1</span> Method 1</h6>
+<pre class="sourceCode r"><code class="sourceCode r">imp &lt;-<span class="st"> </span><span class="kw">na.mean</span>(missatrand_a10)
+p1&lt;-<span class="kw">as.tibble</span>(<span class="kw">cbind</span>(<span class="dt">Date =</span> <span class="kw">as.yearmon</span>(<span class="kw">time</span>(missatrand_a10)), 
+                <span class="dt">missatrand =</span> missatrand_a10,<span class="dt">complete_a10 =</span> complete_a10,<span class="dt">imputed_val =</span> imp))<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                </span><span class="kw">mutate</span>(<span class="dt">imputed_val =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(missatrand),imputed_val,<span class="ot">NA</span>),
+                       <span class="dt">complete_a10 =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(missatrand),complete_a10,<span class="ot">NA</span>)
+                       )<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Date)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="co">#geom_line(aes(y=missatrand),color=&quot;red&quot;)+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>missatrand),<span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>imputed_val),<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>complete_a10),<span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Anti-diabetic drug sales&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&quot;Imputed values (Blue); Real values (Red) &quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>))
+
+p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> complete_a10<span class="op">-</span>imp, <span class="dt">x =</span> <span class="kw">as.yearmon</span>(<span class="kw">time</span>(missatrand_a10)) )) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="op">-</span><span class="dv">10</span>,<span class="dv">10</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Errors&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Date&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;Errors in imputation&quot;</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>))
+
+<span class="kw">grid.arrange</span>(p1, p2, <span class="dt">ncol=</span><span class="dv">2</span>,<span class="dt">top=</span><span class="st">&quot;Interpolation using mean&quot;</span>)</code></pre>
+<p><img src="timeseries_files/figure-html/fig1-1.png" width="960" /></p>
+</div>
+</div>
+<div id="moving-averages" class="section level4">
+<h4><span class="header-section-number">5.4.1.2</span> Moving Averages</h4>
+<p>As this function calculates moving averages based on the last n observations, it will generally be performing better than the last method. Moving averages work well when data has a linear trend. This function also allows us to use linear-weighted and exponentially-weighted moving averages.</p>
+<div id="method-2" class="section level6">
+<h6><span class="header-section-number">5.4.1.2.0.1</span> Method 2</h6>
+<pre class="sourceCode r"><code class="sourceCode r">imp &lt;-<span class="st"> </span><span class="kw">na.ma</span>(missatrand_a10)
+p1&lt;-<span class="kw">as.tibble</span>(<span class="kw">cbind</span>(<span class="dt">Date =</span> <span class="kw">as.yearmon</span>(<span class="kw">time</span>(missatrand_a10)), 
+                <span class="dt">missatrand =</span> missatrand_a10,<span class="dt">complete_a10 =</span> complete_a10,<span class="dt">imputed_val =</span> imp))<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                </span><span class="kw">mutate</span>(<span class="dt">imputed_val =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(missatrand),imputed_val,<span class="ot">NA</span>),
+                       <span class="dt">complete_a10 =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(missatrand),complete_a10,<span class="ot">NA</span>)
+                       )<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Date)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="co">#geom_line(aes(y=missatrand),color=&quot;red&quot;)+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>missatrand),<span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>imputed_val),<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>complete_a10),<span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Anti-diabetic drug sales&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&quot;Imputed values (Blue); Real values (Red) &quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>))
+
+p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> complete_a10<span class="op">-</span>imp, <span class="dt">x =</span> <span class="kw">as.yearmon</span>(<span class="kw">time</span>(missatrand_a10)) )) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="op">-</span><span class="dv">10</span>,<span class="dv">10</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Errors&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Date&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;Errors in imputation&quot;</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>))
+
+<span class="kw">grid.arrange</span>(p1, p2, <span class="dt">ncol=</span><span class="dv">2</span>,<span class="dt">top=</span><span class="st">&quot;Interpolation using n-Moving Averages&quot;</span>)</code></pre>
+<p><img src="timeseries_files/figure-html/fig2-1.png" width="960" /></p>
+</div>
+</div>
+</div>
+<div id="time-series-specific-methods" class="section level3">
+<h3><span class="header-section-number">5.4.2</span> Time series specific methods</h3>
+<div id="kalman-smoothing-with-auto.arima" class="section level4">
+<h4><span class="header-section-number">5.4.2.1</span> Kalman smoothing with auto.arima</h4>
+<p>This is a more advanced function for interpolation and requires higher computation time. It uses <a href="https://stats.stackexchange.com/questions/140990/using-kalman-filters-to-impute-missing-values-in-time-series?noredirect=1&amp;lq=1" target="_blank">Kalman Smoothing</a> on ARIMA model to impute the missing values. Structural time series models are another type of model that can be used to impute missing values using this function .</p>
+<div id="method-3" class="section level6">
+<h6><span class="header-section-number">5.4.2.1.0.1</span> Method 3</h6>
+<pre class="sourceCode r"><code class="sourceCode r">imp &lt;-<span class="st"> </span><span class="kw">na.kalman</span>(missatrand_a10,<span class="dt">model =</span> <span class="st">&quot;auto.arima&quot;</span>)
+p1&lt;-<span class="kw">as.tibble</span>(<span class="kw">cbind</span>(<span class="dt">Date =</span> <span class="kw">as.yearmon</span>(<span class="kw">time</span>(missatrand_a10)), 
+                <span class="dt">missatrand =</span> missatrand_a10,<span class="dt">complete_a10 =</span> complete_a10,<span class="dt">imputed_val =</span> imp))<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                </span><span class="kw">mutate</span>(<span class="dt">imputed_val =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(missatrand),imputed_val,<span class="ot">NA</span>),
+                       <span class="dt">complete_a10 =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(missatrand),complete_a10,<span class="ot">NA</span>)
+                       )<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Date)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="co">#geom_line(aes(y=missatrand),color=&quot;red&quot;)+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>missatrand),<span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>imputed_val),<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>complete_a10),<span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Anti-diabetic drug sales&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&quot;Imputed values (Blue); Real values (Red) &quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>))
+
+p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> complete_a10<span class="op">-</span>imp, <span class="dt">x =</span> <span class="kw">as.yearmon</span>(<span class="kw">time</span>(missatrand_a10)) )) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="op">-</span><span class="dv">10</span>,<span class="dv">10</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Errors&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Date&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;Errors in imputation&quot;</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>))
+
+<span class="kw">grid.arrange</span>(p1, p2, <span class="dt">ncol=</span><span class="dv">2</span>,<span class="dt">top=</span><span class="st">&quot;Interpolation using Auto.arima&quot;</span>)</code></pre>
+<p><img src="timeseries_files/figure-html/fig3-1.png" width="960" /></p>
+</div>
+</div>
+<div id="seasonal-splitting" class="section level4">
+<h4><span class="header-section-number">5.4.2.2</span> Seasonal splitting</h4>
+<p>This function interpolates missing values by splitting the data by seasons and performing imputation on the resulting datasets. Another similar function that works based on the seasonality component in this package is <code>na.seadec()</code> which deseasonalizes the data, performs imputation, and adds the seasonal component back again.</p>
+<div id="method-4" class="section level6">
+<h6><span class="header-section-number">5.4.2.2.0.1</span> Method 4</h6>
+<pre class="sourceCode r"><code class="sourceCode r">imp &lt;-<span class="st"> </span><span class="kw">na.seasplit</span>(missatrand_a10)
+p1&lt;-<span class="kw">as.tibble</span>(<span class="kw">cbind</span>(<span class="dt">Date =</span> <span class="kw">as.yearmon</span>(<span class="kw">time</span>(missatrand_a10)), 
+                <span class="dt">missatrand =</span> missatrand_a10,<span class="dt">complete_a10 =</span> complete_a10,<span class="dt">imputed_val =</span> imp))<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                </span><span class="kw">mutate</span>(<span class="dt">imputed_val =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(missatrand),imputed_val,<span class="ot">NA</span>),
+                       <span class="dt">complete_a10 =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(missatrand),complete_a10,<span class="ot">NA</span>)
+                       )<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Date)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="co">#geom_line(aes(y=missatrand),color=&quot;red&quot;)+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>missatrand),<span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>imputed_val),<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>complete_a10),<span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Anti-diabetic drug sales&quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&quot;Imputed values (Blue); Real values (Red) &quot;</span>)<span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>))
+
+p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> complete_a10<span class="op">-</span>imp, <span class="dt">x =</span> <span class="kw">as.yearmon</span>(<span class="kw">time</span>(missatrand_a10)) )) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="op">-</span><span class="dv">10</span>,<span class="dv">10</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Errors&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Date&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;Errors in imputation&quot;</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>))
+
+<span class="kw">grid.arrange</span>(p1, p2, <span class="dt">ncol=</span><span class="dv">2</span>,<span class="dt">top=</span><span class="st">&quot;Seasonally splitted interpolation&quot;</span>)</code></pre>
+<p><img src="timeseries_files/figure-html/fig4-1.png" width="960" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="further-reading" class="section level2">
+<h2><span class="header-section-number">5.5</span> Further reading</h2>
 <ul>
-<li><a href="https://www.meetup.com/nyhackr/" target="_blank">New York Open Statistical Programming Meetup</a>: Meetups hosted by <a href="https://www.jaredlander.com/about/" target="_blank">Jared Lander</a> and <a href="http://wesmckinney.com/" target="_blank">Wes McKinney</a> on a variety of topics in statistical programming, but with a focus on the R language. Past speakers have included <a href="https://en.wikipedia.org/wiki/Joseph_J._Allaire" target="_blank">J.J. Allaire</a> (founder of RStudio) and <a href="http://hadley.nz/" target="_blank">Hadley Wickham</a> (core tidyverse developer). Other attendees are generally eager to welcome newcomers and all of their talks are available on the <a href="https://www.youtube.com/channel/UC2-hKemnrmVCH_29duyJ26A" target="_blank">Lander Analytics Youtube channel</a>.</li>
+<li><p>Details about the imputeTS package can be found here. <a href="https://cran.r-project.org/web/packages/imputeTS/vignettes/imputeTS-Time-Series-Missing-Value-Imputation-in-R.pdf" target="_blank">imputeTS</a></p></li>
+<li><p>To learn more about time series, decomposition, forecasting and more check Rob J. Hyndman’s notes from <a href="https://otexts.org/fpp2/" target="_blank">otext</a></p></li>
 </ul>
 
 </div>
 </div>
+
+
+
 <!-- 
 Footer 
   - included at the end of every page
@@ -589,8 +792,8 @@ Footer
           </div>
         </div>
       </div>
-<a href="network.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="percept.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="iris.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bar.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -620,7 +823,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jtr13/EDAV/edit/master/general_resources.Rmd",
+"link": "https://github.com/jtr13/EDAV/edit/master/timeseries.Rmd",
 "text": "Edit"
 },
 "download": null,
