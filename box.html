@@ -604,7 +604,11 @@ g1</code></pre>
 </div>
 <div id="theory-1" class="section level2">
 <h2><span class="header-section-number">7.4</span> Theory</h2>
-<!-- *   TODO Outliers  -->
+<p>Here’s a quote by Hadley Wickham that sums up boxplots nicely:</p>
+<blockquote>
+<p>The boxplot is a compact distributional summary, displaying less detail than a histogram or kernel density, but also taking up less space. Boxplots use robust summary statistics that are always located at actual data points, are quickly computable (originally by hand), and have no tuning parameters. They are particularly useful for comparing distributions across groups. - Hadley Wickham</p>
+</blockquote>
+<p>Another important use of the boxplot is in showing outliers. A boxplot shows how much of an outlier a data point is with quartiles and fences. Use the boxplot when you have data with outliers so that they can be exposed. What it lacks in specificity it makes up with its ability to clearly summarize large data sets.</p>
 <ul>
 <li>For more info about boxplots and continuous variables, check out <a href="http://www.gradaanwr.net/content/03-examining-continuous-variables/" target="_blank">Chapter 3</a> of the textbook.</li>
 </ul>
@@ -662,6 +666,7 @@ plot <span class="op">+</span><span class="st"> </span>theme</code></pre>
 <li><a href="https://plot.ly/ggplot2/box-plots/" target="_blank">Boxplots with plotly package</a>: boxplot examples using the <code>plotly</code> package. These allow for a little interactivity on hover, which might better explain the underlying statistics of your plot.</li>
 <li><a href="http://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization" target="_blank">ggplot2 Boxplot: Quick Start Guide</a>: Article from <a href="http://www.sthda.com/english/" target="_blank">STHDA</a> on making boxplots using ggplot2. Excellent starting point for getting immediate results and custom formatting.</li>
 <li><a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf" target="_blank">ggplot2 cheatsheet</a>: Always good to have close by.</li>
+<li><a href="http://vita.had.co.nz/papers/boxplots.pdf" target="_blank">Hadley Wickhan and Lisa Stryjewski on boxplots</a>: good for understanding basics of more complex boxplots and some of the history behind them.</li>
 </ul>
 
 </div>
