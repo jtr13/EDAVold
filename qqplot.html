@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="histo.html">
-<link rel="next" href="ridgeline.html">
+<link rel="prev" href="scatter.html">
+<link rel="next" href="violin.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -542,193 +542,76 @@ function unhover(element) {
 <br><br>
 <a href="index.html"><img src="images/icons/edav_resource_url_no_smile.png" onmouseover="hover(this);" onmouseout="unhover(this);" /></a>
 </center>
-<div id="mosaic" class="section level1">
-<h1><span class="header-section-number">10</span> Chart: Mosaic</h1>
-<!-- Chapter Banner -->
-<p><img src="images/banners/banner_mosaic.png" />
-<em>This chapter originated as a community contribution created by <a href="https://github.com/harin" target="_blank">harin</a></em></p>
+<div id="qqplot" class="section level1">
+<h1><span class="header-section-number">13</span> Chart: QQ-Plot</h1>
+<p><img src="images/banners/banner_qqplot.png" />
+<em>This chapter originated as a community contribution created by <a href="https://github.com/hao871563506" target="_blank">hao871563506</a></em></p>
 <p><em>This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider <a href="contribute.html">contributing to our repo</a>.</em></p>
-<div id="overview-8" class="section level2">
-<h2><span class="header-section-number">10.1</span> Overview</h2>
-<p>This section covers how to make Mosaic plots</p>
+<div id="introduction-2" class="section level2">
+<h2><span class="header-section-number">13.1</span> Introduction</h2>
+<p>In statistics, a Q-Q (quantile-quantile) plot is a probability plot, which is a graphical method for comparing two probability distributions by plotting their quantiles against each other. A point (x, y) on the plot corresponds to one of the quantiles of the second distribution (y-coordinate) plotted against the same quantile of the first distribution (x-coordinate). Thus the line is a parametric curve with the parameter which is the number of the interval for the quantile.</p>
 </div>
-<div id="tldr-5" class="section level2">
-<h2><span class="header-section-number">10.2</span> tl;dr</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(vcd)
-<span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, 
-       <span class="dt">labeling =</span> <span class="kw">labeling_border</span>(
-         <span class="dt">abbreviate_labs =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">6</span>),
-         <span class="dt">rot_labels=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">45</span>)
-       ),
-       <span class="dt">direction=</span><span class="kw">c</span>(<span class="st">&#39;v&#39;</span>,<span class="st">&#39;v&#39;</span>,<span class="st">&#39;h&#39;</span>), <span class="co"># Age = Vertical, Music = Vertical, Favoriate = Horizonal (a.k.a DoubleDecker)</span>
-       <span class="dt">gp =</span> <span class="kw">gpar</span>(<span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&#39;lightblue&#39;</span>, <span class="st">&#39;gray&#39;</span>)),
-       df)</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div id="interpreting-qqplots" class="section level2">
+<h2><span class="header-section-number">13.2</span> Interpreting qqplots</h2>
 </div>
-<div id="simple-example-walkthrough" class="section level2">
-<h2><span class="header-section-number">10.3</span> Simple Example Walkthrough</h2>
-<div id="order-of-splits" class="section level3">
-<h3><span class="header-section-number">10.3.1</span> Order of splits</h3>
-<p>It is best to draw mosaic plots incrementally: start with splitting on one variable and then add additional variables one at a time. The full mosaic plot will have one split per variable.</p>
-<p>Important: if your data is in a data frame (see above), <strong>the count column must be called <code>Freq</code></strong>.</p>
-<p>Split on <code>Age</code> only:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(vcd)
-<span class="kw">mosaic</span>(<span class="op">~</span>Age, df)</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>Split on <code>Age</code>, then <code>Music</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Music <span class="op">~</span><span class="st"> </span>Age, df)</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>Note that the <em>first</em> split is between “young” and “old”, while the second set of splits divides each age group into “classical” and “rock”.</p>
-<p>Split on <code>Age</code>, then <code>Music</code>, then <code>Favorite</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, df)</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div id="normal-or-not-examples-using-qqnorm" class="section level2">
+<h2><span class="header-section-number">13.3</span> Normal or not (examples using qqnorm)</h2>
+<div id="normal-qqplot" class="section level3">
+<h3><span class="header-section-number">13.3.1</span> Normal qqplot</h3>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dv">50</span>, <span class="dv">10</span>)
+<span class="kw">qqnorm</span>(x)
+<span class="kw">qqline</span>(x, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</code></pre>
+<p><img src="qqplot_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>The points seem to fall along a straight line. Notice the x-axis plots the theoretical quantiles. Those are the quantiles from the standard Normal distribution with mean 0 and standard deviation 1.</p>
 </div>
-<div id="direction-of-splits" class="section level3">
-<h3><span class="header-section-number">10.3.2</span> Direction of splits</h3>
-<p>Note that in the previous example, the direction of the splits is as follows:</p>
-<ol style="list-style-type: decimal">
-<li><p><code>Age</code> – horizontal split</p></li>
-<li><p><code>Music</code> – vertical split</p></li>
-<li><p><code>Favorite</code> – horizontal split</p></li>
-</ol>
-<p>This is the default direction pattern: alternating directions beginning with horizontal. Therefore we get the same plot with the following:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, 
-       <span class="dt">direction =</span> <span class="kw">c</span>(<span class="st">&quot;h&quot;</span>, <span class="st">&quot;v&quot;</span>, <span class="st">&quot;h&quot;</span>), df)</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>The directions can be altered as desired. For example, to create a doubledecker plot, make all splits vertical except the last one:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music,
-       <span class="dt">direction =</span> <span class="kw">c</span>(<span class="st">&quot;v&quot;</span>, <span class="st">&quot;v&quot;</span>, <span class="st">&quot;h&quot;</span>), df)</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>Note that the direction vector is in order of splits (<code>Age</code>, <code>Music</code>, <code>Favorite</code>), not in the order in which the variables appear in the formula, where the last variable to be split is listed first, before the “~”.</p>
-</div>
-<div id="options" class="section level3">
-<h3><span class="header-section-number">10.3.3</span> Options</h3>
-<div id="fill-color" class="section level4">
-<h4><span class="header-section-number">10.3.3.1</span> Fill color:</h4>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grid) <span class="co"># needed for gpar</span>
-<span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, 
-       <span class="dt">gp =</span> <span class="kw">gpar</span>(<span class="dt">fill =</span> <span class="kw">c</span>(<span class="st">&quot;lightblue&quot;</span>, <span class="st">&quot;blue&quot;</span>)),
-       df)</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-</div>
-<div id="rotate-labels" class="section level4">
-<h4><span class="header-section-number">10.3.3.2</span> Rotate labels:</h4>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, 
-       <span class="dt">labeling =</span> <span class="kw">labeling_border</span>(<span class="dt">rot_labels =</span> <span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">-45</span>, <span class="dv">0</span>, <span class="dv">0</span>)),
-       df)</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p>The <code>rot_labels =</code> vector sets the rotation in degrees on the four sides of the plot in this order: <em>top, right, bottom, left</em>. (Different from the typical base graphics order!) The default is <code>rot_labels = c(0, 90, 0, 90)</code>.</p>
-</div>
-<div id="abbreviate-labels" class="section level4">
-<h4><span class="header-section-number">10.3.3.3</span> Abbreviate labels:</h4>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, 
-       <span class="dt">labeling =</span> <span class="kw">labeling_border</span>(<span class="dt">abbreviate_labs =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">6</span>)), 
-       df)</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>Labels are abbreviated in the order of the splits (as for <code>direction =</code>). The abbreviation algorithm appears to return the specified number of characters after vowels are eliminated (if necessary).</p>
-<p>For more formatting options, see <code>&gt;?vcd::labeling_border</code>.</p>
-</div>
-<div id="remove-spacing-between-cells" class="section level4">
-<h4><span class="header-section-number">10.3.3.4</span> Remove spacing between cells</h4>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music,
-       <span class="dt">spacing =</span> <span class="kw">spacing_equal</span>(<span class="dt">sp =</span> <span class="kw">unit</span>(<span class="dv">0</span>, <span class="st">&quot;lines&quot;</span>)),
-       df)</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<p>For more details, see <code>&gt;?vcd::spacings</code></p>
-</div>
-<div id="change-border-color-must-also-set-fill" class="section level4">
-<h4><span class="header-section-number">10.3.3.5</span> Change border color (must also set fill(?))</h4>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(Favorite <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music,
-       <span class="dt">gp =</span> <span class="kw">gpar</span>(<span class="dt">fill =</span> <span class="kw">c</span>(<span class="st">&quot;lightblue&quot;</span>, <span class="st">&quot;blue&quot;</span>),
-                 <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>),
-       <span class="dt">spacing =</span> <span class="kw">spacing_equal</span>(<span class="dt">sp =</span> <span class="kw">unit</span>(<span class="dv">0</span>, <span class="st">&quot;lines&quot;</span>)),
-       df)</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div id="non-normal-qqplot" class="section level3">
+<h3><span class="header-section-number">13.3.2</span> Non-normal qqplot</h3>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">1000</span>, <span class="dv">5</span>)
+<span class="kw">qqnorm</span>(x)
+<span class="kw">qqline</span>(x, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</code></pre>
+<p><img src="qqplot_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Notice the points form a curve instead of a straight line. Normal Q-Q plots that look like this usually mean your sample data are skewed.</p>
 </div>
 </div>
-</div>
-<div id="mosaic-using-base-r" class="section level2">
-<h2><span class="header-section-number">10.4</span> Mosaic using base R</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(vcdExtra)
-<span class="kw">mosaicplot</span>(<span class="kw">xtabs</span>(count <span class="op">~</span><span class="st"> </span>lake <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data=</span>Alligator), <span class="dt">main=</span><span class="st">&quot;&quot;</span>)</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="kw">xtabs</span>(Freq <span class="op">~</span><span class="st"> </span>Favorite <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music, <span class="dt">data=</span>df), <span class="dt">main=</span><span class="st">&quot;&quot;</span>,
-           <span class="dt">dir=</span><span class="kw">c</span>(<span class="st">&#39;h&#39;</span>, <span class="st">&#39;v&#39;</span>, <span class="st">&#39;v&#39;</span>))</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
-<div id="mosaic-using-vcddoubledecker" class="section level3">
-<h3><span class="header-section-number">10.4.1</span> Mosaic using vcd::doubledecker</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Arthritis)
-vcd<span class="op">::</span><span class="kw">doubledecker</span>(Improved <span class="op">~</span><span class="st"> </span>Treatment <span class="op">+</span><span class="st"> </span>Sex, <span class="dt">data=</span>Arthritis)</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">vcd<span class="op">::</span><span class="kw">doubledecker</span>(Music <span class="op">~</span><span class="st"> </span>Favorite <span class="op">+</span><span class="st"> </span>Age, 
-                  <span class="kw">xtabs</span>(Freq <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Music <span class="op">+</span><span class="st"> </span>Favorite, df))</code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-</div>
-</div>
-<div id="mosaic-using-ggplot" class="section level2">
-<h2><span class="header-section-number">10.5</span> Mosaic using ggplot</h2>
-<p>For a comprehensive overview of mosaic plot in ggplot check out the link below.
-<a href="https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html" class="uri" target="_blank">https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html</a></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggmosaic)
-
-<span class="co"># equivalent to doing Favorite ~ Age + Music in vcd::mosaic with doubledecker style cut</span>
-<span class="kw">ggplot</span>(df) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_mosaic</span>(
-    <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">product</span>(Favorite, Age, Music), <span class="co"># cut from right to left </span>
-        <span class="dt">weight=</span>Freq,
-        <span class="dt">fill=</span>Favorite
-        ),
-    <span class="dt">divider=</span><span class="kw">c</span>(<span class="st">&quot;vspine&quot;</span> , <span class="st">&quot;hspine&quot;</span>, <span class="st">&quot;hspine&quot;</span>) <span class="co"># equivalent to divider=ddecker()</span>
-  ) </code></pre>
-<p><img src="mosaic_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-</div>
-<div id="theory-4" class="section level2">
-<h2><span class="header-section-number">10.6</span> Theory</h2>
-</div>
-<div id="when-to-use-2" class="section level2">
-<h2><span class="header-section-number">10.7</span> When to use</h2>
-<p>When you want to see the relationships in Multivariate Categorical Data</p>
-</div>
-<div id="considerations-2" class="section level2">
-<h2><span class="header-section-number">10.8</span> Considerations</h2>
-<div id="labels" class="section level3">
-<h3><span class="header-section-number">10.8.1</span> Labels</h3>
-<p>Legibility of the labels is problematic in mosaic plot especially when there are a lot of dimensions. This can be alleviated by
-- Abbreviate names
-- Rotating the labels</p>
-</div>
-<div id="aspect-ratio" class="section level3">
-<h3><span class="header-section-number">10.8.2</span> Aspect Ratio</h3>
+<div id="different-kinds-of-qqplots" class="section level2">
+<h2><span class="header-section-number">13.4</span> Different kinds of qqplots</h2>
+<p>The following graph is a conclusion of all the kinds of qqplot:
+<img src="images/qqplot_types.png" />
+<em>via <a href="https://stats.stackexchange.com/questions/101274/how-to-interpret-a-qq-plot/" target="_blank">Stack Exchange</a></em></p>
 <ul>
-<li>lengths are easier to judge than area, so try to use rectangles with same width or height</li>
-<li>Taller thinner rectangles are better (we are better at distinguishing length than area)</li>
+<li><p><strong>Normal qqplot</strong>: The normal distribution is symmetric, so it has no skew (the mean is equal to the median).</p></li>
+<li><p><strong>Right skewed qqplot</strong>: Right-skew is also known as positive skew.</p></li>
+<li><p><strong>Left skewed qqplot</strong>: Left-skew is also known as negative skew.</p></li>
+<li><p><strong>Light tailed qqplot</strong>: meaning that compared to the normal distribution there is little more data located at the extremes of the distribution and less data in the center of the distribution.</p></li>
+<li><p><strong>Heavy tailed qqplot</strong>: meaning that compared to the normal distribution there is much more data located at the extremes of the distribution and less data in the center of the distribution.</p></li>
+<li><p><strong>Biomodel qqplot</strong>: illustrate a bimodal distribution.</p></li>
 </ul>
 </div>
-<div id="gaps-between-rectangles" class="section level3">
-<h3><span class="header-section-number">10.8.3</span> Gaps between rectangles</h3>
-<ul>
-<li>No gap = most efficient</li>
-</ul>
-<p>However, a gap can help improve legibility, so try out different combinations</p>
-<ul>
-<li>Can have a gap at splits</li>
-<li>Can Vary gap size down the hierarchy</li>
-</ul>
+<div id="qqplot-using-ggplot" class="section level2">
+<h2><span class="header-section-number">13.5</span> qqplot using ggplot</h2>
+<p>In order to use <code>ggplot2</code> to plot a qqplot, we must use a dataframe, so here we convert it to one. We can see that using ggplot to plot a qqplot has a similar outcome as using qqnorm</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dv">50</span>, <span class="dv">10</span>)
+x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x)
+<span class="kw">ggplot</span>(x, <span class="kw">aes</span>(<span class="dt">sample =</span> x)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_qq</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_qq_line</span>()</code></pre>
+<p><img src="qqplot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>However, when we need to plot different groups, ggplot will be very helpful with its coloring by factor.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(<span class="dt">sample =</span> mpg, <span class="dt">colour =</span> <span class="kw">factor</span>(cyl))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_qq</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_qq_line</span>()</code></pre>
+<p><img src="qqplot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
-<div id="color" class="section level3">
-<h3><span class="header-section-number">10.8.4</span> Color</h3>
+<div id="references" class="section level2">
+<h2><span class="header-section-number">13.6</span> References</h2>
 <ul>
-<li>good for rates in the subgroup</li>
-<li>displaying residual</li>
-<li>emphasizing particular subgroup</li>
-</ul>
-</div>
-</div>
-<div id="external-resources-4" class="section level2">
-<h2><span class="header-section-number">10.9</span> External resources</h2>
-<ul>
-<li><p>Chapter 7 of <a href="https://www.crcpress.com/Graphical-Data-Analysis-with-R/Unwin/p/book/9781498715232" target="_blank">Graphical data analysis with R by Anthony Unwin</a></p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html" target="_blank">Link</a>: A comprehensive overview of mosaic plot in ggplot check out the link below.</p></li>
+<li><a href="https://data.library.virginia.edu/understanding-q-q-plots/" target="_blank">Understanding Q-Q Plots</a>: A discussion from the University of Virginia Library on qqplots.</li>
+<li><a href="https://stats.stackexchange.com/questions/101274/how-to-interpret-a-qq-plot" target="_blank">How to interpret a QQ plot</a>: Another resource for interpreting qqplots.</li>
+<li><a href="http://seankross.com/2016/02/29/A-Q-Q-Plot-Dissection-Kit.html" target="_blank">A QQ Plot Dissection Kit</a>: An excellent walkthrough on qqplots by Sean Kross.</li>
+<li><a href="https://www.jstor.org/stable/2334448?seq=1#metadata_info_tab_contents" target="_blank">Probability plotting methods for the analysis of data</a>: Paper on plotting techniques, which discusses qqplots. (Wilk, M.B.; Gnanadesikan, R. (1968))</li>
+<li><a href="https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot#cite_note-1" target="_blank">QQ-Plot Wiki</a>: Wikipedia entry on qqplots</li>
 </ul>
 
 </div>
@@ -756,8 +639,8 @@ Footer
           </div>
         </div>
       </div>
-<a href="histo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ridgeline.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="scatter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="violin.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -787,7 +670,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jtr13/EDAV/edit/master/mosaic.Rmd",
+"link": "https://github.com/jtr13/EDAV/edit/master/qqplot.Rmd",
 "text": "Edit"
 },
 "download": null,
