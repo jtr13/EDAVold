@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="box.html">
-<link rel="next" href="histo.html">
+<link rel="prev" href="dates.html">
+<link rel="next" href="maps.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -593,147 +593,205 @@ function unhover(element) {
 <br><br>
 <a href="index.html"><img src="images/icons/edav_resource_url_no_smile.png" onmouseover="hover(this);" onmouseout="unhover(this);" /></a>
 </center>
-<div id="heatmap" class="section level1">
-<h1><span class="header-section-number">9</span> Chart: Heatmap</h1>
-<!-- Chapter Banner -->
-<p><img src="images/banners/banner_heatmap.png" /></p>
-<div id="overview-7" class="section level2">
-<h2><span class="header-section-number">9.1</span> Overview</h2>
-<p>This section covers how to make heatmaps.</p>
+<div id="import" class="section level1">
+<h1><span class="header-section-number">17</span> Importing Data</h1>
+<p><img src="images/banners/banner_import.png" />
+<em>This chapter originated as a community contribution created by <a href="https://github.com/ZhangZhida" target="_blank">ZhangZhida</a></em></p>
+<p><em>This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider <a href="contribute.html">contributing to our repo</a>.</em></p>
+<div id="overview-13" class="section level2">
+<h2><span class="header-section-number">17.1</span> Overview</h2>
+<p>This section covers how to import data from built-in R sources, local files, web sources and databases.</p>
 </div>
-<div id="tldr-3" class="section level2">
-<h2><span class="header-section-number">9.2</span> tl;dr</h2>
-<p>Enough with these simple examples! I want <a href="https://www.youtube.com/watch?v=tl8WjoE79Wo" target="_blank">a complicated one</a>!</p>
-<p>Here’s a heatmap of occupational categories of sons and fathers in the US, UK, and Japan:
-<img src="heatmap_files/figure-html/unnamed-chunk-1-1.png" width="864" /></p>
-<p>And here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(vcdExtra) <span class="co"># dataset</span>
-<span class="kw">library</span>(dplyr) <span class="co"># manipulation</span>
-<span class="kw">library</span>(ggplot2) <span class="co"># plotting</span>
-<span class="kw">library</span>(viridis) <span class="co"># color palette</span>
+<div id="import-built-in-dataset" class="section level2">
+<h2><span class="header-section-number">17.2</span> Import built-in dataset</h2>
+<p>R comes with quite a lot of built-in datasets, which R users can play around with. You are probably familiar with many of the built-in datasets like <code>iris</code>, <code>mtcars</code>, <code>beavers</code>, <code>dataset</code>, etc. Since datasets are preloaded, we can manipulate them directly. To see a full list of built-in R datasets and their descriptions, please refer to <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html" target="_blank">The R Datasets Package</a>. We can also run <code>data()</code> to view the full list.</p>
+<p>After we find the dataset we want, we can use the function <code>data(package_name)</code> to load the built-in dataset into our workspace. For example, here we want to load the <code>iris</code> dataset:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load data</span>
+<span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)
+<span class="kw">head</span>(iris)</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<p>Besides the datasets above, there are other datasets within specific R packages. To see a full list of data in various packages, run <code>??datasets</code> in the RStudio console.
+For exmaple, say we want to load the <code>diamonds</code> dataset from the <code>ggplot2</code> package. To load the <code>diamonds</code> data, first we need to load the <code>ggplot2</code> library:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 
-<span class="co"># format data</span>
-orderedclasses &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Farm&quot;</span>, <span class="st">&quot;LoM&quot;</span>, <span class="st">&quot;UpM&quot;</span>, <span class="st">&quot;LoNM&quot;</span>, <span class="st">&quot;UpNM&quot;</span>)
-mydata &lt;-<span class="st"> </span>Yamaguchi87
-mydata<span class="op">$</span>Son &lt;-<span class="st"> </span><span class="kw">factor</span>(mydata<span class="op">$</span>Son, <span class="dt">levels =</span> orderedclasses)
-mydata<span class="op">$</span>Father &lt;-<span class="st"> </span><span class="kw">factor</span>(mydata<span class="op">$</span>Father,
-                        <span class="dt">levels =</span> orderedclasses)
-japan &lt;-<span class="st"> </span>mydata <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Country <span class="op">==</span><span class="st"> &quot;Japan&quot;</span>)
-uk &lt;-<span class="st"> </span>mydata <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Country <span class="op">==</span><span class="st"> &quot;UK&quot;</span>)
-us &lt;-<span class="st"> </span>mydata <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Country <span class="op">==</span><span class="st"> &quot;US&quot;</span>)
-
-<span class="co"># convert to % of country and class total</span>
-mydata_new &lt;-<span class="st"> </span>mydata <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Country, Father) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Total =</span> <span class="kw">sum</span>(Freq)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()
-
-<span class="co"># make custom theme</span>
-theme_heat &lt;-<span class="st"> </span><span class="kw">theme_classic</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.line =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>())
-
-<span class="co"># basic plot</span>
-plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mydata_new, <span class="kw">aes</span>(<span class="dt">x =</span> Father, <span class="dt">y =</span> Son)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Freq<span class="op">/</span>Total), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">coord_fixed</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Country) <span class="op">+</span><span class="st"> </span>theme_heat
-
-<span class="co"># plot with text overlay and viridis color palette</span>
-plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">round</span>(Freq<span class="op">/</span>Total, <span class="dv">1</span>)), 
-                 <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
-<span class="st">      </span><span class="kw">scale_fill_viridis</span>() <span class="op">+</span>
-<span class="st">      </span><span class="co"># formatting</span>
-<span class="st">      </span><span class="kw">ggtitle</span>(<span class="st">&quot;Like Father, Like Son&quot;</span>,
-              <span class="dt">subtitle =</span> <span class="st">&quot;Heatmaps of occupational categories for fathers and sons, by country&quot;</span>) <span class="op">+</span>
-<span class="st">      </span><span class="kw">labs</span>(<span class="dt">caption =</span> <span class="st">&quot;Source: vcdExtra::Yamaguchi87&quot;</span>) <span class="op">+</span>
-<span class="st">      </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">theme</span>(<span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;grey35&quot;</span>)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">theme</span>(<span class="dt">plot.caption =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> <span class="st">&quot;grey68&quot;</span>))</code></pre>
-<p>For more info on this dataset, type <code>?vcdExtra::Yamaguchi87</code> into the console.</p>
+<span class="kw">data</span>(<span class="st">&quot;diamonds&quot;</span>)
+<span class="kw">head</span>(diamonds)</code></pre>
+<pre><code>## # A tibble: 6 x 10
+##   carat cut       color clarity depth table price     x     y     z
+##   &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 0.23  Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+## 2 0.21  Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+## 3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+## 4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+## 5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+## 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48</code></pre>
 </div>
-<div id="simple-examples-2" class="section level2">
-<h2><span class="header-section-number">9.3</span> Simple examples</h2>
-<p>Too complicated! <a href="https://www.youtube.com/watch?v=PlsW2hd06R0" target="_blank">Simplify, man!</a></p>
-<div id="heatmap-of-two-dimensional-bin-counts" class="section level3">
-<h3><span class="header-section-number">9.3.1</span> Heatmap of two-dimensional bin counts</h3>
-<p>For this heatmap, we will use the <code>SpeedSki</code> dataset.</p>
-<p>Only two variables, <code>x</code> and <code>y</code> are needed for two-dimensional bin count heatmaps. The third variable–i.e., the color–represents the bin count of points in the region it covers. Think of it as a two-dimensional histogram.</p>
-<p>To create a heatmap, simply substitute <code>geom_point()</code> with <code>geom_bin2d()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2) <span class="co"># plotting </span>
-<span class="kw">library</span>(GDAdata) <span class="co"># data (SpeedSki)</span>
-
-<span class="kw">ggplot</span>(SpeedSki, <span class="kw">aes</span>(Year, Speed)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_bin2d</span>()</code></pre>
-<p><img src="heatmap_files/figure-html/heat-map-default-1.png" width="672" /></p>
+<div id="import-local-data" class="section level2">
+<h2><span class="header-section-number">17.3</span> Import local data</h2>
+<div id="import-text-file" class="section level3">
+<h3><span class="header-section-number">17.3.1</span> Import text file</h3>
+<p>The function <code>read.table()</code> is the most general function for reading text files. To use this function, we need to specify how we read the file. In other words, we need to specify some basic parameters like <code>sep</code>, <code>header</code>, etc. <code>sep</code> represents the separator, and <code>header</code> is set to <code>TRUE</code> if we want to read the first line as the header information. Other parameters are also useful in different cases. For example, <code>na.strings</code> indicates strings should be regarded as NA values.</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/MusicIcecream.csv&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)
+<span class="kw">head</span>(df)</code></pre>
+<pre><code>##     Age   Favorite     Music Freq
+## 1   old bubble gum classical    1
+## 2   old bubble gum      rock    1
+## 3   old     coffee classical    3
+## 4   old     coffee      rock    1
+## 5 young bubble gum classical    2
+## 6 young bubble gum      rock    5</code></pre>
 </div>
-<div id="heat-map-of-dataframe" class="section level3">
-<h3><span class="header-section-number">9.3.2</span> Heat map of dataframe</h3>
-<p>To get a visual sense of the dataframe, you can use a heatmap. You can also look into <a href="https://stackoverflow.com/questions/15215457/standardize-data-columns-in-r" target="_blank">scaling the columns</a> to get a sense of your data on a common scale. In this example, we use <code>geom_tile</code> to graph all cells in the dataframe and color them by their value:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pgmm) <span class="co"># data</span>
-<span class="kw">library</span>(tidyverse) <span class="co"># processing/graphing</span>
-<span class="kw">library</span>(viridis) <span class="co"># color palette</span>
-
-<span class="kw">data</span>(wine)
-
-<span class="co"># convert to column, value</span>
-wine_new &lt;-<span class="st"> </span>wine <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">rownames_to_column</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(colname, value, <span class="op">-</span>rowname)
-
-<span class="kw">ggplot</span>(wine_new, <span class="kw">aes</span>(<span class="dt">x =</span> rowname, <span class="dt">y =</span> colname, <span class="dt">fill =</span> value)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_tile</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_viridis</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Italian Wine Dataframe&quot;</span>)</code></pre>
-<p><img src="heatmap_files/figure-html/heat-map-wine-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># only difference from above is scaling</span>
-wine_scaled &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">scale</span>(wine)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">rownames_to_column</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(colname, value, <span class="op">-</span>rowname)
-
-<span class="kw">ggplot</span>(wine_scaled, <span class="kw">aes</span>(<span class="dt">x =</span> rowname, <span class="dt">y =</span> colname, <span class="dt">fill =</span> value)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_tile</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_viridis</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Italian Wine Dataframe, Scaled&quot;</span>)</code></pre>
-<p><img src="heatmap_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div id="import-csv-file" class="section level3">
+<h3><span class="header-section-number">17.3.2</span> Import CSV file</h3>
+<p>A Comma-Separated Values file (CSV) is a delimited text file that uses a comma to separate values. We can easily read a CSV file with built-in R functions.</p>
+<p>The <code>read.csv()</code> function provides two useful parameters. One is <code>header</code>, which can be set to <code>FALSE</code> if there is no header. The other is <code>sep</code>, which specifies the separator. For example, we can specify the separator to be <code>sep=&quot;\t</code> if the CSV file value is seperated by the tab character. The default value of <code>header</code> and <code>sep</code> are <code>TRUE</code> and <code>&quot;,&quot;</code>, respectively.</p>
+<p><code>read.csv2()</code> is another function for reading CSV files. The difference between <code>read.csv()</code> and <code>read.csv2</code> is that, the former uses the tab <code>&quot;\t&quot;</code> as the separator, while the latter one uses the semicolon <code>&quot;;&quot;</code>. This serves as an easy shortcut for different CSV formats used in different regions.</p>
+<p>Let’s see an example on reading a standard CSV file:</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/MusicIcecream.csv&quot;</span>)
+<span class="kw">head</span>(df)</code></pre>
+<pre><code>##     Age   Favorite     Music Freq
+## 1   old bubble gum classical    1
+## 2   old bubble gum      rock    1
+## 3   old     coffee classical    3
+## 4   old     coffee      rock    1
+## 5 young bubble gum classical    2
+## 6 young bubble gum      rock    5</code></pre>
+<p>A small note while reading multiple files: let R know your current directory by using <code>setwd()</code>. Then, you can read any file in this directory by directly using the name of the file, without specifying the location.</p>
 </div>
-<div id="modifications-1" class="section level3">
-<h3><span class="header-section-number">9.3.3</span> Modifications</h3>
-<p>You can change the color palette by specifying it explicitly in your chain of <code>ggplot</code> function calls. The bin width can be added inside the <code>geom_bin2d()</code> function call:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(viridis) <span class="co"># viridis color palette</span>
+<div id="import-json-file" class="section level3">
+<h3><span class="header-section-number">17.3.3</span> Import JSON file</h3>
+<p>A JSON file is a file that stores simple data structures and objects in JavaScript Object Notation (JSON) format, which is a standard data interchange format. For example, <code>{&quot;name&quot;:&quot;Vince&quot;, &quot;age&quot;:23, &quot;city&quot;:&quot;New York&quot;}</code> is an object with JSON format. In recent years, JSON has become the mainstream format to transfer data on websites.</p>
+<p>To read a JSON file, we can use the <code>jsonlite</code> package. The <code>jsonlite</code> package is a JSON parser/generator optimized for the web. Its main strength is that it implements a bidirectional mapping between JSON data and the most important R data types. In the example below, the argument <code>simplifyDataFrame = TRUE</code> will directly transform a list of JSON objects into a dataframe. If you want to know more about the arguments <code>simplifyVector</code> and <code>simplifyMatrix</code>, which provide flexible control on other R data formats to transform to, please refer to <a href="https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html" target="_blank">Getting started with JSON and jsonlite</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(jsonlite)
 
-<span class="co"># create plot</span>
-g1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(SpeedSki, <span class="kw">aes</span>(Year, Speed)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">scale_fill_viridis</span>() <span class="co"># modify color</span>
+<span class="co"># read JSON data</span>
+raw_json_data &lt;-<span class="st"> </span><span class="kw">fromJSON</span>(<span class="dt">txt =</span> <span class="st">&quot;data/WaterConsumptionInNYC.json&quot;</span>, <span class="dt">simplifyDataFrame =</span> <span class="ot">TRUE</span>)
 
-<span class="co"># show plot</span>
-g1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_bin2d</span>(<span class="dt">binwidth =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>)) <span class="co"># modify bin width</span></code></pre>
-<p><img src="heatmap_files/figure-html/heat-map-color-bin-width-1.png" width="672" /></p>
-<p>Here are some other examples:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># larger bin width</span>
-g1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_bin2d</span>(<span class="dt">binwidth =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">10</span>)) </code></pre>
-<p><img src="heatmap_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># hexagonal bins</span>
-g1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_hex</span>(<span class="dt">binwidth =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>))</code></pre>
-<p><img src="heatmap_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># hexagonal bins + scatterplot layer</span>
-g1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_hex</span>(<span class="dt">binwidth =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>), <span class="dt">alpha =</span> <span class="fl">.4</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.8</span>)</code></pre>
-<p><img src="heatmap_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># hexagonal bins with custom color gradient/bin count</span>
-<span class="kw">ggplot</span>(SpeedSki, <span class="kw">aes</span>(Year, Speed)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;#cccccc&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;#09005F&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># color</span>
-<span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">bins =</span> <span class="dv">10</span>) <span class="co"># number of bins horizontally/vertically</span></code></pre>
-<p><img src="heatmap_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<span class="co"># transform JSON to Data Frame</span>
+df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(raw_json_data)
+<span class="kw">head</span>(df)</code></pre>
+<pre><code>##   new_york_city_population nyc_consumption_million_gallons_per_day
+## 1                  7102100                                    1512
+## 2                  7071639                                    1506
+## 3                  7089241                                    1309
+## 4                  7109105                                    1382
+## 5                  7181224                                    1424
+## 6                  7234514                                    1465
+##   per_capita_gallons_per_person_per_day year
+## 1                                   213 1979
+## 2                                   213 1980
+## 3                                   185 1981
+## 4                                   194 1982
+## 5                                   198 1983
+## 6                                   203 1984</code></pre>
 </div>
 </div>
-<div id="theory-2" class="section level2">
-<h2><span class="header-section-number">9.4</span> Theory</h2>
-<p>Heat maps are like a combination of <a href="scatter.html">scatterplots</a> and <a href="histo.html">histograms</a>: they allow you to compare different parameters while also seeing their relative distributions.</p>
+<div id="import-web-data" class="section level2">
+<h2><span class="header-section-number">17.4</span> Import web data</h2>
+<p>We can import data from the web, as long as we have the link to the dataset. Basically, there are two ways to import web data. One way is to scrape the dataset with the link before we import that data into the R workspace. The other way is to import the dataset from the web to our workspace directly.</p>
+<p>Let’s take the example of <code>Water Consumption In The New York City</code>, which is on the <a href="https://data.cityofnewyork.us/Environment/Water-Consumption-In-The-New-York-City/ia2d-e54m" target="&quot;_blank">NYC Open Data website</a>.</p>
+<div id="scrape-web-data-to-local-spacememory-before-importing-it" class="section level3">
+<h3><span class="header-section-number">17.4.1</span> Scrape web data to local space/memory before importing it</h3>
+<p>To securely access the web data, we can use the <code>RCurl</code> package (for more resources, see <a href="http://www.omegahat.net/RCurl/" target="_blank">The RCurl Package</a>. To be more flexible, we can first download the data to local hard drive and then read them as local files. To download the file, we can use the commands like <code>curl</code> : <a href="http://www.compciv.org/recipes/cli/downloading-with-curl/" target="_blank">Downloading files with curl</a>, <code>wget</code> : <a href="https://www.rosehosting.com/blog/wget-command-examples/" target="_blank">Wget Command Examples</a>. You can also download it with the browser.</p>
+<pre><code>##   Year New.York.City.Population NYC.Consumption.Million.gallons.per.day.
+## 1 1979                  7102100                                     1512
+## 2 1980                  7071639                                     1506
+## 3 1981                  7089241                                     1309
+## 4 1982                  7109105                                     1382
+## 5 1983                  7181224                                     1424
+## 6 1984                  7234514                                     1465
+##   Per.Capita.Gallons.per.person.per.day.
+## 1                                    213
+## 2                                    213
+## 3                                    185
+## 4                                    194
+## 5                                    198
+## 6                                    203</code></pre>
+</div>
+<div id="directly-read-web-source-into-the-workspace" class="section level3">
+<h3><span class="header-section-number">17.4.2</span> Directly read web source into the workspace</h3>
+<p>We still use the water consumption data as an example. First, we specify the correct data URL, and then read the data just like reading the local dataset:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># specify the URL link to the data source</span>
+url &lt;-<span class="st"> &quot;https://data.cityofnewyork.us/api/views/ia2d-e54m/rows.csv&quot;</span>
+
+<span class="co"># read the URL</span>
+df &lt;-<span class="st"> </span><span class="kw">read.table</span>(url, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+<span class="kw">head</span>(df)</code></pre>
+<pre><code>##   Year New.York.City.Population NYC.Consumption.Million.gallons.per.day.
+## 1 1979                  7102100                                     1512
+## 2 1980                  7071639                                     1506
+## 3 1981                  7089241                                     1309
+## 4 1982                  7109105                                     1382
+## 5 1983                  7181224                                     1424
+## 6 1984                  7234514                                     1465
+##   Per.Capita.Gallons.per.person.per.day.
+## 1                                    213
+## 2                                    213
+## 3                                    185
+## 4                                    194
+## 5                                    198
+## 6                                    203</code></pre>
+</div>
+</div>
+<div id="import-data-from-database" class="section level2">
+<h2><span class="header-section-number">17.5</span> Import data from database</h2>
+<p>R provides packages to manipulate data from relational databases like PostgreSQL, MySQL, etc. One of those packages is <code>odbc</code> package, which is one database interface for communication between R and relational database management systems. More resources on package: <a href="https://db.rstudio.com/odbc/" target="_blank">odbc</a>.</p>
+<p>Before we connect to a local database, we must satisfy the requirement of the ODBC driver, through which our R package can communicate with the database. To get help on how to install ODBC driver on systems like Windows, Linux, MacOS, please refer to this document: <a href="https://cran.r-project.org/web/packages/odbc/readme/README.html" target="_blank">Install ODBC Driver</a>.</p>
+<p>After we installed the ODBC driver, with <code>odbc</code> and <code>DBI</code> packages, we are able to manipulate the database. To read a table in the database, we usually take steps as follows. First, we build the connection to the database using <code>dbConnect()</code> function. Then, we can do some exploratory operations like listing all tables in the database. To query the data we want, we can send a SQL query into the database. Then we can retrieve the desired data and <code>dfFetch()</code> provides control on how many records to retrieve at a time. Finally, we finish reading and close the connection.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(odbc)
+<span class="kw">library</span>(DBI)
+
+<span class="co"># build connection with database </span>
+con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(odbc<span class="op">::</span><span class="kw">odbc</span>(),
+  <span class="dt">driver =</span> <span class="st">&quot;PostgreSQL Driver&quot;</span>,
+  <span class="dt">database =</span> <span class="st">&quot;test_db&quot;</span>,
+  <span class="dt">uid =</span> <span class="st">&quot;postgres&quot;</span>,
+  <span class="dt">pwd =</span> <span class="st">&quot;password&quot;</span>,
+  <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span>,
+  <span class="dt">port =</span> <span class="dv">5432</span>)
+
+<span class="co"># list all tables in the test_db database</span>
+<span class="kw">dbListTables</span>(con)
+
+<span class="co"># read table test_table into Data Frame</span>
+data &lt;-<span class="st"> </span><span class="kw">dbReadTable</span>(con, <span class="st">&quot;test_table&quot;</span>)
+
+<span class="co"># write an R Data Frame object to an SQL table</span>
+<span class="co"># here we write the built-in data mtcars to a new_table in DB</span>
+data &lt;-<span class="st"> </span><span class="kw">dbWriteTable</span>(con, <span class="st">&quot;new_table&quot;</span>, mtcars)
+
+<span class="co"># SQL query</span>
+result &lt;-<span class="st"> </span><span class="kw">dbSendQuery</span>(con, <span class="st">&quot;SELECT * FROM test_table&quot;</span>)
+
+<span class="co"># Retrieve the first 10 results</span>
+first_<span class="dv">10</span> &lt;-<span class="st"> </span><span class="kw">dbFetch</span>(result, <span class="dt">n =</span> <span class="dv">10</span>)
+<span class="co"># Retrieve the rest of the results</span>
+rest &lt;-<span class="st"> </span><span class="kw">dbFetch</span>(result)
+
+<span class="co"># close the connection</span>
+<span class="kw">dbDisconnect</span>(con)</code></pre>
+</div>
+<div id="more-resources" class="section level2">
+<h2><span class="header-section-number">17.6</span> More resources</h2>
 <ul>
-<li>While heatmaps are visually striking, there are often better choices to get your point across. For more info, checkout this <a href="https://campus.datacamp.com/courses/data-visualization-with-ggplot2-2/chapter-4-best-practices?ex=10" target="_blank">DataCamp section on heatmaps and alternatives</a>.</li>
-</ul>
-</div>
-<div id="external-resources-2" class="section level2">
-<h2><span class="header-section-number">9.5</span> External resources</h2>
-<ul>
-<li><a href="https://www.r-graph-gallery.com/heatmap/" target="_blank">R Graph Gallery: Heatmaps</a>: Has examples of creating heatmaps with the <code>heatmap()</code> function.</li>
-<li><a href="https://www.r-bloggers.com/how-to-make-a-simple-heatmap-in-ggplot2/" target="_blank">How to make a simple heatmap in ggplot2</a>: Create a heatmap with <code>geom_tile()</code>.</li>
+<li>Import local file:
+<a href="https://www.datacamp.com/community/tutorials/r-data-import-tutorial#Getting" target="_blank">This R Data Import Tutorial Is Everything You Need</a></li>
+<li>Import JSON file:
+<a href="https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html" target="_blank">Getting started with JSON and jsonlite</a></li>
+<li>Import web data:
+<a href="http://www.omegahat.net/RCurl/" target="_blank">The RCurl Package</a></li>
+<li>Import database file
+<a href="https://db.rstudio.com/" target="_blank">Databases using R</a></li>
+<li>Documentation on odbc package
+<a href="https://db.rstudio.com/odbc/" target="_blank">odbc</a></li>
+<li>Install ODBC Driver On Your System
+<a href="https://cran.r-project.org/web/packages/odbc/readme/README.html" target="_blank">Install ODBC Driver</a></li>
 </ul>
 
 </div>
@@ -761,8 +819,8 @@ Footer
           </div>
         </div>
       </div>
-<a href="box.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="histo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="dates.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="maps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -792,7 +850,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jtr13/EDAV/edit/master/heatmap.Rmd",
+"link": "https://github.com/jtr13/EDAV/edit/master/import_data.Rmd",
 "text": "Edit"
 },
 "download": null,
