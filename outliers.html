@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="bar.html">
-<link rel="next" href="heatmap.html">
+<link rel="prev" href="missing.html">
+<link rel="next" href="network.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -578,142 +578,126 @@ function unhover(element) {
 <br><br>
 <a href="index.html"><img src="images/icons/edav_resource_url_no_smile.png" onmouseover="hover(this);" onmouseout="unhover(this);" /></a>
 </center>
-<div id="box" class="section level1">
-<h1><span class="header-section-number">8</span> Chart: Boxplot</h1>
-<p><img src="images/banners/banner_boxplot.png" /></p>
-<div id="overview-6" class="section level2">
-<h2><span class="header-section-number">8.1</span> Overview</h2>
-<p>This section covers how to make boxplots.</p>
+<div id="outliers" class="section level1">
+<h1><span class="header-section-number">19</span> Outliers</h1>
+<p><img src="images/banners/banner_outliers.png" />
+<em>This chapter originated as a community contribution created by <a href="https://github.com/kiransaini" target="_blank">kiransaini</a></em></p>
+<p><em>This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider <a href="contribute.html">contributing to our repo</a>.</em></p>
+<div id="overview-14" class="section level2">
+<h2><span class="header-section-number">19.1</span> Overview</h2>
+<p>This section covers what types of outliers are encountered in data and how to handle them.</p>
 </div>
-<div id="tldr-2" class="section level2">
-<h2><span class="header-section-number">8.2</span> tl;dr</h2>
-<p>I want a nice example and I want it NOW!</p>
-<p>Here’s a look at the weights of newborn chicks split by the feed supplement they received:</p>
-<p><img src="boxplot_files/figure-html/tldr-show-plot-1.png" width="672" /></p>
-<p>And here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(datasets) <span class="co"># data</span>
-<span class="kw">library</span>(ggplot2) <span class="co"># plotting</span>
-
-<span class="co"># reorder supplements</span>
-supps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;horsebean&quot;</span>, <span class="st">&quot;linseed&quot;</span>, <span class="st">&quot;soybean&quot;</span>, <span class="st">&quot;meatmeal&quot;</span>, <span class="st">&quot;sunflower&quot;</span>, <span class="st">&quot;casein&quot;</span>)
-
-<span class="co"># boxplot by feed supplement with jitter layer</span>
-<span class="kw">ggplot</span>(chickwts, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(feed, <span class="dt">levels =</span> supps), 
-                     <span class="dt">y =</span> weight)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="co"># plotting</span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;#cc9a38&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;#473e2c&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.2</span>, <span class="dt">width =</span> <span class="fl">0.1</span>, <span class="dt">color =</span> <span class="st">&quot;#926d25&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="co"># formatting</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Casein Makes You Fat?!&quot;</span>,
-          <span class="dt">subtitle =</span> <span class="st">&quot;Boxplots of Chick Weights by Feed Supplement&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Feed Supplement&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Chick Weight (g)&quot;</span>, <span class="dt">caption =</span> <span class="st">&quot;Source: datasets::chickwts&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;grey35&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.caption =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> <span class="st">&quot;grey68&quot;</span>))</code></pre>
-<p>For more info on this dataset, type <code>?datasets::chickwts</code> into the console.</p>
+<div id="tldr-9" class="section level2">
+<h2><span class="header-section-number">19.2</span> tl;dr</h2>
+<p>I want to see my outliers!</p>
+<p>Outliers are difficult to spot because judging a datapoint as an outlier depends on the data or model with which they are compared. It is important to detect outliers because they can distort predictions and affect the accuracy of the model.</p>
 </div>
-<div id="simple-examples-1" class="section level2">
-<h2><span class="header-section-number">8.3</span> Simple examples</h2>
-<p>Okay…<em>much</em> simpler please.</p>
-<p>Let’s use the <code>airquality</code> dataset from the <code>datasets</code> package:</p>
+<div id="what-are-outliers" class="section level2">
+<h2><span class="header-section-number">19.3</span> What are outliers?</h2>
+<p>Outliers are noticeably far from the bulk of the data. They can be errors, genuine extreme values, rare values, unusual values, cases of special interest, or data from another source. Outliers on individual variables can be spotted using <a href="box.html">boxplots</a> and bivariate outliers can be spotted using <a href="scatter.html">scatterplots</a>. There can also be higher dimensional outliers that are not outliers in lower dimensions.</p>
+<p>It is worth identifying outliers for a number of reasons. Bad outliers should always be corrected and many statistical methods may work poorly in presence of outliers, but genuine outlying values can be interesting in their own right. Let’s have a look at the outliers of the ‘carat’ variable in the <code>diamonds</code> dataset:</p>
+<p><img src="outliers_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+<div id="types-of-outliers" class="section level2">
+<h2><span class="header-section-number">19.4</span> Types of Outliers</h2>
+<div id="univariate-outliers" class="section level3">
+<h3><span class="header-section-number">19.4.1</span> Univariate Outliers</h3>
+<p><strong>Univariate outliers</strong> are outlying along one dimension. The best-known approach for an initial look at the data is to use boxplots. <a href="https://en.wikipedia.org/wiki/John_Tukey" target="_blank">Tukey</a> suggests marking individual cases as outliers if they are more than 1.5 IQR (the interquartile range) outside the hinges (basically the quartiles). Outliers may change if they are grouped by another variable. Let’s have a look at outliers on the Sepal Width variable in the <code>iris</code> dataset, both when the data is grouped by Species and when it is not. The outliers are clearly different:</p>
+<pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>Species, <span class="dt">y=</span>Sepal.Width)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Boxplot for Sepal Width grouped by Species in iris dataset&quot;</span>)
+p</code></pre>
+<p><img src="outliers_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">y=</span>Sepal.Width)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Boxplot for Sepal Width in iris dataset&quot;</span>)
+p</code></pre>
+<p><img src="outliers_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+</div>
+<div id="multivariate-outliers" class="section level3">
+<h3><span class="header-section-number">19.4.2</span> Multivariate Outliers</h3>
+<p><strong>Multivariate outliers</strong> are outlying along more than one dimension. Scatterplots and parallel coordinate plots are useful for visualizing multivariate outliers. You could regard points as outliers that are far from the mass of the data, or you could regard points as outliers that do not fit the smooth model well. Some points are outliers on both criteria. Let’s have a look at outliers on the Petal Length and Sepal Width variables in the <code>iris</code> dataset. We can clearly see an outlier which is far from the mass of the data (lower left):</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Width, <span class="dt">y=</span>Petal.Length)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Scatterplot for Petal Length vs Sepal Width in iris dataset&quot;</span>)</code></pre>
+<p><img src="outliers_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Let’s have a look at outliers on the Petal Length and Petal Width variables in the <code>iris</code> dataset by fitting a smooth model. Here the outliers are the points that do not fit the smooth model:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>Petal.Width, <span class="dt">y=</span>Petal.Length)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_density2d</span>(<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">bins=</span><span class="dv">4</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Scatterplot for Petal Length vs Petal Width in iris dataset&quot;</span>)</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="outliers_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Lets have a look at outliers in the <code>diamond</code> dataset using a parallel coordinate plot. We can see an outlier on the carat, cut, color, and clarity variables that is not an outlier on individual variables:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(GGally)
+<span class="kw">ggparcoord</span>(diamonds[<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>,], <span class="dt">columns=</span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">scale=</span><span class="st">&quot;uniminmax&quot;</span>, <span class="dt">alpha=</span><span class="fl">0.8</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Parallel coordinate plot of diamonds dataset&quot;</span>)</code></pre>
+<p><img src="outliers_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="categorical-outliers" class="section level3">
+<h3><span class="header-section-number">19.4.3</span> Categorical Outliers</h3>
+<p>Outliers can be rare on a categorical scale. Certain combinations of categories are rare or should not occur at all. Fluctuation diagrams can be used to find such outliers. We can see rare cases in the <code>HairEyeColor</code> dataset:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(datasets)
-<span class="kw">head</span>(airquality, <span class="dt">n =</span> <span class="dv">5</span>)</code></pre>
-<pre><code>##   Ozone Solar.R Wind Temp Month Day
-## 1    41     190  7.4   67     5   1
-## 2    36     118  8.0   72     5   2
-## 3    12     149 12.6   74     5   3
-## 4    18     313 11.5   62     5   4
-## 5    NA      NA 14.3   56     5   5</code></pre>
-<div id="boxplot-using-base-r" class="section level3">
-<h3><span class="header-section-number">8.3.1</span> Boxplot using base R</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot data</span>
-<span class="kw">boxplot</span>(airquality, <span class="dt">col =</span> <span class="st">&#39;lightBlue&#39;</span>, <span class="dt">main =</span> <span class="st">&quot;Base R Boxplots of airquality&quot;</span>)</code></pre>
-<p><img src="boxplot_files/figure-html/base-r-1.png" width="672" /></p>
-<p>Boxplots with Base R are super easy. Like <a href="histo.html">histograms</a>, boxplots only need the data. In this case, we passed a dataframe with six variables, so it made separate boxplots for each variable. You may not want to create boxplots for every variable, in which case you could specify the variables individually or use <a href="https://www.rdocumentation.org/packages/dplyr/versions/0.7.5/topics/filter" target="_blank"><code>filter</code></a> from the <a href="https://www.rdocumentation.org/packages/dplyr/versions/0.7.5" target="_blank"><code>dplyr</code></a> package.</p>
-</div>
-<div id="boxplot-using-ggplot2" class="section level3">
-<h3><span class="header-section-number">8.3.2</span> Boxplot using ggplot2</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># import ggplot</span>
-<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(extracat)
 
-<span class="co"># plot data</span>
-g1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">stack</span>(airquality), <span class="kw">aes</span>(<span class="dt">x =</span> ind, <span class="dt">y =</span> values)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;lightBlue&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="co"># extra formatting</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;ggplot2 Boxplots of airquality&quot;</span>)
-
-g1</code></pre>
-<pre><code>## Warning: Removed 44 rows containing non-finite values (stat_boxplot).</code></pre>
-<p><img src="boxplot_files/figure-html/ggplot-1.png" width="672" /></p>
-<p><code>ggplot2</code> requires data to be mapped to the <code>x</code> and <code>y</code> aesthetics. Here we use the <code>stack</code> function to combine each column of the <code>airquality</code> dataframe. Reading the documentation for the <code>stack</code> function (<code>?utils::stack</code>), we see the new stacked dataframe has two columns: <code>values</code> and <code>ind</code>, which we use to create the boxplots. <strong>Notice</strong>: <code>ggplot2</code> warns us that it is ignoring “non-finite values”, which are the NA’s in the dataset.</p>
+<span class="kw">fluctile</span>(HairEyeColor)</code></pre>
+<p><img src="outliers_files/figure-html/unnamed-chunk-6-1.png" width="768" /></p>
 </div>
 </div>
-<div id="theory-1" class="section level2">
-<h2><span class="header-section-number">8.4</span> Theory</h2>
-<p>Here’s a quote by Hadley Wickham that sums up boxplots nicely:</p>
-<blockquote>
-<p>The boxplot is a compact distributional summary, displaying less detail than a histogram or kernel density, but also taking up less space. Boxplots use robust summary statistics that are always located at actual data points, are quickly computable (originally by hand), and have no tuning parameters. They are particularly useful for comparing distributions across groups. - Hadley Wickham</p>
-</blockquote>
-<p>Another important use of the boxplot is in showing outliers. A boxplot shows how much of an outlier a data point is with quartiles and fences. Use the boxplot when you have data with outliers so that they can be exposed. What it lacks in specificity it makes up with its ability to clearly summarize large data sets.</p>
+<div id="handling-outliers" class="section level2">
+<h2><span class="header-section-number">19.5</span> Handling Outliers</h2>
+<p>Identifying outliers using plots and fitting models is relatively easy compared to what to do after identifying the outliers. Outliers can be rare cases, unusual values, or genuine errors. Genuine errors must be corrected if possible or else they must be removed. Imputation of outliers is complicated and appropriate background knowledge is required.</p>
+<p>A strategy for dealing with outliers is as follows</p>
+<ol style="list-style-type: decimal">
+<li><p>Plot the one-dimensional distributions of the variables using boxplots. Examine any extreme outliers to see if they are rare values or errors and decide if they should be removed or imputed.</p></li>
+<li><p>For outliers which are extreme on one dimension, examine their values on other dimensions to decide whether they should be discarded or not. Discard values that are outliers on more than one dimension.</p></li>
+<li><p>Consider cases which are outliers in a higher dimensions but not in lower dimensions. Decide whether they are errors or not and consider discarding or imputing the errors.</p></li>
+<li><p>Plot boxplots and parallel coordinate plots by using grouping on a variable to find outliers in subsets of the data.</p></li>
+</ol>
+<div id="not-informative" class="section level3">
+<h3><span class="header-section-number">19.5.1</span> Not informative</h3>
+<p>Consider the <code>diamonds</code> dataset. Let’s have a look at the width (y) and depth (z) variables:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">y=</span>y)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;#9B3535&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Ouliers on width variable in diamonds dataset&quot;</span>)</code></pre>
+<p><img src="outliers_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">y=</span>z)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;#9B3535&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Ouliers on depth variable in diamonds dataset&quot;</span>)</code></pre>
+<p><img src="outliers_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(y, z)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col =</span> <span class="st">&quot;#9B3535&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;width&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;depth&quot;</span>)</code></pre>
+<p><img src="outliers_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="more-informative" class="section level3">
+<h3><span class="header-section-number">19.5.2</span> More informative</h3>
+<p>The plots are not very informative due to the outliers. The same plots after filtering the outliers are much more informative:</p>
+<pre class="sourceCode r"><code class="sourceCode r">d2 &lt;-<span class="st"> </span><span class="kw">filter</span>(diamonds, y <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&lt;</span><span class="st"> </span><span class="dv">11</span> <span class="op">&amp;</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>z <span class="op">&lt;</span><span class="st"> </span><span class="dv">8</span>)
+<span class="kw">ggplot</span>(d2, <span class="kw">aes</span>(<span class="dt">y=</span>y)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Ouliers on width variable in diamonds dataset&quot;</span>)</code></pre>
+<p><img src="outliers_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">d2 &lt;-<span class="st"> </span><span class="kw">filter</span>(diamonds, y <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&lt;</span><span class="st"> </span><span class="dv">11</span> <span class="op">&amp;</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>z <span class="op">&lt;</span><span class="st"> </span><span class="dv">8</span>)
+<span class="kw">ggplot</span>(d2, <span class="kw">aes</span>(<span class="dt">y=</span>z)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Ouliers on depth variable in diamonds dataset&quot;</span>)</code></pre>
+<p><img src="outliers_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">d2 &lt;-<span class="st"> </span><span class="kw">filter</span>(diamonds, y <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&lt;</span><span class="st"> </span><span class="dv">11</span> <span class="op">&amp;</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>z <span class="op">&lt;</span><span class="st"> </span><span class="dv">8</span>)
+<span class="kw">ggplot</span>(d2, <span class="kw">aes</span>(y, z)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">color =</span> <span class="st">&quot;darkGrey&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightBlue&quot;</span>, <span class="dt">stroke =</span> <span class="fl">0.1</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;width&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;depth&quot;</span>)</code></pre>
+<p><img src="outliers_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+</div>
+<div id="external-resources-9" class="section level2">
+<h2><span class="header-section-number">19.6</span> External Resources</h2>
 <ul>
-<li>For more info about boxplots and continuous variables, check out <a href="http://www.gradaanwr.net/content/03-examining-continuous-variables/" target="_blank">Chapter 3</a> of the textbook.</li>
-</ul>
-</div>
-<div id="when-to-use-1" class="section level2">
-<h2><span class="header-section-number">8.5</span> When to use</h2>
-<p>Boxplots should be used to display <em>continuous variables</em>. They are particularly useful for identifying outliers and comparing different groups.</p>
-<p><em>Aside</em>: Boxplots may even help you <a href="https://xkcd.com/539/" target="_blank">convince someone you are their outlier</a> (If you like it when people over-explain jokes, <a href="https://www.explainxkcd.com/wiki/index.php/539:_Boyfriend" target="_blank">here is why that comic is funny</a>.).</p>
-</div>
-<div id="considerations-1" class="section level2">
-<h2><span class="header-section-number">8.6</span> Considerations</h2>
-<div id="flipping-orientation" class="section level3">
-<h3><span class="header-section-number">8.6.1</span> Flipping orientation</h3>
-<p>Often you want boxplots to be horizontal. Super easy to do: just tack on <code>coord_flip()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># g1 plot from above (5.3.2)</span>
-g1 <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</code></pre>
-<pre><code>## Warning: Removed 44 rows containing non-finite values (stat_boxplot).</code></pre>
-<p><img src="boxplot_files/figure-html/flip-boxplot-1.png" width="672" /></p>
-</div>
-<div id="not-for-categorical-data" class="section level3">
-<h3><span class="header-section-number">8.6.2</span> NOT for categorical data</h3>
-<p>Boxplots are great, but they do NOT work with categorical data. Make sure your variable is continuous before using boxplots. Here’s an example of what <em>not</em> to do:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(likert) <span class="co"># data</span>
-<span class="kw">library</span>(dplyr) <span class="co"># data manipulation</span>
-
-<span class="co"># load/format data</span>
-<span class="kw">data</span>(pisaitems)
-pisa &lt;-<span class="st"> </span>pisaitems[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">7</span>] <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate_all</span>(as.integer) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(<span class="kw">complete.cases</span>(.))
-
-<span class="co"># create theme</span>
-theme &lt;-<span class="st"> </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;grey35&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.caption =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> <span class="st">&quot;grey68&quot;</span>))
-
-<span class="co"># create plot</span>
-plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">stack</span>(pisa), <span class="kw">aes</span>(<span class="dt">x =</span> ind, <span class="dt">y =</span> values)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;#9B3535&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Don&#39;t Plot Boxplots of Categorical Variables Like This&quot;</span>,
-          <span class="dt">subtitle =</span> <span class="st">&quot;...seriously don&#39;t. Here, I&#39;ll make it red so it looks scary:&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Assessment Code&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Values&quot;</span>, <span class="dt">caption =</span> <span class="st">&quot;Source: likert::pisaitems&quot;</span>)
-
-<span class="co"># bad boxplot</span>
-plot <span class="op">+</span><span class="st"> </span>theme</code></pre>
-<p><img src="boxplot_files/figure-html/bad-boxplots-1.png" width="672" /></p>
-</div>
-</div>
-<div id="external-resources-1" class="section level2">
-<h2><span class="header-section-number">8.7</span> External resources</h2>
-<ul>
-<li>Tukey, John W. 1977. <a href="https://clio.columbia.edu/catalog/136422" target="_blank"><em>Exploratory Data Analysis.</em></a> Addison-Wesley. (Chapter 2): the primary source in which boxplots are first presented.</li>
-<li><a href="https://campus.datacamp.com/courses/helsinki-open-data-science/logistic-regression?ex=7" target="_blank">DataCamp: Quick Exercise on Boxplots</a>: a simple example of making boxplots from a dataset.</li>
-<li><a href="http://t-redactyl.io/blog/2016/04/creating-plots-in-r-using-ggplot2-part-10-boxplots.html" target="_blank">Article on boxplots with ggplot2</a>: An excellent collection of code examples on how to make boxplots with <code>ggplot2</code>. Covers layering, working with legends, faceting, formatting, and more. If you want a boxplot to look a certain way, this article will help.</li>
-<li><a href="https://plot.ly/ggplot2/box-plots/" target="_blank">Boxplots with plotly package</a>: boxplot examples using the <code>plotly</code> package. These allow for a little interactivity on hover, which might better explain the underlying statistics of your plot.</li>
-<li><a href="http://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization" target="_blank">ggplot2 Boxplot: Quick Start Guide</a>: Article from <a href="http://www.sthda.com/english/" target="_blank">STHDA</a> on making boxplots using ggplot2. Excellent starting point for getting immediate results and custom formatting.</li>
-<li><a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf" target="_blank">ggplot2 cheatsheet</a>: Always good to have close by.</li>
-<li><a href="http://vita.had.co.nz/papers/boxplots.pdf" target="_blank">Hadley Wickhan and Lisa Stryjewski on boxplots</a>: good for understanding basics of more complex boxplots and some of the history behind them.</li>
+<li><p><a href="https://www.r-bloggers.com/identify-describe-plot-and-remove-the-outliers-from-the-dataset/" target="_blank">Identify, describe, plot, and remove the outliers from the dataset</a>: Plotting and removing outliers from a dataset</p></li>
+<li><p><a href="https://towardsdatascience.com/a-brief-overview-of-outlier-detection-techniques-1e0b2c19e561" target="_blank">A Brief Overview of Outlier Detection Techniques</a>: Discussion of the theoretical aspect of outlier detection</p></li>
 </ul>
 
 </div>
@@ -741,8 +725,8 @@ Footer
           </div>
         </div>
       </div>
-<a href="bar.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="heatmap.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="missing.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="network.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -772,7 +756,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jtr13/EDAV/edit/master/boxplot.Rmd",
+"link": "https://github.com/jtr13/EDAV/edit/master/outliers.Rmd",
 "text": "Edit"
 },
 "download": null,
