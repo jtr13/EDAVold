@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="scatter.html">
-<link rel="next" href="violin.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="basics.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -619,78 +619,60 @@ function unhover(element) {
 <br><br>
 <a href="index.html"><img src="images/icons/edav_resource_url_no_smile.png" onmouseover="hover(this);" onmouseout="unhover(this);" /></a>
 </center>
-<div id="qqplot" class="section level1">
-<h1><span class="header-section-number">15</span> Chart: QQ-Plot</h1>
-<p><img src="images/banners/banner_qqplot.png" />
-<em>This chapter originated as a community contribution created by <a href="https://github.com/hao871563506" target="_blank">hao871563506</a></em></p>
-<p><em>This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider <a href="contribute.html">contributing to our repo</a>.</em></p>
-<div id="introduction-2" class="section level2">
-<h2><span class="header-section-number">15.1</span> Introduction</h2>
-<p>In statistics, a Q-Q (quantile-quantile) plot is a probability plot, which is a graphical method for comparing two probability distributions by plotting their quantiles against each other. A point (x, y) on the plot corresponds to one of the quantiles of the second distribution (y-coordinate) plotted against the same quantile of the first distribution (x-coordinate). Thus the line is a parametric curve with the parameter which is the number of the interval for the quantile.</p>
+<div id="introduction" class="section level1 unnumbered">
+<h1>Introduction</h1>
+<p><img src="images/banners/banner_intro.png" /></p>
+<div id="overview" class="section level2">
+<h2><span class="header-section-number">0.4</span> Overview</h2>
+<p>This chapter introduces how this resource is organized, explains how you can add to this resource, and includes some general acknowledgments.</p>
 </div>
-<div id="interpreting-qqplots" class="section level2">
-<h2><span class="header-section-number">15.2</span> Interpreting qqplots</h2>
+<div id="how-this-resource-is-structured" class="section level2">
+<h2><span class="header-section-number">0.5</span> How this resource is structured</h2>
+<p>This resource is split into four color-coded sections, each of which provides different kinds of assistance. Below is an explanation of each section:</p>
+<div id="section-i-information-blue" class="section level3">
+<h3><span class="header-section-number">0.5.1</span> Section I: Information (Blue)</h3>
+<p><img src="images/banners/banner_blue.png" /></p>
+<p>Pages in the <strong>blue section</strong> contain basic <strong>information</strong>. Examples of blue pages include this introduction page and the <a href="basics.html">basics page</a>, which explains how to setup R/RStudio as well as ways to get help if you need it. Blue pages are the help desk of this resource: look to them if you are lost and need to find your way.</p>
 </div>
-<div id="normal-or-not-examples-using-qqnorm" class="section level2">
-<h2><span class="header-section-number">15.3</span> Normal or not (examples using qqnorm)</h2>
-<div id="normal-qqplot" class="section level3">
-<h3><span class="header-section-number">15.3.1</span> Normal qqplot</h3>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dv">50</span>, <span class="dv">10</span>)
-<span class="kw">qqnorm</span>(x)
-<span class="kw">qqline</span>(x, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</code></pre>
-<p><img src="qqplot_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>The points seem to fall along a straight line. Notice the x-axis plots the theoretical quantiles. Those are the quantiles from the standard Normal distribution with mean 0 and standard deviation 1.</p>
+<div id="section-ii-walkthroughs-red" class="section level3">
+<h3><span class="header-section-number">0.5.2</span> Section II: Walkthroughs (Red)</h3>
+<p><img src="images/banners/banner_red.png" /></p>
+<p>Pages in the <strong>red section</strong> contain more extensive <strong>walkthroughs</strong>. An example of a red page is the <a href="iris.html">iris walkthrough</a>, where a well-known dataset is presented as a pretty scatterplot and steps are shown from start to finish. This page type is the most thorough: it tries to provide full documentation, explanations of design choices, and advice on best practices. It’s like going to office hours and having a great clarifying chat with a course assistant…in article form. If you would like to see a fully-worked-through example of something with a lot of guidance along the way, check out the red pages.</p>
 </div>
-<div id="non-normal-qqplot" class="section level3">
-<h3><span class="header-section-number">15.3.2</span> Non-normal qqplot</h3>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">1000</span>, <span class="dv">5</span>)
-<span class="kw">qqnorm</span>(x)
-<span class="kw">qqline</span>(x, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</code></pre>
-<p><img src="qqplot_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>Notice the points form a curve instead of a straight line. Normal Q-Q plots that look like this usually mean your sample data are skewed.</p>
+<div id="section-iii-documentation-green" class="section level3">
+<h3><span class="header-section-number">0.5.3</span> Section III: Documentation (Green)</h3>
+<p><img src="images/banners/banner_green.png" /></p>
+<p>Pages in the <strong>green section</strong> contain more compact <strong>documentation</strong>. An example of a green page is the <a href="histo.html">histogram page</a>, which includes simple examples of how to create histograms, when to use them, and things to be aware of/watch out for. The green pages hold your hand much less than the red pages: they explain how to use a chart/tool using examples and simple terms. If you have an idea in mind and are just wondering how to execute it, the green pages will help fill in those gaps.</p>
+</div>
+<div id="section-iv-references-yellow" class="section level3">
+<h3><span class="header-section-number">0.5.4</span> Section IV: References (Yellow)</h3>
+<p><img src="images/banners/banner_yellow.png" /></p>
+<p>Pages in the <strong>yellow section</strong> contain simple collections of <strong>references</strong>. An example of a yellow page is the <a href="general.html">external resources page</a>, which is a list of materials that you can look through and learn from. Yellow pages have the least amount of hand-holding: they are collections of resources and bare-boned tutorials that will help you learn about new things.</p>
 </div>
 </div>
-<div id="different-kinds-of-qqplots" class="section level2">
-<h2><span class="header-section-number">15.4</span> Different kinds of qqplots</h2>
-<p>The following graph is a conclusion of all the kinds of qqplot:
-<img src="images/qqplot_types.png" />
-<em>via <a href="https://stats.stackexchange.com/questions/101274/how-to-interpret-a-qq-plot/" target="_blank">Stack Exchange</a></em></p>
-<ul>
-<li><p><strong>Normal qqplot</strong>: The normal distribution is symmetric, so it has no skew (the mean is equal to the median).</p></li>
-<li><p><strong>Right skewed qqplot</strong>: Right-skew is also known as positive skew.</p></li>
-<li><p><strong>Left skewed qqplot</strong>: Left-skew is also known as negative skew.</p></li>
-<li><p><strong>Light tailed qqplot</strong>: meaning that compared to the normal distribution there is little more data located at the extremes of the distribution and less data in the center of the distribution.</p></li>
-<li><p><strong>Heavy tailed qqplot</strong>: meaning that compared to the normal distribution there is much more data located at the extremes of the distribution and less data in the center of the distribution.</p></li>
-<li><p><strong>Biomodel qqplot</strong>: illustrate a bimodal distribution.</p></li>
-</ul>
+<div id="help-improve-edav.info" class="section level2">
+<h2><span class="header-section-number">0.6</span> Help improve <em>edav.info/</em></h2>
+<p>This resource is an ongoing creation made by students, for students. We welcome you to help make it better. Not finding what you are looking for? Think a section could be made clearer? Consider helping improve <em>edav.info/</em> by submitting a pull request to the <a href="https://github.com/jtr13/EDAV" target="_blank">github page</a>. Don’t understand that last sentence? We have a <a href="contribute.html">page on how you can contribute to <em>edav.info/</em></a>.</p>
 </div>
-<div id="qqplot-using-ggplot" class="section level2">
-<h2><span class="header-section-number">15.5</span> qqplot using ggplot</h2>
-<p>In order to use <code>ggplot2</code> to plot a qqplot, we must use a dataframe, so here we convert it to one. We can see that using ggplot to plot a qqplot has a similar outcome as using qqnorm</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dv">50</span>, <span class="dv">10</span>)
-x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x)
-<span class="kw">ggplot</span>(x, <span class="kw">aes</span>(<span class="dt">sample =</span> x)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">stat_qq</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">stat_qq_line</span>()</code></pre>
-<p><img src="qqplot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>However, when we need to plot different groups, ggplot will be very helpful with its coloring by factor.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-<span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(<span class="dt">sample =</span> mpg, <span class="dt">colour =</span> <span class="kw">factor</span>(cyl))) <span class="op">+</span>
-<span class="st">  </span><span class="kw">stat_qq</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">stat_qq_line</span>()</code></pre>
-<p><img src="qqplot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div id="fun-stuff" class="section level2">
+<h2><span class="header-section-number">0.7</span> Fun stuff</h2>
+<div id="t-shirts" class="section level3">
+<h3><span class="header-section-number">0.7.1</span> T-shirts</h3>
+<p>Zach Bogart has made a few t-shirts available on <a href="https://teespring.com/stores/edav" target="_blank">Teespring</a> so you can show your love for EDAV and R. Hope you enjoy! <i class="far fa-smile"></i></p>
+<center>
+<a href="https://teespring.com/stores/edav" class="active-banner" target="_blank"><img src="images/edav_shirt.png" alt="EDAV Store" /></a>
+</center>
 </div>
-<div id="references" class="section level2">
-<h2><span class="header-section-number">15.6</span> References</h2>
-<ul>
-<li><a href="https://data.library.virginia.edu/understanding-q-q-plots/" target="_blank">Understanding Q-Q Plots</a>: A discussion from the University of Virginia Library on qqplots.</li>
-<li><a href="https://stats.stackexchange.com/questions/101274/how-to-interpret-a-qq-plot" target="_blank">How to interpret a QQ plot</a>: Another resource for interpreting qqplots.</li>
-<li><a href="http://seankross.com/2016/02/29/A-Q-Q-Plot-Dissection-Kit.html" target="_blank">A QQ Plot Dissection Kit</a>: An excellent walkthrough on qqplots by Sean Kross.</li>
-<li><a href="https://www.jstor.org/stable/2334448?seq=1#metadata_info_tab_contents" target="_blank">Probability plotting methods for the analysis of data</a>: Paper on plotting techniques, which discusses qqplots. (Wilk, M.B.; Gnanadesikan, R. (1968))</li>
-<li><a href="https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot#cite_note-1" target="_blank">QQ-Plot Wiki</a>: Wikipedia entry on qqplots</li>
-</ul>
+</div>
+<div id="acknowledgments" class="section level2">
+<h2><span class="header-section-number">0.8</span> Acknowledgments</h2>
+<div id="our-contributors" class="section level3">
+<h3><span class="header-section-number">0.8.1</span> Our Contributors</h3>
+<p>Thank you so much to everyone who has contributed. You make <em>edav.info/</em> possible.</p>
+<p><i class="fas fa-heart"></i></p>
+<p>Aashna Kanuga (<a href="https://github.com/aashnakanuga" target="_blank">@aashnakanuga</a>), Akshata Patel (<a href="https://github.com/akshatapatel" target="_blank">@akshatapatel</a>), Angela Li (<a href="https://github.com/angela-li" target="_blank">@angela-li</a>), <a href="https://github.com/anipin" target="_blank">@anipin</a>, <a href="https://github.com/AshwinJay101" target="_blank">@AshwinJay101</a>, Eric Boxer (<a href="https://github.com/Ecboxer" target="_blank">@Ecboxer</a>), <a href="https://github.com/excited-student" target="_blank">@excited-student</a>, <a href="https://github.com/hao871563506" target="_blank">@hao871563506</a>, Harin Sanghirun (<a href="https://github.com/harin" target="_blank">@harin</a>), <a href="https://github.com/jw2531" target="_blank">@jw2531</a>, <a href="https://github.com/kiransaini" target="_blank">@kiransaini</a>, <a href="https://github.com/leahparreztnik" target="_blank">@leahparreztnik</a>, Louis Massera (<a href="https://github.com/louismassera" target="_blank">@louismassera</a>), Neha Saraf (<a href="https://github.com/nehasaraf1994" target="_blank">@nehasaraf1994</a>), Oleh Dubno (<a href="https://github.com/odubno" target="_blank">@odubno</a>), Ramy Jaber (<a href="https://github.com/ramyij" target="_blank">@ramyij</a>), Rod Bogart (<a href="https://github.com/rodbogart" target="_blank">@rodbogart</a>), <a href="https://github.com/Somendratripathi" target="_blank">@Somendratripathi</a>, Tim Kartawijaya (<a href="https://github.com/TimKartawijaya" target="_blank">@TimKartawijaya</a>), <a href="https://github.com/ujjwal95" target="_blank">@ujjwal95</a>, Zhida Zhang (<a href="https://github.com/ZhangZhida" target="_blank">@ZhangZhida</a>)</p>
 
+</div>
 </div>
 </div>
 <!-- 
@@ -716,8 +698,8 @@ Footer
           </div>
         </div>
       </div>
-<a href="scatter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="violin.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -747,7 +729,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jtr13/EDAV/edit/master/qqplot.Rmd",
+"link": "https://github.com/jtr13/EDAV/edit/master/intro.Rmd",
 "text": "Edit"
 },
 "download": null,
