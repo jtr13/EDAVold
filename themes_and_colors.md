@@ -201,7 +201,7 @@ ggplot(subset, aes(x = clarity, y = carat, color = cut)) +
 
 **ggsci** offers a number of palettes inspired by colors used in scientific journals, science fiction movies, and TV shows. For continous data, `scale_fill_material(colname)` is used, and for discrete data, `scale_color_palname()` or `scale_fill_palname()` are used. 
 
-## ggsci for discrete data
+### ggsci for discrete data
 
 
 ```r
@@ -230,7 +230,7 @@ g1 + scale_color_locuszoom()
 
 <img src="themes_and_colors_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
-## ggsci for continuous data
+### ggsci for continuous data
 
 
 ```r

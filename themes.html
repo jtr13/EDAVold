@@ -540,10 +540,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.5" data-path="themes.html"><a href="themes.html#ggthemr"><i class="fa fa-check"></i><b>24.5</b> ggthemr</a><ul>
 <li class="chapter" data-level="24.5.1" data-path="themes.html"><a href="themes.html#ggthemr-examples"><i class="fa fa-check"></i><b>24.5.1</b> ggthemr examples</a></li>
 </ul></li>
-<li class="chapter" data-level="24.6" data-path="themes.html"><a href="themes.html#ggsci"><i class="fa fa-check"></i><b>24.6</b> ggsci</a></li>
-<li class="chapter" data-level="24.7" data-path="themes.html"><a href="themes.html#ggsci-for-discrete-data"><i class="fa fa-check"></i><b>24.7</b> ggsci for discrete data</a></li>
-<li class="chapter" data-level="24.8" data-path="themes.html"><a href="themes.html#ggsci-for-continuous-data"><i class="fa fa-check"></i><b>24.8</b> ggsci for continuous data</a></li>
-<li class="chapter" data-level="24.9" data-path="themes.html"><a href="themes.html#external-resources-11"><i class="fa fa-check"></i><b>24.9</b> External Resources</a></li>
+<li class="chapter" data-level="24.6" data-path="themes.html"><a href="themes.html#ggsci"><i class="fa fa-check"></i><b>24.6</b> ggsci</a><ul>
+<li class="chapter" data-level="24.6.1" data-path="themes.html"><a href="themes.html#ggsci-for-discrete-data"><i class="fa fa-check"></i><b>24.6.1</b> ggsci for discrete data</a></li>
+<li class="chapter" data-level="24.6.2" data-path="themes.html"><a href="themes.html#ggsci-for-continuous-data"><i class="fa fa-check"></i><b>24.6.2</b> ggsci for continuous data</a></li>
+</ul></li>
+<li class="chapter" data-level="24.7" data-path="themes.html"><a href="themes.html#external-resources-11"><i class="fa fa-check"></i><b>24.7</b> External Resources</a></li>
 </ul></li>
 <li class="part"><span><b>IV References (Yellow)</b></span></li>
 <li class="chapter" data-level="25" data-path="general.html"><a href="general.html"><i class="fa fa-check"></i><b>25</b> General Resources</a><ul>
@@ -746,9 +747,8 @@ q <span class="op">+</span><span class="st"> </span><span class="kw">theme_minim
 <div id="ggsci" class="section level2">
 <h2><span class="header-section-number">24.6</span> ggsci</h2>
 <p><strong>ggsci</strong> offers a number of palettes inspired by colors used in scientific journals, science fiction movies, and TV shows. For continous data, <code>scale_fill_material(colname)</code> is used, and for discrete data, <code>scale_color_palname()</code> or <code>scale_fill_palname()</code> are used.</p>
-</div>
-<div id="ggsci-for-discrete-data" class="section level2">
-<h2><span class="header-section-number">24.7</span> ggsci for discrete data</h2>
+<div id="ggsci-for-discrete-data" class="section level3">
+<h3><span class="header-section-number">24.6.1</span> ggsci for discrete data</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we need to remove the theme set previously if we don&#39;t want to use it anymore</span>
 <span class="kw">ggthemr_reset</span>()
 
@@ -762,8 +762,8 @@ g1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_colo
 <pre class="sourceCode r"><code class="sourceCode r">g1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_locuszoom</span>()</code></pre>
 <p><img src="themes_and_colors_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
-<div id="ggsci-for-continuous-data" class="section level2">
-<h2><span class="header-section-number">24.8</span> ggsci for continuous data</h2>
+<div id="ggsci-for-continuous-data" class="section level3">
+<h3><span class="header-section-number">24.6.2</span> ggsci for continuous data</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(carat, price)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">bins =</span> <span class="dv">20</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_fill_material</span>(<span class="st">&quot;orange&quot;</span>)</code></pre>
@@ -773,8 +773,9 @@ g1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_colo
 <span class="kw">show_col</span>(palette)</code></pre>
 <p><img src="themes_and_colors_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 </div>
+</div>
 <div id="external-resources-11" class="section level2">
-<h2><span class="header-section-number">24.9</span> External Resources</h2>
+<h2><span class="header-section-number">24.7</span> External Resources</h2>
 <ul>
 <li><a href="https://data.library.virginia.edu/setting-up-color-palettes-in-r/" target="_blank">RColorBrewer</a>: Setting up Color Palettes in R</li>
 <li><a href="https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/" target="_blank">ggthemes</a>: Github page containing more examples</li>
