@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="publish.html">
-<link rel="next" href="chapter-index.html">
+<link rel="prev" href="network.html">
+<link rel="next" href="general.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -636,72 +636,157 @@ function unhover(element) {
 <br><br>
 <a href="index.html"><img src="images/icons/edav_resource_url_no_smile.png" onmouseover="hover(this);" onmouseout="unhover(this);" /></a>
 </center>
-<div id="github" class="section level1">
-<h1><span class="header-section-number">28</span> GitHub Resources</h1>
-<p><img src="images/banners/banner_github.png" /></p>
-<div id="overview-21" class="section level2">
-<h2><span class="header-section-number">28.1</span> Overview</h2>
-<p>This section includes links for working with GitHub and advice on how to collaborate in teams on large coding projects.</p>
+<div id="themes" class="section level1">
+<h1><span class="header-section-number">24</span> Themes and Palettes</h1>
+<p><img src="images/banners/banner_themes.png" />
+<em>This chapter originated as a community contribution created by <a href="https://github.com/Akanksha1Raj" target="_blank">ar3879</a></em></p>
+<p><em>This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider <a href="contribute.html">contributing to our repo</a>.</em></p>
+<div id="overview-18" class="section level2">
+<h2><span class="header-section-number">24.1</span> Overview</h2>
+<p>Our graphs have to be informative and attractive to the audience to get their attention. Themes and colors play an important role in making the graphs attractive.</p>
+<p>This section covers how we can set different palettes and themes to suit the context and to make them look cool.</p>
 </div>
-<div id="tldr-12" class="section level2">
-<h2><span class="header-section-number">28.2</span> tl;dr</h2>
-<p>I don’t wanna just <em>read</em> about GitHub; I wanna learn by <em>doing</em>!</p>
-<p>We love your enthusiasm. To hit the ground running, checkout <a href="https://lab.github.com/" target="_blank">GitHub Learning Lab</a>. This application will teach you how to use GitHub with hands-on courses using actual repos. Its the perfect way to understand what using GitHub looks like.</p>
-<p><strong>Want a little reading as well?</strong>: <a href="https://try.github.io/" target="_blank">Resources to learn Git</a> is a simple site split into two main sections: <em>Learn by reading</em> and <em>Learn by doing</em>. Take your pick. <i class= "far fa-smile"></i></p>
-</div>
-<div id="on-github" class="section level2">
-<h2><span class="header-section-number">28.3</span> On GitHub</h2>
-<p>In this course, you will be working on a <a href="project.html">project</a> in teams. Because of this, you probably want to be able to share code and work on different parts of the project simultaneously. This is where Git and GitHub comes in.</p>
-<p><a href="https://github.com/" target="_blank">GitHub</a> is a way to work on projects and keep track of their status easily and efficiently. It is built off of <a href="https://git-scm.com/" target="_blank">Git</a>, a type of <a href="https://en.wikipedia.org/wiki/Version_control" target="_blank">version control</a> software. It is super useful and powerful, but people also find it quite annoying and <a href="https://xkcd.com/1597/" target="_blank">difficult to understand</a>. So, in an effort to help you, we have collected some resources to learn about GitHub and how you can use it to work on projects.</p>
-</div>
-<div id="getting-started-1" class="section level2">
-<h2><span class="header-section-number">28.4</span> Getting started</h2>
-<p>What’s GitHub? Start here.</p>
+<div id="ggplot2-themes" class="section level2">
+<h2><span class="header-section-number">24.2</span> ggplot2 themes</h2>
+<p>In <code>ggplot2</code>, we do have a set of themes, which we can set. A brief description of them is as follows:</p>
 <ul>
-<li><a href="https://guides.github.com/activities/hello-world/" target="_blank">Hello World</a>: GitHub’s take on the “Hello World” program. Great starting point to learn how GitHub works.</li>
-<li><a href="https://www.youtube.com/githubguides" target="_blank">Github Training &amp; Guides</a>: This YouTube Channel has a lot of info about what GitHub can do. The first line of the opening video is, “Okay. You signed up for GitHub. What do you do now?”. If you are asking that very question, this channel will serve you well.</li>
+<li><code>theme_gray()</code>: signature <code>ggplot2</code> theme</li>
+<li><code>theme_bw()</code>: dark on light <code>ggplot2</code> theme</li>
+<li><code>theme_linedraw()</code>: uses black lines on white backgrounds only</li>
+<li><code>theme_light()</code>: similar to <code>linedraw()</code> but with grey lines as well</li>
+<li><code>theme_dark()</code>: lines on a dark background instead of light</li>
+<li><code>theme_minimal()</code>: no background annotations, minimal feel</li>
+<li><code>theme_classic()</code>: theme with no grid lines</li>
+<li><code>theme_void()</code>: empty theme with no elements</li>
 </ul>
+<div id="ggplot2-theme-example" class="section level3">
+<h3><span class="header-section-number">24.2.1</span> ggplot2 theme example</h3>
+<pre class="sourceCode r"><code class="sourceCode r">q &lt;-<span class="st"> </span><span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">2.5</span>,<span class="dt">alpha =</span> <span class="fl">0.75</span>) 
+
+q <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>There are several other packages available that set the themes and colors in many ways. We will discuss 4 of them.</p>
+<ol style="list-style-type: decimal">
+<li>RColorBrewer</li>
+<li>ggthemes</li>
+<li>ggthemr</li>
+<li>ggsci</li>
+</ol>
 </div>
-<div id="getting-help-1" class="section level2">
-<h2><span class="header-section-number">28.5</span> Getting help</h2>
-<p>If you’re lost, these might help.</p>
+</div>
+<div id="rcolorbrewer" class="section level2">
+<h2><span class="header-section-number">24.3</span> RColorBrewer</h2>
+<p>Often, we find ourselves looking for the colors which make our graph look clear and cool.</p>
+<p>RColorBrewer offers a number of palettes, which we can use based on the context of our graph. There are <strong>three</strong> categories of these palettes: <em>Sequential</em>, <em>Diverging</em>, and <em>Qualitative</em></p>
+<pre class="sourceCode r"><code class="sourceCode r">q &lt;-<span class="st"> </span><span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">2.5</span>, <span class="dt">alpha =</span> <span class="fl">0.75</span>) </code></pre>
 <ul>
-<li><a href="https://guides.github.com/" target="_blank">GitHub Guides</a>: This is a phenomenal collection of short articles from GitHub to help you learn about the fundamentals around their product. They are so great, we have already listed their Hello World article. Here are some other important ones:
-<ul>
-<li><a href="https://guides.github.com/introduction/flow/" target="_blank">Understanding the GitHub Flow</a>: Explains how working with GitHub generally goes.</li>
-<li><a href="https://guides.github.com/introduction/git-handbook/" target="_blank">Git Handbook</a>: Explains what version control is.</li>
-</ul></li>
-<li><a href="https://help.github.com/" target="_blank">GitHub Help</a>: This is the yellow-pages of GitHub. Ask a question and it will try to <em>push</em> you in the right direction. <a href="https://getyarn.io/yarn-clip/6e7f4795-b65b-4fad-b1fb-c5c9161a95fa" target="_blank">Get it?</a></li>
+<li><strong>Sequential Palette</strong>: It represents the shade of the color from light to dark. It is usually used to represent interval data where low values can be shown with a light color and high values can be shown with a dark color. For instance –Blues, BuPu, YlGn, Reds, OrRd</li>
 </ul>
-</div>
-<div id="branching-out" class="section level2">
-<h2><span class="header-section-number">28.6</span> Branching out</h2>
-<p>GitHub is super social. Learn how to <em>git</em> involved! <a href="https://getyarn.io/yarn-clip/c5de0e9e-6122-48f9-87ed-337aeb2e9ae4" target="_blank"><i class="far fa-smile"></i></a></p>
+<pre class="sourceCode r"><code class="sourceCode r">q <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Blues&quot;</span>)</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <ul>
-<li><a href="https://opensource.guide/how-to-contribute/" target="_blank">Open Source Guide</a>: Info on how to contribute to open source projects. Great links to the GitHub skills involved as well as good GitHub etiquette to adopt.</li>
-<li><a href="https://guides.github.com/activities/forking/" target="_blank">Forking Projects</a>: Quick read from GitHub on how to fork a repository so you can contribute to it.</li>
-<li><a href="https://guides.github.com/features/issues/" target="_blank">Mastering Issues</a>: On what Issues are in GitHub and how they can help get things done.</li>
-<li><a href="contribute.html">Our Page on Contributing</a>: You can contribute to <em>edav.info/</em> with your new-found GitHub skills! Checkout our page on how to contribute through pull requests and/or issues.</li>
+<li><strong>Diverging Palette</strong>: It has darker colors of contrasting hues on both the ends, and lighter color in the middle. For instance –Spectral, RdGy, PuOr</li>
 </ul>
+<pre class="sourceCode r"><code class="sourceCode r">q <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;PuOr&quot;</span>)</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ul>
+<li><strong>Qualitative Palette</strong>: It is usually used when we want to highlight the differences in the classes (categorial variables). For instance –set1, set2, set3, pastel1, pastel2 , dark2</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">q <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Pastel1&quot;</span>)</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
-<div id="going-deeper-1" class="section level2">
-<h2><span class="header-section-number">28.7</span> Going deeper</h2>
-<p>For the <a href="https://getyarn.io/yarn-clip/64bbb001-ed8a-450a-8826-b939f653b969" target="_blank">nerds in the room</a>…</p>
+<div id="ggthemes" class="section level2">
+<h2><span class="header-section-number">24.4</span> ggthemes</h2>
+<p><strong>ggthemes</strong> provides additional geoms, scales, and themes to <code>ggplot2</code>. Some of them are really cool! We can change the theme and color of a graph based on the context.</p>
+<pre class="sourceCode r"><code class="sourceCode r">g1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">2.5</span>,<span class="dt">alpha =</span> <span class="fl">0.75</span>) </code></pre>
+<div id="ggthemes-examples" class="section level3">
+<h3><span class="header-section-number">24.4.1</span> ggthemes examples</h3>
+<pre class="sourceCode r"><code class="sourceCode r">g1 <span class="op">+</span><span class="st"> </span><span class="kw">theme_economist</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_economist</span>()</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">g1 <span class="op">+</span><span class="st"> </span><span class="kw">theme_igray</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_tableau</span>()</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">g1 <span class="op">+</span><span class="st"> </span><span class="kw">theme_wsj</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_wsj</span>()</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">g1 <span class="op">+</span><span class="st"> </span><span class="kw">theme_igray</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_colorblind</span>()</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>If we would like to use these colors in the graphs, which may not support using <code>ggthemes</code>, we can use the <code>scales</code> package to know what colors were used for a given palette. For example:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_col</span>(<span class="kw">colorblind_pal</span>()(<span class="dv">6</span>))</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+</div>
+<div id="ggthemr" class="section level2">
+<h2><span class="header-section-number">24.5</span> ggthemr</h2>
+<p><strong>ggthemr</strong> is used to set the theme of ggplot graphs. It has 17 different themes to change the way ggplot graphs look. Use of ggthemr is different from other other packages. We set the theme <em>before</em> using it.</p>
+<div id="ggthemr-examples" class="section level3">
+<h3><span class="header-section-number">24.5.1</span> ggthemr examples</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggthemr</span>(<span class="st">&quot;sky&quot;</span>)</code></pre>
+<pre><code>## Warning: New theme missing the following elements: panel.grid, plot.tag,
+## plot.tag.position</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">2.5</span>, <span class="dt">alpha =</span> <span class="fl">0.75</span>)</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggthemr</span>(<span class="st">&quot;flat&quot;</span>)</code></pre>
+<pre><code>## Warning: New theme missing the following elements: panel.grid, plot.tag,
+## plot.tag.position</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">2.5</span>, <span class="dt">alpha =</span> <span class="fl">0.75</span>)</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Interestingly, we can set more parameters to change the themes:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggthemr</span>(<span class="st">&quot;lilac&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;outer&quot;</span>, <span class="dt">layout =</span> <span class="st">&quot;scientific&quot;</span>, <span class="dt">spacing =</span> <span class="dv">2</span>)</code></pre>
+<pre><code>## Warning: New theme missing the following elements: panel.grid, plot.tag,
+## plot.tag.position</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">2.5</span>, <span class="dt">alpha =</span> <span class="fl">0.75</span>)</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+</div>
+<div id="ggsci" class="section level2">
+<h2><span class="header-section-number">24.6</span> ggsci</h2>
+<p><strong>ggsci</strong> offers a number of palettes inspired by colors used in scientific journals, science fiction movies, and TV shows. For continous data, <code>scale_fill_material(colname)</code> is used, and for discrete data, <code>scale_color_palname()</code> or <code>scale_fill_palname()</code> are used.</p>
+</div>
+<div id="ggsci-for-discrete-data" class="section level2">
+<h2><span class="header-section-number">24.7</span> ggsci for discrete data</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we need to remove the theme set previously if we don&#39;t want to use it anymore</span>
+<span class="kw">ggthemr_reset</span>()
+
+g1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">2.5</span>, <span class="dt">alpha =</span> <span class="fl">0.75</span>)
+
+g1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_startrek</span>()</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">g1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_jama</span>()</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">g1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_locuszoom</span>()</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+<div id="ggsci-for-continuous-data" class="section level2">
+<h2><span class="header-section-number">24.8</span> ggsci for continuous data</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(carat, price)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">bins =</span> <span class="dv">20</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_material</span>(<span class="st">&quot;orange&quot;</span>)</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>We can also find out the color used, so that we can use them in some other graphs created in base R:</p>
+<pre class="sourceCode r"><code class="sourceCode r">palette =<span class="st"> </span><span class="kw">pal_lancet</span>(<span class="st">&quot;lanonc&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.7</span>)(<span class="dv">9</span>)
+<span class="kw">show_col</span>(palette)</code></pre>
+<p><img src="themes_and_colors_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+<div id="external-resources-11" class="section level2">
+<h2><span class="header-section-number">24.9</span> External Resources</h2>
 <ul>
-<li><a href="https://www.youtube.com/watch?v=3m7BgIvC-uQ" target="_blank">Git For Ages 4 And Up</a>: There’s a lot going on under the hood. This talk will help explain how it all works…with kids toys!</li>
-<li><a href="https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs" target="_blank">Make pretty git logs</a>: Always remember <a href="https://i.stack.imgur.com/ElVkf.jpg" target="_blank">(A DOG)</a>. Also, this alias command is nice to have around:
-<ul>
-<li><code>git config --global alias.adog &quot;log --all --decorate --oneline --graph&quot;</code></li>
-</ul></li>
-<li><a href="https://stackoverflow.com/questions/4298960/git-add-and-commit-in-one-command" target="_blank"><code>add</code> and <code>commit</code> with one command</a>: Another (even more) helpful alias command:
-<ul>
-<li><code>git config --global alias.add-commit '!git add -A &amp;&amp; git commit'</code></li>
-</ul></li>
-<li><a href="https://github.com/jimeh/git-aware-prompt" target="_blank">Git Aware Prompt</a>: An excellent add-on to the Terminal that informs you which branch you have checked out. Someone also made <a href="https://github.com/udondan/git-aware-prompt" target="_blank">an even spiffier version</a> where it will inform you of your git status using helpful emojis.</li>
+<li><a href="https://data.library.virginia.edu/setting-up-color-palettes-in-r/" target="_blank">RColorBrewer</a>: Setting up Color Palettes in R</li>
+<li><a href="https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/" target="_blank">ggthemes</a>: Github page containing more examples</li>
+<li><a href="https://github.com/cttobin/ggthemr" target="_blank">ggthemr</a>: Github Repository of the package</li>
+<li><a href="https://cran.r-project.org/web/packages/ggsci/vignettes/ggsci.html" target="_blank">ggsci</a>: Scientific Journal and Sci-Fi Themed Color Palettes for ggplot2</li>
 </ul>
 
 </div>
 </div>
+
+
+
 <!-- 
 Footer 
   - included at the end of every page
@@ -725,8 +810,8 @@ Footer
           </div>
         </div>
       </div>
-<a href="publish.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chapter-index.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="network.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="general.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -756,7 +841,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jtr13/EDAV/edit/master/github_resources.Rmd",
+"link": "https://github.com/jtr13/EDAV/edit/master/themes_and_colors.Rmd",
 "text": "Edit"
 },
 "download": null,
