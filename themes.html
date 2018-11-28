@@ -25,7 +25,7 @@
 <meta name="author" content="Zach Bogart, Joyce Robbins">
 
 
-<meta name="date" content="2018-11-21">
+<meta name="date" content="2018-11-28">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -49,6 +49,24 @@
 
 
 <script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.1.17/leaflet-providers.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
+<script src="libs/lfx-webgl-heatmap-0.2.7/lfx-webgl-heatmap-prod.js"></script>
+<script src="libs/lfx-webgl-heatmap-0.2.7/lfx-webgl-heatmap-bindings.js"></script>
+<link id="lfx-webgl-heatmap-skyline-attachment" rel="attachment" href="libs/lfx-webgl-heatmap-0.2.7/skyline-gradient.png"/>
+<link id="lfx-webgl-heatmap-deep-sea-attachment" rel="attachment" href="libs/lfx-webgl-heatmap-0.2.7/deep-sea-gradient.png"/>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
 <link href="libs/vis-4.20.1/vis.css" rel="stylesheet" />
 <script src="libs/vis-4.20.1/vis.min.js"></script>
 <script src="libs/visNetwork-binding-2.0.4/visNetwork.js"></script>
@@ -486,108 +504,118 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.3" data-path="maps.html"><a href="maps.html#longitude-latitude-data"><i class="fa fa-check"></i><b>20.3</b> Longitude / Latitude data</a></li>
 <li class="chapter" data-level="20.4" data-path="maps.html"><a href="maps.html#resources-2"><i class="fa fa-check"></i><b>20.4</b> Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="missing.html"><a href="missing.html"><i class="fa fa-check"></i><b>21</b> Missing Data</a><ul>
-<li class="chapter" data-level="21.1" data-path="missing.html"><a href="missing.html#overview-16"><i class="fa fa-check"></i><b>21.1</b> Overview</a></li>
-<li class="chapter" data-level="21.2" data-path="missing.html"><a href="missing.html#tldr-9"><i class="fa fa-check"></i><b>21.2</b> tl;dr</a></li>
-<li class="chapter" data-level="21.3" data-path="missing.html"><a href="missing.html#what-are-nas"><i class="fa fa-check"></i><b>21.3</b> What are NAs?</a></li>
-<li class="chapter" data-level="21.4" data-path="missing.html"><a href="missing.html#types-of-missing-data"><i class="fa fa-check"></i><b>21.4</b> Types of Missing Data</a></li>
-<li class="chapter" data-level="21.5" data-path="missing.html"><a href="missing.html#missing-patterns"><i class="fa fa-check"></i><b>21.5</b> Missing Patterns</a><ul>
-<li class="chapter" data-level="21.5.1" data-path="missing.html"><a href="missing.html#missing-patterns-by-columns"><i class="fa fa-check"></i><b>21.5.1</b> Missing Patterns by columns</a></li>
-<li class="chapter" data-level="21.5.2" data-path="missing.html"><a href="missing.html#missing-patterns-by-rows"><i class="fa fa-check"></i><b>21.5.2</b> Missing Patterns by rows</a></li>
+<li class="chapter" data-level="21" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>21</b> Interactive Geographic Data</a><ul>
+<li class="chapter" data-level="21.1" data-path="leaflet.html"><a href="leaflet.html#overview-16"><i class="fa fa-check"></i><b>21.1</b> Overview</a></li>
+<li class="chapter" data-level="21.2" data-path="leaflet.html"><a href="leaflet.html#brief-description-about-dataset"><i class="fa fa-check"></i><b>21.2</b> Brief Description about Dataset</a></li>
+<li class="chapter" data-level="21.3" data-path="leaflet.html"><a href="leaflet.html#plotting-markers"><i class="fa fa-check"></i><b>21.3</b> Plotting Markers</a></li>
+<li class="chapter" data-level="21.4" data-path="leaflet.html"><a href="leaflet.html#dynamic-heatmaps"><i class="fa fa-check"></i><b>21.4</b> Dynamic Heatmaps</a></li>
+<li class="chapter" data-level="21.5" data-path="leaflet.html"><a href="leaflet.html#dynamic-clustering"><i class="fa fa-check"></i><b>21.5</b> Dynamic Clustering</a></li>
+<li class="chapter" data-level="21.6" data-path="leaflet.html"><a href="leaflet.html#plotting-groups"><i class="fa fa-check"></i><b>21.6</b> Plotting Groups</a></li>
+<li class="chapter" data-level="21.7" data-path="leaflet.html"><a href="leaflet.html#plotting-categorical-data"><i class="fa fa-check"></i><b>21.7</b> Plotting Categorical Data</a></li>
+<li class="chapter" data-level="21.8" data-path="leaflet.html"><a href="leaflet.html#external-resources-9"><i class="fa fa-check"></i><b>21.8</b> External Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="21.6" data-path="missing.html"><a href="missing.html#handling-missing-values"><i class="fa fa-check"></i><b>21.6</b> Handling Missing values</a><ul>
-<li class="chapter" data-level="21.6.1" data-path="missing.html"><a href="missing.html#deletion-of-rows-containing-nas"><i class="fa fa-check"></i><b>21.6.1</b> Deletion of rows containing NAs</a></li>
-<li class="chapter" data-level="21.6.2" data-path="missing.html"><a href="missing.html#imputation-techniques"><i class="fa fa-check"></i><b>21.6.2</b> Imputation Techniques</a></li>
-<li class="chapter" data-level="21.6.3" data-path="missing.html"><a href="missing.html#model-imputation"><i class="fa fa-check"></i><b>21.6.3</b> Model Imputation</a></li>
+<li class="chapter" data-level="22" data-path="missing.html"><a href="missing.html"><i class="fa fa-check"></i><b>22</b> Missing Data</a><ul>
+<li class="chapter" data-level="22.1" data-path="missing.html"><a href="missing.html#overview-17"><i class="fa fa-check"></i><b>22.1</b> Overview</a></li>
+<li class="chapter" data-level="22.2" data-path="missing.html"><a href="missing.html#tldr-9"><i class="fa fa-check"></i><b>22.2</b> tl;dr</a></li>
+<li class="chapter" data-level="22.3" data-path="missing.html"><a href="missing.html#what-are-nas"><i class="fa fa-check"></i><b>22.3</b> What are NAs?</a></li>
+<li class="chapter" data-level="22.4" data-path="missing.html"><a href="missing.html#types-of-missing-data"><i class="fa fa-check"></i><b>22.4</b> Types of Missing Data</a></li>
+<li class="chapter" data-level="22.5" data-path="missing.html"><a href="missing.html#missing-patterns"><i class="fa fa-check"></i><b>22.5</b> Missing Patterns</a><ul>
+<li class="chapter" data-level="22.5.1" data-path="missing.html"><a href="missing.html#missing-patterns-by-columns"><i class="fa fa-check"></i><b>22.5.1</b> Missing Patterns by columns</a></li>
+<li class="chapter" data-level="22.5.2" data-path="missing.html"><a href="missing.html#missing-patterns-by-rows"><i class="fa fa-check"></i><b>22.5.2</b> Missing Patterns by rows</a></li>
 </ul></li>
-<li class="chapter" data-level="21.7" data-path="missing.html"><a href="missing.html#external-resources-9"><i class="fa fa-check"></i><b>21.7</b> External Resources</a></li>
+<li class="chapter" data-level="22.6" data-path="missing.html"><a href="missing.html#handling-missing-values"><i class="fa fa-check"></i><b>22.6</b> Handling Missing values</a><ul>
+<li class="chapter" data-level="22.6.1" data-path="missing.html"><a href="missing.html#deletion-of-rows-containing-nas"><i class="fa fa-check"></i><b>22.6.1</b> Deletion of rows containing NAs</a></li>
+<li class="chapter" data-level="22.6.2" data-path="missing.html"><a href="missing.html#imputation-techniques"><i class="fa fa-check"></i><b>22.6.2</b> Imputation Techniques</a></li>
+<li class="chapter" data-level="22.6.3" data-path="missing.html"><a href="missing.html#model-imputation"><i class="fa fa-check"></i><b>22.6.3</b> Model Imputation</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="outliers.html"><a href="outliers.html"><i class="fa fa-check"></i><b>22</b> Outliers</a><ul>
-<li class="chapter" data-level="22.1" data-path="outliers.html"><a href="outliers.html#overview-17"><i class="fa fa-check"></i><b>22.1</b> Overview</a></li>
-<li class="chapter" data-level="22.2" data-path="outliers.html"><a href="outliers.html#tldr-10"><i class="fa fa-check"></i><b>22.2</b> tl;dr</a></li>
-<li class="chapter" data-level="22.3" data-path="outliers.html"><a href="outliers.html#what-are-outliers"><i class="fa fa-check"></i><b>22.3</b> What are outliers?</a></li>
-<li class="chapter" data-level="22.4" data-path="outliers.html"><a href="outliers.html#types-of-outliers"><i class="fa fa-check"></i><b>22.4</b> Types of Outliers</a><ul>
-<li class="chapter" data-level="22.4.1" data-path="outliers.html"><a href="outliers.html#univariate-outliers"><i class="fa fa-check"></i><b>22.4.1</b> Univariate Outliers</a></li>
-<li class="chapter" data-level="22.4.2" data-path="outliers.html"><a href="outliers.html#multivariate-outliers"><i class="fa fa-check"></i><b>22.4.2</b> Multivariate Outliers</a></li>
-<li class="chapter" data-level="22.4.3" data-path="outliers.html"><a href="outliers.html#categorical-outliers"><i class="fa fa-check"></i><b>22.4.3</b> Categorical Outliers</a></li>
+<li class="chapter" data-level="22.7" data-path="missing.html"><a href="missing.html#external-resources-10"><i class="fa fa-check"></i><b>22.7</b> External Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="22.5" data-path="outliers.html"><a href="outliers.html#handling-outliers"><i class="fa fa-check"></i><b>22.5</b> Handling Outliers</a><ul>
-<li class="chapter" data-level="22.5.1" data-path="outliers.html"><a href="outliers.html#not-informative"><i class="fa fa-check"></i><b>22.5.1</b> Not informative</a></li>
-<li class="chapter" data-level="22.5.2" data-path="outliers.html"><a href="outliers.html#more-informative"><i class="fa fa-check"></i><b>22.5.2</b> More informative</a></li>
+<li class="chapter" data-level="23" data-path="outliers.html"><a href="outliers.html"><i class="fa fa-check"></i><b>23</b> Outliers</a><ul>
+<li class="chapter" data-level="23.1" data-path="outliers.html"><a href="outliers.html#overview-18"><i class="fa fa-check"></i><b>23.1</b> Overview</a></li>
+<li class="chapter" data-level="23.2" data-path="outliers.html"><a href="outliers.html#tldr-10"><i class="fa fa-check"></i><b>23.2</b> tl;dr</a></li>
+<li class="chapter" data-level="23.3" data-path="outliers.html"><a href="outliers.html#what-are-outliers"><i class="fa fa-check"></i><b>23.3</b> What are outliers?</a></li>
+<li class="chapter" data-level="23.4" data-path="outliers.html"><a href="outliers.html#types-of-outliers"><i class="fa fa-check"></i><b>23.4</b> Types of Outliers</a><ul>
+<li class="chapter" data-level="23.4.1" data-path="outliers.html"><a href="outliers.html#univariate-outliers"><i class="fa fa-check"></i><b>23.4.1</b> Univariate Outliers</a></li>
+<li class="chapter" data-level="23.4.2" data-path="outliers.html"><a href="outliers.html#multivariate-outliers"><i class="fa fa-check"></i><b>23.4.2</b> Multivariate Outliers</a></li>
+<li class="chapter" data-level="23.4.3" data-path="outliers.html"><a href="outliers.html#categorical-outliers"><i class="fa fa-check"></i><b>23.4.3</b> Categorical Outliers</a></li>
 </ul></li>
-<li class="chapter" data-level="22.6" data-path="outliers.html"><a href="outliers.html#external-resources-10"><i class="fa fa-check"></i><b>22.6</b> External Resources</a></li>
+<li class="chapter" data-level="23.5" data-path="outliers.html"><a href="outliers.html#handling-outliers"><i class="fa fa-check"></i><b>23.5</b> Handling Outliers</a><ul>
+<li class="chapter" data-level="23.5.1" data-path="outliers.html"><a href="outliers.html#not-informative"><i class="fa fa-check"></i><b>23.5.1</b> Not informative</a></li>
+<li class="chapter" data-level="23.5.2" data-path="outliers.html"><a href="outliers.html#more-informative"><i class="fa fa-check"></i><b>23.5.2</b> More informative</a></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>23</b> Networks</a><ul>
-<li class="chapter" data-level="23.1" data-path="network.html"><a href="network.html#visnetwork-interactive"><i class="fa fa-check"></i><b>23.1</b> visNetwork (interactive)</a><ul>
-<li class="chapter" data-level="23.1.1" data-path="network.html"><a href="network.html#minimum-working-example"><i class="fa fa-check"></i><b>23.1.1</b> Minimum working example</a></li>
-<li class="chapter" data-level="23.1.2" data-path="network.html"><a href="network.html#performance"><i class="fa fa-check"></i><b>23.1.2</b> Performance</a></li>
-<li class="chapter" data-level="23.1.3" data-path="network.html"><a href="network.html#helpful-configuration-tools"><i class="fa fa-check"></i><b>23.1.3</b> Helpful configuration tools</a></li>
-<li class="chapter" data-level="23.1.4" data-path="network.html"><a href="network.html#coloring-nodes"><i class="fa fa-check"></i><b>23.1.4</b> Coloring nodes</a></li>
-<li class="chapter" data-level="23.1.5" data-path="network.html"><a href="network.html#directed-nodes-arrows"><i class="fa fa-check"></i><b>23.1.5</b> Directed nodes (arrows)</a></li>
-<li class="chapter" data-level="23.1.6" data-path="network.html"><a href="network.html#turn-off-the-physics-simulation"><i class="fa fa-check"></i><b>23.1.6</b> Turn off the physics simulation</a></li>
-<li class="chapter" data-level="23.1.7" data-path="network.html"><a href="network.html#grey-out-nodes-far-from-selected-defined-by-degree"><i class="fa fa-check"></i><b>23.1.7</b> Grey out nodes far from selected (defined by “degree”)</a></li>
+<li class="chapter" data-level="23.6" data-path="outliers.html"><a href="outliers.html#external-resources-11"><i class="fa fa-check"></i><b>23.6</b> External Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>24</b> Interactive Networks</a><ul>
+<li class="chapter" data-level="24.1" data-path="network.html"><a href="network.html#visnetwork-interactive"><i class="fa fa-check"></i><b>24.1</b> visNetwork (interactive)</a><ul>
+<li class="chapter" data-level="24.1.1" data-path="network.html"><a href="network.html#minimum-working-example"><i class="fa fa-check"></i><b>24.1.1</b> Minimum working example</a></li>
+<li class="chapter" data-level="24.1.2" data-path="network.html"><a href="network.html#performance"><i class="fa fa-check"></i><b>24.1.2</b> Performance</a></li>
+<li class="chapter" data-level="24.1.3" data-path="network.html"><a href="network.html#helpful-configuration-tools"><i class="fa fa-check"></i><b>24.1.3</b> Helpful configuration tools</a></li>
+<li class="chapter" data-level="24.1.4" data-path="network.html"><a href="network.html#coloring-nodes"><i class="fa fa-check"></i><b>24.1.4</b> Coloring nodes</a></li>
+<li class="chapter" data-level="24.1.5" data-path="network.html"><a href="network.html#directed-nodes-arrows"><i class="fa fa-check"></i><b>24.1.5</b> Directed nodes (arrows)</a></li>
+<li class="chapter" data-level="24.1.6" data-path="network.html"><a href="network.html#turn-off-the-physics-simulation"><i class="fa fa-check"></i><b>24.1.6</b> Turn off the physics simulation</a></li>
+<li class="chapter" data-level="24.1.7" data-path="network.html"><a href="network.html#grey-out-nodes-far-from-selected-defined-by-degree"><i class="fa fa-check"></i><b>24.1.7</b> Grey out nodes far from selected (defined by “degree”)</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="24" data-path="themes.html"><a href="themes.html"><i class="fa fa-check"></i><b>24</b> Themes and Palettes</a><ul>
-<li class="chapter" data-level="24.1" data-path="themes.html"><a href="themes.html#overview-18"><i class="fa fa-check"></i><b>24.1</b> Overview</a></li>
-<li class="chapter" data-level="24.2" data-path="themes.html"><a href="themes.html#ggplot2-themes"><i class="fa fa-check"></i><b>24.2</b> ggplot2 themes</a><ul>
-<li class="chapter" data-level="24.2.1" data-path="themes.html"><a href="themes.html#ggplot2-theme-example"><i class="fa fa-check"></i><b>24.2.1</b> ggplot2 theme example</a></li>
+<li class="chapter" data-level="25" data-path="themes.html"><a href="themes.html"><i class="fa fa-check"></i><b>25</b> Themes and Palettes</a><ul>
+<li class="chapter" data-level="25.1" data-path="themes.html"><a href="themes.html#overview-19"><i class="fa fa-check"></i><b>25.1</b> Overview</a></li>
+<li class="chapter" data-level="25.2" data-path="themes.html"><a href="themes.html#ggplot2-themes"><i class="fa fa-check"></i><b>25.2</b> ggplot2 themes</a><ul>
+<li class="chapter" data-level="25.2.1" data-path="themes.html"><a href="themes.html#ggplot2-theme-example"><i class="fa fa-check"></i><b>25.2.1</b> ggplot2 theme example</a></li>
 </ul></li>
-<li class="chapter" data-level="24.3" data-path="themes.html"><a href="themes.html#rcolorbrewer"><i class="fa fa-check"></i><b>24.3</b> RColorBrewer</a></li>
-<li class="chapter" data-level="24.4" data-path="themes.html"><a href="themes.html#ggthemes"><i class="fa fa-check"></i><b>24.4</b> ggthemes</a><ul>
-<li class="chapter" data-level="24.4.1" data-path="themes.html"><a href="themes.html#ggthemes-examples"><i class="fa fa-check"></i><b>24.4.1</b> ggthemes examples</a></li>
+<li class="chapter" data-level="25.3" data-path="themes.html"><a href="themes.html#rcolorbrewer"><i class="fa fa-check"></i><b>25.3</b> RColorBrewer</a></li>
+<li class="chapter" data-level="25.4" data-path="themes.html"><a href="themes.html#ggthemes"><i class="fa fa-check"></i><b>25.4</b> ggthemes</a><ul>
+<li class="chapter" data-level="25.4.1" data-path="themes.html"><a href="themes.html#ggthemes-examples"><i class="fa fa-check"></i><b>25.4.1</b> ggthemes examples</a></li>
 </ul></li>
-<li class="chapter" data-level="24.5" data-path="themes.html"><a href="themes.html#ggthemr"><i class="fa fa-check"></i><b>24.5</b> ggthemr</a><ul>
-<li class="chapter" data-level="24.5.1" data-path="themes.html"><a href="themes.html#ggthemr-examples"><i class="fa fa-check"></i><b>24.5.1</b> ggthemr examples</a></li>
+<li class="chapter" data-level="25.5" data-path="themes.html"><a href="themes.html#ggthemr"><i class="fa fa-check"></i><b>25.5</b> ggthemr</a><ul>
+<li class="chapter" data-level="25.5.1" data-path="themes.html"><a href="themes.html#ggthemr-examples"><i class="fa fa-check"></i><b>25.5.1</b> ggthemr examples</a></li>
 </ul></li>
-<li class="chapter" data-level="24.6" data-path="themes.html"><a href="themes.html#ggsci"><i class="fa fa-check"></i><b>24.6</b> ggsci</a><ul>
-<li class="chapter" data-level="24.6.1" data-path="themes.html"><a href="themes.html#ggsci-for-discrete-data"><i class="fa fa-check"></i><b>24.6.1</b> ggsci for discrete data</a></li>
-<li class="chapter" data-level="24.6.2" data-path="themes.html"><a href="themes.html#ggsci-for-continuous-data"><i class="fa fa-check"></i><b>24.6.2</b> ggsci for continuous data</a></li>
+<li class="chapter" data-level="25.6" data-path="themes.html"><a href="themes.html#ggsci"><i class="fa fa-check"></i><b>25.6</b> ggsci</a><ul>
+<li class="chapter" data-level="25.6.1" data-path="themes.html"><a href="themes.html#ggsci-for-discrete-data"><i class="fa fa-check"></i><b>25.6.1</b> ggsci for discrete data</a></li>
+<li class="chapter" data-level="25.6.2" data-path="themes.html"><a href="themes.html#ggsci-for-continuous-data"><i class="fa fa-check"></i><b>25.6.2</b> ggsci for continuous data</a></li>
 </ul></li>
-<li class="chapter" data-level="24.7" data-path="themes.html"><a href="themes.html#external-resources-11"><i class="fa fa-check"></i><b>24.7</b> External Resources</a></li>
+<li class="chapter" data-level="25.7" data-path="themes.html"><a href="themes.html#external-resources-12"><i class="fa fa-check"></i><b>25.7</b> External Resources</a></li>
 </ul></li>
 <li class="part"><span><b>IV References (Yellow)</b></span></li>
-<li class="chapter" data-level="25" data-path="general.html"><a href="general.html"><i class="fa fa-check"></i><b>25</b> General Resources</a><ul>
-<li class="chapter" data-level="25.1" data-path="general.html"><a href="general.html#books"><i class="fa fa-check"></i><b>25.1</b> Books</a></li>
-<li class="chapter" data-level="25.2" data-path="general.html"><a href="general.html#cheatsheets"><i class="fa fa-check"></i><b>25.2</b> Cheatsheets</a></li>
-<li class="chapter" data-level="25.3" data-path="general.html"><a href="general.html#articles"><i class="fa fa-check"></i><b>25.3</b> Articles</a></li>
-<li class="chapter" data-level="25.4" data-path="general.html"><a href="general.html#meetups"><i class="fa fa-check"></i><b>25.4</b> Meetups</a></li>
-<li class="chapter" data-level="25.5" data-path="general.html"><a href="general.html#twitter"><i class="fa fa-check"></i><b>25.5</b> Twitter</a></li>
+<li class="chapter" data-level="26" data-path="general.html"><a href="general.html"><i class="fa fa-check"></i><b>26</b> General Resources</a><ul>
+<li class="chapter" data-level="26.1" data-path="general.html"><a href="general.html#books"><i class="fa fa-check"></i><b>26.1</b> Books</a></li>
+<li class="chapter" data-level="26.2" data-path="general.html"><a href="general.html#cheatsheets"><i class="fa fa-check"></i><b>26.2</b> Cheatsheets</a></li>
+<li class="chapter" data-level="26.3" data-path="general.html"><a href="general.html#articles"><i class="fa fa-check"></i><b>26.3</b> Articles</a></li>
+<li class="chapter" data-level="26.4" data-path="general.html"><a href="general.html#meetups"><i class="fa fa-check"></i><b>26.4</b> Meetups</a></li>
+<li class="chapter" data-level="26.5" data-path="general.html"><a href="general.html#twitter"><i class="fa fa-check"></i><b>26.5</b> Twitter</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="percept.html"><a href="percept.html"><i class="fa fa-check"></i><b>26</b> Perception/Color Resources</a><ul>
-<li class="chapter" data-level="26.1" data-path="percept.html"><a href="percept.html#overview-19"><i class="fa fa-check"></i><b>26.1</b> Overview</a></li>
-<li class="chapter" data-level="26.2" data-path="percept.html"><a href="percept.html#perception"><i class="fa fa-check"></i><b>26.2</b> Perception</a></li>
-<li class="chapter" data-level="26.3" data-path="percept.html"><a href="percept.html#color-1"><i class="fa fa-check"></i><b>26.3</b> Color</a></li>
-<li class="chapter" data-level="26.4" data-path="percept.html"><a href="percept.html#quick-tips-on-using-color-with-ggplot2"><i class="fa fa-check"></i><b>26.4</b> Quick tips on using color with <code>ggplot2</code></a><ul>
-<li class="chapter" data-level="26.4.1" data-path="percept.html"><a href="percept.html#continuous-data"><i class="fa fa-check"></i><b>26.4.1</b> Continuous data</a></li>
-<li class="chapter" data-level="26.4.2" data-path="percept.html"><a href="percept.html#discrete-data"><i class="fa fa-check"></i><b>26.4.2</b> Discrete data</a></li>
+<li class="chapter" data-level="27" data-path="percept.html"><a href="percept.html"><i class="fa fa-check"></i><b>27</b> Perception/Color Resources</a><ul>
+<li class="chapter" data-level="27.1" data-path="percept.html"><a href="percept.html#overview-20"><i class="fa fa-check"></i><b>27.1</b> Overview</a></li>
+<li class="chapter" data-level="27.2" data-path="percept.html"><a href="percept.html#perception"><i class="fa fa-check"></i><b>27.2</b> Perception</a></li>
+<li class="chapter" data-level="27.3" data-path="percept.html"><a href="percept.html#color-1"><i class="fa fa-check"></i><b>27.3</b> Color</a></li>
+<li class="chapter" data-level="27.4" data-path="percept.html"><a href="percept.html#quick-tips-on-using-color-with-ggplot2"><i class="fa fa-check"></i><b>27.4</b> Quick tips on using color with <code>ggplot2</code></a><ul>
+<li class="chapter" data-level="27.4.1" data-path="percept.html"><a href="percept.html#continuous-data"><i class="fa fa-check"></i><b>27.4.1</b> Continuous data</a></li>
+<li class="chapter" data-level="27.4.2" data-path="percept.html"><a href="percept.html#discrete-data"><i class="fa fa-check"></i><b>27.4.2</b> Discrete data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="publish.html"><a href="publish.html"><i class="fa fa-check"></i><b>27</b> Publishing Resources</a><ul>
-<li class="chapter" data-level="27.1" data-path="publish.html"><a href="publish.html#overview-20"><i class="fa fa-check"></i><b>27.1</b> Overview</a></li>
-<li class="chapter" data-level="27.2" data-path="publish.html"><a href="publish.html#tldr-11"><i class="fa fa-check"></i><b>27.2</b> tl;dr</a></li>
-<li class="chapter" data-level="27.3" data-path="publish.html"><a href="publish.html#bookdown"><i class="fa fa-check"></i><b>27.3</b> Bookdown</a></li>
-<li class="chapter" data-level="27.4" data-path="publish.html"><a href="publish.html#essentials"><i class="fa fa-check"></i><b>27.4</b> Essentials</a></li>
-<li class="chapter" data-level="27.5" data-path="publish.html"><a href="publish.html#adding-a-custom-domain-name"><i class="fa fa-check"></i><b>27.5</b> Adding a custom domain name</a></li>
-<li class="chapter" data-level="27.6" data-path="publish.html"><a href="publish.html#make-a-custom-404-page"><i class="fa fa-check"></i><b>27.6</b> Make a custom 404 page</a></li>
-<li class="chapter" data-level="27.7" data-path="publish.html"><a href="publish.html#hooking-up-travis"><i class="fa fa-check"></i><b>27.7</b> Hooking up Travis</a><ul>
-<li class="chapter" data-level="27.7.1" data-path="publish.html"><a href="publish.html#add-travis-files-to-github-repo"><i class="fa fa-check"></i><b>27.7.1</b> Add Travis files to GitHub repo</a></li>
-<li class="chapter" data-level="27.7.2" data-path="publish.html"><a href="publish.html#add-travis-service"><i class="fa fa-check"></i><b>27.7.2</b> Add Travis service</a></li>
+<li class="chapter" data-level="28" data-path="publish.html"><a href="publish.html"><i class="fa fa-check"></i><b>28</b> Publishing Resources</a><ul>
+<li class="chapter" data-level="28.1" data-path="publish.html"><a href="publish.html#overview-21"><i class="fa fa-check"></i><b>28.1</b> Overview</a></li>
+<li class="chapter" data-level="28.2" data-path="publish.html"><a href="publish.html#tldr-11"><i class="fa fa-check"></i><b>28.2</b> tl;dr</a></li>
+<li class="chapter" data-level="28.3" data-path="publish.html"><a href="publish.html#bookdown"><i class="fa fa-check"></i><b>28.3</b> Bookdown</a></li>
+<li class="chapter" data-level="28.4" data-path="publish.html"><a href="publish.html#essentials"><i class="fa fa-check"></i><b>28.4</b> Essentials</a></li>
+<li class="chapter" data-level="28.5" data-path="publish.html"><a href="publish.html#adding-a-custom-domain-name"><i class="fa fa-check"></i><b>28.5</b> Adding a custom domain name</a></li>
+<li class="chapter" data-level="28.6" data-path="publish.html"><a href="publish.html#make-a-custom-404-page"><i class="fa fa-check"></i><b>28.6</b> Make a custom 404 page</a></li>
+<li class="chapter" data-level="28.7" data-path="publish.html"><a href="publish.html#hooking-up-travis"><i class="fa fa-check"></i><b>28.7</b> Hooking up Travis</a><ul>
+<li class="chapter" data-level="28.7.1" data-path="publish.html"><a href="publish.html#add-travis-files-to-github-repo"><i class="fa fa-check"></i><b>28.7.1</b> Add Travis files to GitHub repo</a></li>
+<li class="chapter" data-level="28.7.2" data-path="publish.html"><a href="publish.html#add-travis-service"><i class="fa fa-check"></i><b>28.7.2</b> Add Travis service</a></li>
 </ul></li>
-<li class="chapter" data-level="27.8" data-path="publish.html"><a href="publish.html#other-resources"><i class="fa fa-check"></i><b>27.8</b> Other resources</a></li>
+<li class="chapter" data-level="28.8" data-path="publish.html"><a href="publish.html#other-resources"><i class="fa fa-check"></i><b>28.8</b> Other resources</a></li>
 </ul></li>
-<li class="chapter" data-level="28" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>28</b> GitHub Resources</a><ul>
-<li class="chapter" data-level="28.1" data-path="github.html"><a href="github.html#overview-21"><i class="fa fa-check"></i><b>28.1</b> Overview</a></li>
-<li class="chapter" data-level="28.2" data-path="github.html"><a href="github.html#tldr-12"><i class="fa fa-check"></i><b>28.2</b> tl;dr</a></li>
-<li class="chapter" data-level="28.3" data-path="github.html"><a href="github.html#on-github"><i class="fa fa-check"></i><b>28.3</b> On GitHub</a></li>
-<li class="chapter" data-level="28.4" data-path="github.html"><a href="github.html#getting-started-1"><i class="fa fa-check"></i><b>28.4</b> Getting started</a></li>
-<li class="chapter" data-level="28.5" data-path="github.html"><a href="github.html#getting-help-1"><i class="fa fa-check"></i><b>28.5</b> Getting help</a></li>
-<li class="chapter" data-level="28.6" data-path="github.html"><a href="github.html#branching-out"><i class="fa fa-check"></i><b>28.6</b> Branching out</a></li>
-<li class="chapter" data-level="28.7" data-path="github.html"><a href="github.html#going-deeper-1"><i class="fa fa-check"></i><b>28.7</b> Going deeper</a></li>
+<li class="chapter" data-level="29" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>29</b> GitHub Resources</a><ul>
+<li class="chapter" data-level="29.1" data-path="github.html"><a href="github.html#overview-22"><i class="fa fa-check"></i><b>29.1</b> Overview</a></li>
+<li class="chapter" data-level="29.2" data-path="github.html"><a href="github.html#tldr-12"><i class="fa fa-check"></i><b>29.2</b> tl;dr</a></li>
+<li class="chapter" data-level="29.3" data-path="github.html"><a href="github.html#on-github"><i class="fa fa-check"></i><b>29.3</b> On GitHub</a></li>
+<li class="chapter" data-level="29.4" data-path="github.html"><a href="github.html#getting-started-1"><i class="fa fa-check"></i><b>29.4</b> Getting started</a></li>
+<li class="chapter" data-level="29.5" data-path="github.html"><a href="github.html#getting-help-1"><i class="fa fa-check"></i><b>29.5</b> Getting help</a></li>
+<li class="chapter" data-level="29.6" data-path="github.html"><a href="github.html#branching-out"><i class="fa fa-check"></i><b>29.6</b> Branching out</a></li>
+<li class="chapter" data-level="29.7" data-path="github.html"><a href="github.html#going-deeper-1"><i class="fa fa-check"></i><b>29.7</b> Going deeper</a></li>
 </ul></li>
-<li class="chapter" data-level="29" data-path="chapter-index.html"><a href="chapter-index.html"><i class="fa fa-check"></i><b>29</b> Chapter Index</a><ul>
-<li class="chapter" data-level="29.1" data-path="chapter-index.html"><a href="chapter-index.html#overview-22"><i class="fa fa-check"></i><b>29.1</b> Overview</a></li>
-<li class="chapter" data-level="29.2" data-path="chapter-index.html"><a href="chapter-index.html#index"><i class="fa fa-check"></i><b>29.2</b> Index</a></li>
+<li class="chapter" data-level="30" data-path="chapter-index.html"><a href="chapter-index.html"><i class="fa fa-check"></i><b>30</b> Chapter Index</a><ul>
+<li class="chapter" data-level="30.1" data-path="chapter-index.html"><a href="chapter-index.html#overview-23"><i class="fa fa-check"></i><b>30.1</b> Overview</a></li>
+<li class="chapter" data-level="30.2" data-path="chapter-index.html"><a href="chapter-index.html#index"><i class="fa fa-check"></i><b>30.2</b> Index</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -639,17 +667,17 @@ function unhover(element) {
 <a href="index.html"><img src="images/icons/edav_resource_url_no_smile.png" onmouseover="hover(this);" onmouseout="unhover(this);" /></a>
 </center>
 <div id="themes" class="section level1">
-<h1><span class="header-section-number">24</span> Themes and Palettes</h1>
+<h1><span class="header-section-number">25</span> Themes and Palettes</h1>
 <p><img src="images/banners/banner_themes.png" />
 <em>This chapter originated as a community contribution created by <a href="https://github.com/Akanksha1Raj" target="_blank">ar3879</a></em></p>
 <p><em>This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider <a href="contribute.html">contributing to our repo</a>.</em></p>
-<div id="overview-18" class="section level2">
-<h2><span class="header-section-number">24.1</span> Overview</h2>
+<div id="overview-19" class="section level2">
+<h2><span class="header-section-number">25.1</span> Overview</h2>
 <p>Our graphs have to be informative and attractive to the audience to get their attention. Themes and colors play an important role in making the graphs attractive.</p>
 <p>This section covers how we can set different palettes and themes to suit the context and to make them look cool.</p>
 </div>
 <div id="ggplot2-themes" class="section level2">
-<h2><span class="header-section-number">24.2</span> ggplot2 themes</h2>
+<h2><span class="header-section-number">25.2</span> ggplot2 themes</h2>
 <p>In <code>ggplot2</code>, we do have a set of themes, which we can set. A brief description of them is as follows:</p>
 <ul>
 <li><code>theme_gray()</code>: signature <code>ggplot2</code> theme</li>
@@ -662,7 +690,7 @@ function unhover(element) {
 <li><code>theme_void()</code>: empty theme with no elements</li>
 </ul>
 <div id="ggplot2-theme-example" class="section level3">
-<h3><span class="header-section-number">24.2.1</span> ggplot2 theme example</h3>
+<h3><span class="header-section-number">25.2.1</span> ggplot2 theme example</h3>
 <pre class="sourceCode r"><code class="sourceCode r">q &lt;-<span class="st"> </span><span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">2.5</span>,<span class="dt">alpha =</span> <span class="fl">0.75</span>) 
 
@@ -678,7 +706,7 @@ q <span class="op">+</span><span class="st"> </span><span class="kw">theme_minim
 </div>
 </div>
 <div id="rcolorbrewer" class="section level2">
-<h2><span class="header-section-number">24.3</span> RColorBrewer</h2>
+<h2><span class="header-section-number">25.3</span> RColorBrewer</h2>
 <p>Often, we find ourselves looking for the colors which make our graph look clear and cool.</p>
 <p>RColorBrewer offers a number of palettes, which we can use based on the context of our graph. There are <strong>three</strong> categories of these palettes: <em>Sequential</em>, <em>Diverging</em>, and <em>Qualitative</em></p>
 <pre class="sourceCode r"><code class="sourceCode r">q &lt;-<span class="st"> </span><span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
@@ -700,12 +728,12 @@ q <span class="op">+</span><span class="st"> </span><span class="kw">theme_minim
 <p><img src="themes_and_colors_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="ggthemes" class="section level2">
-<h2><span class="header-section-number">24.4</span> ggthemes</h2>
+<h2><span class="header-section-number">25.4</span> ggthemes</h2>
 <p><strong>ggthemes</strong> provides additional geoms, scales, and themes to <code>ggplot2</code>. Some of them are really cool! We can change the theme and color of a graph based on the context.</p>
 <pre class="sourceCode r"><code class="sourceCode r">g1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">2.5</span>,<span class="dt">alpha =</span> <span class="fl">0.75</span>) </code></pre>
 <div id="ggthemes-examples" class="section level3">
-<h3><span class="header-section-number">24.4.1</span> ggthemes examples</h3>
+<h3><span class="header-section-number">25.4.1</span> ggthemes examples</h3>
 <pre class="sourceCode r"><code class="sourceCode r">g1 <span class="op">+</span><span class="st"> </span><span class="kw">theme_economist</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_economist</span>()</code></pre>
 <p><img src="themes_and_colors_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre class="sourceCode r"><code class="sourceCode r">g1 <span class="op">+</span><span class="st"> </span><span class="kw">theme_igray</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_colour_tableau</span>()</code></pre>
@@ -720,10 +748,10 @@ q <span class="op">+</span><span class="st"> </span><span class="kw">theme_minim
 </div>
 </div>
 <div id="ggthemr" class="section level2">
-<h2><span class="header-section-number">24.5</span> ggthemr</h2>
+<h2><span class="header-section-number">25.5</span> ggthemr</h2>
 <p><strong>ggthemr</strong> is used to set the theme of ggplot graphs. It has 17 different themes to change the way ggplot graphs look. Use of ggthemr is different from other other packages. We set the theme <em>before</em> using it.</p>
 <div id="ggthemr-examples" class="section level3">
-<h3><span class="header-section-number">24.5.1</span> ggthemr examples</h3>
+<h3><span class="header-section-number">25.5.1</span> ggthemr examples</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggthemr</span>(<span class="st">&quot;sky&quot;</span>)</code></pre>
 <pre><code>## Warning: New theme missing the following elements: panel.grid, plot.tag,
 ## plot.tag.position</code></pre>
@@ -746,10 +774,10 @@ q <span class="op">+</span><span class="st"> </span><span class="kw">theme_minim
 </div>
 </div>
 <div id="ggsci" class="section level2">
-<h2><span class="header-section-number">24.6</span> ggsci</h2>
+<h2><span class="header-section-number">25.6</span> ggsci</h2>
 <p><strong>ggsci</strong> offers a number of palettes inspired by colors used in scientific journals, science fiction movies, and TV shows. For continous data, <code>scale_fill_material(colname)</code> is used, and for discrete data, <code>scale_color_palname()</code> or <code>scale_fill_palname()</code> are used.</p>
 <div id="ggsci-for-discrete-data" class="section level3">
-<h3><span class="header-section-number">24.6.1</span> ggsci for discrete data</h3>
+<h3><span class="header-section-number">25.6.1</span> ggsci for discrete data</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we need to remove the theme set previously if we don&#39;t want to use it anymore</span>
 <span class="kw">ggthemr_reset</span>()
 
@@ -764,7 +792,7 @@ g1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_colo
 <p><img src="themes_and_colors_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
 <div id="ggsci-for-continuous-data" class="section level3">
-<h3><span class="header-section-number">24.6.2</span> ggsci for continuous data</h3>
+<h3><span class="header-section-number">25.6.2</span> ggsci for continuous data</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(carat, price)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">bins =</span> <span class="dv">20</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_fill_material</span>(<span class="st">&quot;orange&quot;</span>)</code></pre>
@@ -775,8 +803,8 @@ g1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_colo
 <p><img src="themes_and_colors_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 </div>
 </div>
-<div id="external-resources-11" class="section level2">
-<h2><span class="header-section-number">24.7</span> External Resources</h2>
+<div id="external-resources-12" class="section level2">
+<h2><span class="header-section-number">25.7</span> External Resources</h2>
 <ul>
 <li><a href="https://data.library.virginia.edu/setting-up-color-palettes-in-r/" target="_blank">RColorBrewer</a>: Setting up Color Palettes in R</li>
 <li><a href="https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/" target="_blank">ggthemes</a>: Github page containing more examples</li>
