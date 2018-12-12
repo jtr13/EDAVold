@@ -1,7 +1,7 @@
 --- 
 title: "edav.info/"
 author: "Zach Bogart, Joyce Robbins"
-date: "2018-12-05"
+date: "2018-12-12"
 site: bookdown::bookdown_site
 documentclass: book
 #bibliography: [book.bib]
@@ -31,7 +31,7 @@ There are also **several walkthroughs** where we work with data and discuss prob
 
 We hope this resource serves you well!
 
-This resource is specifically tailored to the GR5702 Exploratory Data Analysis and Visualization course offered at [Columbia University](https://www.columbia.edu/){target="_blank"}. However, anyone interested in working with data in R will benefit from perusing these pages.
+This resource is specifically tailored to the GR5702 Exploratory Data Analysis and Visualization course offered at [Columbia University](https://www.columbia.edu/){target="_blank"}. However, anyone interested in working with data in R will benefit from perusing these pages. Happy coding!
 
 ## Contact
 
