@@ -1,7 +1,7 @@
 --- 
 title: "edav.info/"
 author: "Zach Bogart, Joyce Robbins"
-date: "2018-12-12"
+date: "2018-12-15"
 site: bookdown::bookdown_site
 documentclass: book
 #bibliography: [book.bib]
@@ -55,4 +55,10 @@ Joyce Robbins:
 ## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+
+<!-- Colophon -->
+## Colophon
+
+The EDAV Logo, the url/404 banners, and associated chapter icon designs are designed by Zach Bogart and published with permission. Selected chapter icons can be accessed/purchased at [The Noun Project](https://thenounproject.com/zachbogart/){target="_blank"}. Please attribute the creator if using them for external purposes (see [their icon attribution guidelines](https://thenounproject.zendesk.com/hc/en-us/articles/200509928-How-do-I-give-creators-credit-in-my-work-){target="_blank"} for more information). 
+
 
