@@ -9,7 +9,7 @@
   <meta name="description" content="This resource is a collaborative collection of resources designed to help students succeed in GR5702 Exploratory Data Analysis and Visualization, a course offered at Columbia University. While the course lectures and textbook focus on theoretical issues, this resource, in contrast, provides coding tips and examples to assist students as they create their own analyses and visualizations. It is our hope that students will contribute to edav.info and it will grow with the course.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="6 Walkthrough: Tidy Data &amp; dplyr | edav.info/ />
+  <meta property="og:title" content="6 Walkthrough: Tidy Data &amp; dplyr | edav.info/" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://edav.info/" />
   <meta property="og:image" content="https://edav.info/images/edav_link_logo.png" />
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="jtr13/EDAV" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 Walkthrough: Tidy Data &amp; dplyr | edav.info/ />
+  <meta name="twitter:title" content="6 Walkthrough: Tidy Data &amp; dplyr | edav.info/" />
   
   <meta name="twitter:description" content="This resource is a collaborative collection of resources designed to help students succeed in GR5702 Exploratory Data Analysis and Visualization, a course offered at Columbia University. While the course lectures and textbook focus on theoretical issues, this resource, in contrast, provides coding tips and examples to assist students as they create their own analyses and visualizations. It is our hope that students will contribute to edav.info and it will grow with the course." />
   <meta name="twitter:image" content="https://edav.info/images/edav_link_logo.png" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Zach Bogart, Joyce Robbins">
 
 
-<meta name="date" content="2018-12-17">
+<meta name="date" content="2019-01-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -718,17 +718,17 @@ function unhover(element) {
 <span class="kw">glimpse</span>(biopsy)</code></pre>
 <pre><code>## Observations: 699
 ## Variables: 11
-## $ ID    &lt;chr&gt; &quot;1000025&quot;, &quot;1002945&quot;, &quot;1015425&quot;, &quot;1016277&quot;, &quot;1017023&quot;, &quot;...
-## $ V1    &lt;int&gt; 5, 5, 3, 6, 4, 8, 1, 2, 2, 4, 1, 2, 5, 1, 8, 7, 4, 4, 10...
-## $ V2    &lt;int&gt; 1, 4, 1, 8, 1, 10, 1, 1, 1, 2, 1, 1, 3, 1, 7, 4, 1, 1, 7...
-## $ V3    &lt;int&gt; 1, 4, 1, 8, 1, 10, 1, 2, 1, 1, 1, 1, 3, 1, 5, 6, 1, 1, 7...
-## $ V4    &lt;int&gt; 1, 5, 1, 1, 3, 8, 1, 1, 1, 1, 1, 1, 3, 1, 10, 4, 1, 1, 6...
-## $ V5    &lt;int&gt; 2, 7, 2, 3, 2, 7, 2, 2, 2, 2, 1, 2, 2, 2, 7, 6, 2, 2, 4,...
-## $ V6    &lt;int&gt; 1, 10, 2, 4, 1, 10, 10, 1, 1, 1, 1, 1, 3, 3, 9, 1, 1, 1,...
-## $ V7    &lt;int&gt; 3, 3, 3, 3, 3, 9, 3, 3, 1, 2, 3, 2, 4, 3, 5, 4, 2, 3, 4,...
-## $ V8    &lt;int&gt; 1, 2, 1, 7, 1, 7, 1, 1, 1, 1, 1, 1, 4, 1, 5, 3, 1, 1, 1,...
-## $ V9    &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 4, 1, 1, 1, 2,...
-## $ class &lt;fct&gt; benign, benign, benign, benign, benign, malignant, benig...</code></pre>
+## $ ID    &lt;chr&gt; &quot;1000025&quot;, &quot;1002945&quot;, &quot;1015425&quot;, &quot;1016277&quot;, &quot;1017023&quot;, &quot;10…
+## $ V1    &lt;int&gt; 5, 5, 3, 6, 4, 8, 1, 2, 2, 4, 1, 2, 5, 1, 8, 7, 4, 4, 10, …
+## $ V2    &lt;int&gt; 1, 4, 1, 8, 1, 10, 1, 1, 1, 2, 1, 1, 3, 1, 7, 4, 1, 1, 7, …
+## $ V3    &lt;int&gt; 1, 4, 1, 8, 1, 10, 1, 2, 1, 1, 1, 1, 3, 1, 5, 6, 1, 1, 7, …
+## $ V4    &lt;int&gt; 1, 5, 1, 1, 3, 8, 1, 1, 1, 1, 1, 1, 3, 1, 10, 4, 1, 1, 6, …
+## $ V5    &lt;int&gt; 2, 7, 2, 3, 2, 7, 2, 2, 2, 2, 1, 2, 2, 2, 7, 6, 2, 2, 4, 2…
+## $ V6    &lt;int&gt; 1, 10, 2, 4, 1, 10, 10, 1, 1, 1, 1, 1, 3, 3, 9, 1, 1, 1, 1…
+## $ V7    &lt;int&gt; 3, 3, 3, 3, 3, 9, 3, 3, 1, 2, 3, 2, 4, 3, 5, 4, 2, 3, 4, 3…
+## $ V8    &lt;int&gt; 1, 2, 1, 7, 1, 7, 1, 1, 1, 1, 1, 1, 4, 1, 5, 3, 1, 1, 1, 1…
+## $ V9    &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 4, 1, 1, 1, 2, 1…
+## $ class &lt;fct&gt; benign, benign, benign, benign, benign, malignant, benign,…</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(biopsy)</code></pre>
 <pre><code>##        ID V1 V2 V3 V4 V5 V6 V7 V8 V9     class
 ## 1 1000025  5  1  1  1  2  1  3  1  1    benign
@@ -773,7 +773,7 @@ biopsy &lt;-<span class="st"> </span><span class="kw">tbl_df</span>(biopsy)
 biopsy</code></pre>
 <pre><code>## # A tibble: 699 x 11
 ##    ID         V1    V2    V3    V4    V5    V6    V7    V8    V9 class    
-##  * &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;    
+##    &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;    
 ##  1 1000025     5     1     1     1     2     1     3     1     1 benign   
 ##  2 1002945     5     4     4     5     7    10     3     2     1 benign   
 ##  3 1015425     3     1     1     1     2     2     3     1     1 benign   
@@ -784,7 +784,7 @@ biopsy</code></pre>
 ##  8 1018561     2     1     2     1     2     1     3     1     1 benign   
 ##  9 1033078     2     1     1     1     2     1     1     1     5 benign   
 ## 10 1033078     4     2     1     1     2     1     2     1     1 benign   
-## # ... with 689 more rows</code></pre>
+## # … with 689 more rows</code></pre>
 </div>
 <div id="test-for-missing-values" class="section level2">
 <h2><span class="header-section-number">6.6</span> Test for missing values</h2>
@@ -829,7 +829,7 @@ biopsy<span class="op">$</span>V6[<span class="kw">is.na</span>(biopsy<span clas
        <span class="dt">chromatin =</span> V7, <span class="dt">norm_nucleoli =</span> V8, <span class="dt">mitoses =</span> V9)</code></pre>
 <pre><code>## # A tibble: 699 x 11
 ##    ID    thickness cell_size cell_shape marg_adhesion epithelial_cell…
-##  * &lt;chr&gt;     &lt;int&gt;     &lt;int&gt;      &lt;int&gt;         &lt;int&gt;            &lt;int&gt;
+##    &lt;chr&gt;     &lt;int&gt;     &lt;int&gt;      &lt;int&gt;         &lt;int&gt;            &lt;int&gt;
 ##  1 1000…         5         1          1             1                2
 ##  2 1002…         5         4          4             5                7
 ##  3 1015…         3         1          1             1                2
@@ -840,7 +840,7 @@ biopsy<span class="op">$</span>V6[<span class="kw">is.na</span>(biopsy<span clas
 ##  8 1018…         2         1          2             1                2
 ##  9 1033…         2         1          1             1                2
 ## 10 1033…         4         2          1             1                2
-## # ... with 689 more rows, and 5 more variables: bare_nuclei &lt;dbl&gt;,
+## # … with 689 more rows, and 5 more variables: bare_nuclei &lt;dbl&gt;,
 ## #   chromatin &lt;int&gt;, norm_nucleoli &lt;int&gt;, mitoses &lt;int&gt;, class &lt;fct&gt;</code></pre>
 <p>The tibble shown above is not saved and cannot be used further. To use it afterwards we save it as a new tibble:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#saving the rename function output</span>
@@ -859,7 +859,7 @@ biopsy_new&lt;-<span class="kw">rename</span>(biopsy,
 ## 3 1015…         3         1          1             1                2
 ## 4 1016…         6         8          8             1                3
 ## 5 1017…         4         1          1             3                2
-## # ... with 5 more variables: bare_nuclei &lt;dbl&gt;, chromatin &lt;int&gt;,
+## # … with 5 more variables: bare_nuclei &lt;dbl&gt;, chromatin &lt;int&gt;,
 ## #   norm_nucleoli &lt;int&gt;, mitoses &lt;int&gt;, class &lt;fct&gt;</code></pre>
 <p>The <code>biopsy_new</code> data frame can now be used for further manipulation.</p>
 </div>
@@ -879,7 +879,7 @@ biopsy_new&lt;-<span class="kw">select</span>(biopsy_new,<span class="op">-</spa
 ## 3 1015…         3         1          1             1                2
 ## 4 1016…         6         8          8             1                3
 ## 5 1017…         4         1          1             3                2
-## # ... with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
+## # … with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
 ## #   class &lt;fct&gt;</code></pre>
 </div>
 <div id="mutate" class="section level2">
@@ -899,7 +899,7 @@ biopsy_new&lt;-<span class="kw">mutate</span>(biopsy_new,<span class="dt">bare_n
 ## 3 1015…         3         1          1             1                2
 ## 4 1016…         6         8          8             1                3
 ## 5 1017…         4         1          1             3                2
-## # ... with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
+## # … with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
 ## #   class &lt;fct&gt;</code></pre>
 </div>
 <div id="filter" class="section level2">
@@ -926,7 +926,7 @@ biopsy_new&lt;-<span class="kw">filter</span>(biopsy_new,thickness<span class="o
 ## 3 1044…         8         7          5            10                7
 ## 4 1047…         7         4          6             4                6
 ## 5 1050…        10         7          7             6                4
-## # ... with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
+## # … with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
 ## #   class &lt;fct&gt;</code></pre>
 </div>
 <div id="arrange" class="section level2">
@@ -948,7 +948,7 @@ biopsy_new&lt;-<span class="kw">filter</span>(biopsy_new,thickness<span class="o
 ##  8 1238…         6         1          1             3                2
 ##  9 1257…         6         1          1             1                1
 ## 10 1224…         6         1          1             1                2
-## # ... with 176 more rows, and 3 more variables: bare_nuclei &lt;dbl&gt;,
+## # … with 176 more rows, and 3 more variables: bare_nuclei &lt;dbl&gt;,
 ## #   norm_nucleoli &lt;int&gt;, class &lt;fct&gt;</code></pre>
 <p>This shows the data in increasing order of the cell size.</p>
 <p>To arrange the rows in decreasing order of V2, we add the <code>desc()</code> function to the variable before passing it to arrange.</p>
@@ -967,7 +967,7 @@ biopsy_new&lt;-<span class="kw">filter</span>(biopsy_new,thickness<span class="o
 ##  8 1168…        10        10         10            10               10
 ##  9 1170…        10        10         10             8                2
 ## 10 1173…        10        10         10             3               10
-## # ... with 176 more rows, and 3 more variables: bare_nuclei &lt;dbl&gt;,
+## # … with 176 more rows, and 3 more variables: bare_nuclei &lt;dbl&gt;,
 ## #   norm_nucleoli &lt;int&gt;, class &lt;fct&gt;</code></pre>
 <p>As you can see, there are a number of rows with the same value of <code>V2:cell_size</code>. To break the tie, you can add another variable to be used for ordering when the first variable has the same value.</p>
 <p>Here, we use the tie breaker as the order of variable V3: by cell shape and by ID:</p>
@@ -983,7 +983,7 @@ biopsy_new&lt;-<span class="kw">arrange</span>(biopsy_new,<span class="kw">desc<
 ## 3 1080…        10        10         10             8                6
 ## 4 1100…         6        10         10             2                8
 ## 5 1100…         6        10         10             2                8
-## # ... with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
+## # … with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
 ## #   class &lt;fct&gt;</code></pre>
 </div>
 <div id="summarize-group-by" class="section level2">
@@ -1033,7 +1033,7 @@ biopsy_new&lt;-<span class="kw">arrange</span>(biopsy_new,<span class="kw">desc<
 ## 3 1080…        10        10         10             8                6
 ## 4 1100…         6        10         10             2                8
 ## 5 1100…         6        10         10             2                8
-## # ... with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
+## # … with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
 ## #   class &lt;fct&gt;</code></pre>
 <p>Planning is required to decide which columns we need to keep unchanged, which ones to change, and what names are to be given to the new columns. The columns to keep are the ones that are already tidy. The ones to change are the ones that aren’t true variables but in fact levels of another variable.</p>
 <p>So, the <code>ID</code> and <code>class</code> columns are already tidy. These are kept as is.</p>
@@ -1058,7 +1058,7 @@ tidy_df</code></pre>
 ##  8 1116116 malignant thickness            9
 ##  9 1116116 malignant thickness            9
 ## 10 1168736 malignant thickness           10
-## # ... with 1,292 more rows</code></pre>
+## # … with 1,292 more rows</code></pre>
 </div>
 <div id="helpful-links-1" class="section level2">
 <h2><span class="header-section-number">6.17</span> Helpful Links</h2>

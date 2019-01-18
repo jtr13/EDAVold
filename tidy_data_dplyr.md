@@ -55,17 +55,17 @@ glimpse(biopsy)
 ```
 ## Observations: 699
 ## Variables: 11
-## $ ID    <chr> "1000025", "1002945", "1015425", "1016277", "1017023", "...
-## $ V1    <int> 5, 5, 3, 6, 4, 8, 1, 2, 2, 4, 1, 2, 5, 1, 8, 7, 4, 4, 10...
-## $ V2    <int> 1, 4, 1, 8, 1, 10, 1, 1, 1, 2, 1, 1, 3, 1, 7, 4, 1, 1, 7...
-## $ V3    <int> 1, 4, 1, 8, 1, 10, 1, 2, 1, 1, 1, 1, 3, 1, 5, 6, 1, 1, 7...
-## $ V4    <int> 1, 5, 1, 1, 3, 8, 1, 1, 1, 1, 1, 1, 3, 1, 10, 4, 1, 1, 6...
-## $ V5    <int> 2, 7, 2, 3, 2, 7, 2, 2, 2, 2, 1, 2, 2, 2, 7, 6, 2, 2, 4,...
-## $ V6    <int> 1, 10, 2, 4, 1, 10, 10, 1, 1, 1, 1, 1, 3, 3, 9, 1, 1, 1,...
-## $ V7    <int> 3, 3, 3, 3, 3, 9, 3, 3, 1, 2, 3, 2, 4, 3, 5, 4, 2, 3, 4,...
-## $ V8    <int> 1, 2, 1, 7, 1, 7, 1, 1, 1, 1, 1, 1, 4, 1, 5, 3, 1, 1, 1,...
-## $ V9    <int> 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 4, 1, 1, 1, 2,...
-## $ class <fct> benign, benign, benign, benign, benign, malignant, benig...
+## $ ID    <chr> "1000025", "1002945", "1015425", "1016277", "1017023", "10…
+## $ V1    <int> 5, 5, 3, 6, 4, 8, 1, 2, 2, 4, 1, 2, 5, 1, 8, 7, 4, 4, 10, …
+## $ V2    <int> 1, 4, 1, 8, 1, 10, 1, 1, 1, 2, 1, 1, 3, 1, 7, 4, 1, 1, 7, …
+## $ V3    <int> 1, 4, 1, 8, 1, 10, 1, 2, 1, 1, 1, 1, 3, 1, 5, 6, 1, 1, 7, …
+## $ V4    <int> 1, 5, 1, 1, 3, 8, 1, 1, 1, 1, 1, 1, 3, 1, 10, 4, 1, 1, 6, …
+## $ V5    <int> 2, 7, 2, 3, 2, 7, 2, 2, 2, 2, 1, 2, 2, 2, 7, 6, 2, 2, 4, 2…
+## $ V6    <int> 1, 10, 2, 4, 1, 10, 10, 1, 1, 1, 1, 1, 3, 3, 9, 1, 1, 1, 1…
+## $ V7    <int> 3, 3, 3, 3, 3, 9, 3, 3, 1, 2, 3, 2, 4, 3, 5, 4, 2, 3, 4, 3…
+## $ V8    <int> 1, 2, 1, 7, 1, 7, 1, 1, 1, 1, 1, 1, 4, 1, 5, 3, 1, 1, 1, 1…
+## $ V9    <int> 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 4, 1, 1, 1, 2, 1…
+## $ class <fct> benign, benign, benign, benign, benign, malignant, benign,…
 ```
 
 ```r
@@ -128,7 +128,7 @@ biopsy
 ```
 ## # A tibble: 699 x 11
 ##    ID         V1    V2    V3    V4    V5    V6    V7    V8    V9 class    
-##  * <chr>   <int> <int> <int> <int> <int> <int> <int> <int> <int> <fct>    
+##    <chr>   <int> <int> <int> <int> <int> <int> <int> <int> <int> <fct>    
 ##  1 1000025     5     1     1     1     2     1     3     1     1 benign   
 ##  2 1002945     5     4     4     5     7    10     3     2     1 benign   
 ##  3 1015425     3     1     1     1     2     2     3     1     1 benign   
@@ -139,7 +139,7 @@ biopsy
 ##  8 1018561     2     1     2     1     2     1     3     1     1 benign   
 ##  9 1033078     2     1     1     1     2     1     1     1     5 benign   
 ## 10 1033078     4     2     1     1     2     1     2     1     1 benign   
-## # ... with 689 more rows
+## # … with 689 more rows
 ```
 
 
@@ -205,7 +205,7 @@ rename(biopsy,
 ```
 ## # A tibble: 699 x 11
 ##    ID    thickness cell_size cell_shape marg_adhesion epithelial_cell…
-##  * <chr>     <int>     <int>      <int>         <int>            <int>
+##    <chr>     <int>     <int>      <int>         <int>            <int>
 ##  1 1000…         5         1          1             1                2
 ##  2 1002…         5         4          4             5                7
 ##  3 1015…         3         1          1             1                2
@@ -216,7 +216,7 @@ rename(biopsy,
 ##  8 1018…         2         1          2             1                2
 ##  9 1033…         2         1          1             1                2
 ## 10 1033…         4         2          1             1                2
-## # ... with 689 more rows, and 5 more variables: bare_nuclei <dbl>,
+## # … with 689 more rows, and 5 more variables: bare_nuclei <dbl>,
 ## #   chromatin <int>, norm_nucleoli <int>, mitoses <int>, class <fct>
 ```
 
@@ -242,7 +242,7 @@ head(biopsy_new,5)
 ## 3 1015…         3         1          1             1                2
 ## 4 1016…         6         8          8             1                3
 ## 5 1017…         4         1          1             3                2
-## # ... with 5 more variables: bare_nuclei <dbl>, chromatin <int>,
+## # … with 5 more variables: bare_nuclei <dbl>, chromatin <int>,
 ## #   norm_nucleoli <int>, mitoses <int>, class <fct>
 ```
 
@@ -269,7 +269,7 @@ head(biopsy_new,5)
 ## 3 1015…         3         1          1             1                2
 ## 4 1016…         6         8          8             1                3
 ## 5 1017…         4         1          1             3                2
-## # ... with 3 more variables: bare_nuclei <dbl>, norm_nucleoli <int>,
+## # … with 3 more variables: bare_nuclei <dbl>, norm_nucleoli <int>,
 ## #   class <fct>
 ```
 
@@ -295,7 +295,7 @@ head(biopsy_new,5)
 ## 3 1015…         3         1          1             1                2
 ## 4 1016…         6         8          8             1                3
 ## 5 1017…         4         1          1             3                2
-## # ... with 3 more variables: bare_nuclei <dbl>, norm_nucleoli <int>,
+## # … with 3 more variables: bare_nuclei <dbl>, norm_nucleoli <int>,
 ## #   class <fct>
 ```
 
@@ -333,7 +333,7 @@ head(biopsy_new,5)
 ## 3 1044…         8         7          5            10                7
 ## 4 1047…         7         4          6             4                6
 ## 5 1050…        10         7          7             6                4
-## # ... with 3 more variables: bare_nuclei <dbl>, norm_nucleoli <int>,
+## # … with 3 more variables: bare_nuclei <dbl>, norm_nucleoli <int>,
 ## #   class <fct>
 ```
 
@@ -362,7 +362,7 @@ arrange(biopsy_new,cell_size)
 ##  8 1238…         6         1          1             3                2
 ##  9 1257…         6         1          1             1                1
 ## 10 1224…         6         1          1             1                2
-## # ... with 176 more rows, and 3 more variables: bare_nuclei <dbl>,
+## # … with 176 more rows, and 3 more variables: bare_nuclei <dbl>,
 ## #   norm_nucleoli <int>, class <fct>
 ```
 
@@ -390,7 +390,7 @@ arrange(biopsy_new,desc(cell_size))
 ##  8 1168…        10        10         10            10               10
 ##  9 1170…        10        10         10             8                2
 ## 10 1173…        10        10         10             3               10
-## # ... with 176 more rows, and 3 more variables: bare_nuclei <dbl>,
+## # … with 176 more rows, and 3 more variables: bare_nuclei <dbl>,
 ## #   norm_nucleoli <int>, class <fct>
 ```
 
@@ -414,7 +414,7 @@ head(biopsy_new,5)
 ## 3 1080…        10        10         10             8                6
 ## 4 1100…         6        10         10             2                8
 ## 5 1100…         6        10         10             2                8
-## # ... with 3 more variables: bare_nuclei <dbl>, norm_nucleoli <int>,
+## # … with 3 more variables: bare_nuclei <dbl>, norm_nucleoli <int>,
 ## #   class <fct>
 ```
 
@@ -487,7 +487,7 @@ head(biopsy_new,5)
 ## 3 1080…        10        10         10             8                6
 ## 4 1100…         6        10         10             2                8
 ## 5 1100…         6        10         10             2                8
-## # ... with 3 more variables: bare_nuclei <dbl>, norm_nucleoli <int>,
+## # … with 3 more variables: bare_nuclei <dbl>, norm_nucleoli <int>,
 ## #   class <fct>
 ```
 
@@ -523,7 +523,7 @@ tidy_df
 ##  8 1116116 malignant thickness            9
 ##  9 1116116 malignant thickness            9
 ## 10 1168736 malignant thickness           10
-## # ... with 1,292 more rows
+## # … with 1,292 more rows
 ```
 
 ## Helpful Links

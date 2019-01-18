@@ -110,7 +110,7 @@ Sys.Date()
 ```
 
 ```
-## [1] "2018-12-17"
+## [1] "2019-01-18"
 ```
 
 ```r
@@ -130,7 +130,7 @@ weekdays(today)
 ```
 
 ```
-## [1] "Monday"
+## [1] "Friday"
 ```
 
 ```r
@@ -138,7 +138,7 @@ weekdays(today, abbreviate = TRUE)
 ```
 
 ```
-## [1] "Mon"
+## [1] "Fri"
 ```
 
 ```r
@@ -146,7 +146,7 @@ months(today)
 ```
 
 ```
-## [1] "December"
+## [1] "January"
 ```
 
 ```r
@@ -154,7 +154,7 @@ months(today, abbreviate = TRUE)
 ```
 
 ```
-## [1] "Dec"
+## [1] "Jan"
 ```
 
 ```r
@@ -162,7 +162,7 @@ quarters(today)
 ```
 
 ```
-## [1] "Q4"
+## [1] "Q1"
 ```
 
 The **lubridate** package provides additional functions to extract information from a date:
@@ -174,7 +174,7 @@ lubridate::year(today)
 ```
 
 ```
-## [1] 2018
+## [1] 2019
 ```
 
 ```r
@@ -182,7 +182,7 @@ lubridate::yday(today)
 ```
 
 ```
-## [1] 351
+## [1] 18
 ```
 
 ```r
@@ -190,7 +190,7 @@ lubridate::month(today)
 ```
 
 ```
-## [1] 12
+## [1] 1
 ```
 
 ```r
@@ -198,7 +198,7 @@ lubridate::month(today, label = TRUE)
 ```
 
 ```
-## [1] Dec
+## [1] Jan
 ## 12 Levels: Jan < Feb < Mar < Apr < May < Jun < Jul < Aug < Sep < ... < Dec
 ```
 
@@ -207,7 +207,7 @@ lubridate::mday(today)
 ```
 
 ```
-## [1] 17
+## [1] 18
 ```
 
 ```r
@@ -215,7 +215,7 @@ lubridate::week(today)
 ```
 
 ```
-## [1] 51
+## [1] 3
 ```
 
 ```r
@@ -223,7 +223,7 @@ lubridate::wday(today)
 ```
 
 ```
-## [1] 2
+## [1] 6
 ```
 
 ## Plotting with a `Date` class variable

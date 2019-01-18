@@ -9,7 +9,7 @@
   <meta name="description" content="This resource is a collaborative collection of resources designed to help students succeed in GR5702 Exploratory Data Analysis and Visualization, a course offered at Columbia University. While the course lectures and textbook focus on theoretical issues, this resource, in contrast, provides coding tips and examples to assist students as they create their own analyses and visualizations. It is our hope that students will contribute to edav.info and it will grow with the course.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="25 Timeseries with tidyquant | edav.info/ />
+  <meta property="og:title" content="25 Timeseries with tidyquant | edav.info/" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://edav.info/" />
   <meta property="og:image" content="https://edav.info/images/edav_link_logo.png" />
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="jtr13/EDAV" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="25 Timeseries with tidyquant | edav.info/ />
+  <meta name="twitter:title" content="25 Timeseries with tidyquant | edav.info/" />
   
   <meta name="twitter:description" content="This resource is a collaborative collection of resources designed to help students succeed in GR5702 Exploratory Data Analysis and Visualization, a course offered at Columbia University. While the course lectures and textbook focus on theoretical issues, this resource, in contrast, provides coding tips and examples to assist students as they create their own analyses and visualizations. It is our hope that students will contribute to edav.info and it will grow with the course." />
   <meta name="twitter:image" content="https://edav.info/images/edav_link_logo.png" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Zach Bogart, Joyce Robbins">
 
 
-<meta name="date" content="2018-12-17">
+<meta name="date" content="2019-01-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -759,20 +759,20 @@ function unhover(element) {
 <p>Obtain historical data for single stock (for example, Google):</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get historical data for single stock. e.g. google</span>
 <span class="kw">tq_get</span>(<span class="st">&quot;GOOGL&quot;</span>, <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>)</code></pre>
-<pre><code>## # A tibble: 2,759 x 7
+<pre><code>## # A tibble: 2,528 x 7
 ##    date        open  high   low close   volume adjusted
 ##    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1 2008-01-02  347.  349.  339.  343.  8605100     343.
-##  2 2008-01-03  343.  344.  339.  343.  6498400     343.
-##  3 2008-01-04  340.  341.  328.  329. 10708800     329.
-##  4 2008-01-07  327.  331.  319.  325. 12793900     325.
-##  5 2008-01-08  327.  330.  316.  316. 10667500     316.
-##  6 2008-01-09  315.  327.  312.  327. 13465900     327.
-##  7 2008-01-10  323.  329.  320.  324. 12655700     324.
-##  8 2008-01-11  322.  325.  315.  319.  9944000     319.
-##  9 2008-01-14  326.  329.  323.  327.  8886100     327.
-## 10 2008-01-15  323.  325.  318.  319. 11125200     319.
-## # ... with 2,749 more rows</code></pre>
+##  1 2009-01-02  154.  161.  153.  161.  7213700     161.
+##  2 2009-01-05  161.  166.  158.  164.  9768200     164.
+##  3 2009-01-06  167.  171.  163.  167. 12837500     167.
+##  4 2009-01-07  164.  166.  160.  161.  8980000     161.
+##  5 2009-01-08  159.  163.  159.  163.  7194100     163.
+##  6 2009-01-09  164.  164.  157.  158.  8672300     158.
+##  7 2009-01-12  158.  160.  155.  157.  6601900     157.
+##  8 2009-01-13  156.  160.  155.  157.  8856100     157.
+##  9 2009-01-14  155.  157.  149.  151. 10924800     151.
+## 10 2009-01-15  149.  152.  144.  150. 11857100     150.
+## # … with 2,518 more rows</code></pre>
 <p>Calculate monthly return of single stock:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate monthly return of single stock</span>
 <span class="kw">tq_get</span>(<span class="kw">c</span>(<span class="st">&quot;GOOGL&quot;</span>), <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>) <span class="op">%&gt;%</span>
@@ -780,20 +780,20 @@ function unhover(element) {
                <span class="dt">mutate_fun=</span>periodReturn,
                <span class="dt">period=</span><span class="st">&quot;monthly&quot;</span>,
                <span class="dt">col_rename =</span> <span class="st">&quot;monthly_return&quot;</span>)</code></pre>
-<pre><code>## # A tibble: 132 x 2
+<pre><code>## # A tibble: 121 x 2
 ##    date       monthly_return
 ##    &lt;date&gt;              &lt;dbl&gt;
-##  1 2008-01-31        -0.176 
-##  2 2008-02-29        -0.165 
-##  3 2008-03-31        -0.0652
-##  4 2008-04-30         0.304 
-##  5 2008-05-30         0.0200
-##  6 2008-06-30        -0.101 
-##  7 2008-07-31        -0.100 
-##  8 2008-08-29        -0.0221
-##  9 2008-09-30        -0.135 
-## 10 2008-10-31        -0.103 
-## # ... with 122 more rows</code></pre>
+##  1 2009-01-30        0.0536 
+##  2 2009-02-27       -0.00160
+##  3 2009-03-31        0.0298 
+##  4 2009-04-30        0.138  
+##  5 2009-05-29        0.0537 
+##  6 2009-06-30        0.0104 
+##  7 2009-07-31        0.0509 
+##  8 2009-08-31        0.0420 
+##  9 2009-09-30        0.0740 
+## 10 2009-10-30        0.0812 
+## # … with 111 more rows</code></pre>
 <p>Create a line chart of the <em>closing price</em> for single stock:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># showing closing price for single stock</span>
 <span class="kw">tq_get</span>(<span class="kw">c</span>(<span class="st">&quot;GOOGL&quot;</span>), <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>) <span class="op">%&gt;%</span>
@@ -816,20 +816,20 @@ function unhover(element) {
 <p>Obtain historical data for multiple stocks (for example, GAFA):</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get historical data for multiple stocks. e.g. GAFA</span>
 <span class="kw">tq_get</span>(<span class="kw">c</span>(<span class="st">&quot;GOOGL&quot;</span>,<span class="st">&quot;AMZN&quot;</span>,<span class="st">&quot;FB&quot;</span>,<span class="st">&quot;AAPL&quot;</span>), <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>)</code></pre>
-<pre><code>## # A tibble: 9,932 x 8
+<pre><code>## # A tibble: 9,261 x 8
 ##    symbol date        open  high   low close   volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1 GOOGL  2008-01-02  347.  349.  339.  343.  8605100     343.
-##  2 GOOGL  2008-01-03  343.  344.  339.  343.  6498400     343.
-##  3 GOOGL  2008-01-04  340.  341.  328.  329. 10708800     329.
-##  4 GOOGL  2008-01-07  327.  331.  319.  325. 12793900     325.
-##  5 GOOGL  2008-01-08  327.  330.  316.  316. 10667500     316.
-##  6 GOOGL  2008-01-09  315.  327.  312.  327. 13465900     327.
-##  7 GOOGL  2008-01-10  323.  329.  320.  324. 12655700     324.
-##  8 GOOGL  2008-01-11  322.  325.  315.  319.  9944000     319.
-##  9 GOOGL  2008-01-14  326.  329.  323.  327.  8886100     327.
-## 10 GOOGL  2008-01-15  323.  325.  318.  319. 11125200     319.
-## # ... with 9,922 more rows</code></pre>
+##  1 GOOGL  2009-01-02  154.  161.  153.  161.  7213700     161.
+##  2 GOOGL  2009-01-05  161.  166.  158.  164.  9768200     164.
+##  3 GOOGL  2009-01-06  167.  171.  163.  167. 12837500     167.
+##  4 GOOGL  2009-01-07  164.  166.  160.  161.  8980000     161.
+##  5 GOOGL  2009-01-08  159.  163.  159.  163.  7194100     163.
+##  6 GOOGL  2009-01-09  164.  164.  157.  158.  8672300     158.
+##  7 GOOGL  2009-01-12  158.  160.  155.  157.  6601900     157.
+##  8 GOOGL  2009-01-13  156.  160.  155.  157.  8856100     157.
+##  9 GOOGL  2009-01-14  155.  157.  149.  151. 10924800     151.
+## 10 GOOGL  2009-01-15  149.  152.  144.  150. 11857100     150.
+## # … with 9,251 more rows</code></pre>
 <p>Create a multiple line chart of the closing prices of multiple stocks (again, GAFA). We can show each stock in a different color on the same graph:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a multiple line chart of the closing prices of the four stocks,</span>
 <span class="co"># showing each stock in a different color on the same graph.</span>
@@ -855,21 +855,21 @@ function unhover(element) {
                <span class="dt">mutate_fun=</span>periodReturn,
                <span class="dt">period=</span><span class="st">&quot;monthly&quot;</span>,
                <span class="dt">col_rename =</span> <span class="st">&quot;monthly_return&quot;</span>)</code></pre>
-<pre><code>## # A tibble: 476 x 3
+<pre><code>## # A tibble: 444 x 3
 ## # Groups:   symbol [4]
 ##    symbol date       monthly_return
 ##    &lt;chr&gt;  &lt;date&gt;              &lt;dbl&gt;
-##  1 GOOGL  2008-01-31        -0.176 
-##  2 GOOGL  2008-02-29        -0.165 
-##  3 GOOGL  2008-03-31        -0.0652
-##  4 GOOGL  2008-04-30         0.304 
-##  5 GOOGL  2008-05-30         0.0200
-##  6 GOOGL  2008-06-30        -0.101 
-##  7 GOOGL  2008-07-31        -0.100 
-##  8 GOOGL  2008-08-29        -0.0221
-##  9 GOOGL  2008-09-30        -0.135 
-## 10 GOOGL  2008-10-31        -0.103 
-## # ... with 466 more rows</code></pre>
+##  1 GOOGL  2009-01-30        0.0536 
+##  2 GOOGL  2009-02-27       -0.00160
+##  3 GOOGL  2009-03-31        0.0298 
+##  4 GOOGL  2009-04-30        0.138  
+##  5 GOOGL  2009-05-29        0.0537 
+##  6 GOOGL  2009-06-30        0.0104 
+##  7 GOOGL  2009-07-31        0.0509 
+##  8 GOOGL  2009-08-31        0.0420 
+##  9 GOOGL  2009-09-30        0.0740 
+## 10 GOOGL  2009-10-30        0.0812 
+## # … with 434 more rows</code></pre>
 <p>Create a multiple line chart of monthly return of the four stocks. Again, we can show each stock in a different color on the same graph:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a multiple line chart of monthly return of the four stocks,</span>
 <span class="co"># showing each stock in a different color on the same graph</span>
