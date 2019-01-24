@@ -272,7 +272,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.2" data-path="histo.html"><a href="histo.html#histogram-using-ggplot2"><i class="fa fa-check"></i><b>5.3.2</b> Histogram using ggplot2</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="histo.html"><a href="histo.html#theory"><i class="fa fa-check"></i><b>5.4</b> Theory</a></li>
-<li class="chapter" data-level="5.5" data-path="histo.html"><a href="histo.html#types-of-histrograms"><i class="fa fa-check"></i><b>5.5</b> Types of histrograms</a><ul>
+<li class="chapter" data-level="5.5" data-path="histo.html"><a href="histo.html#types-of-histograms"><i class="fa fa-check"></i><b>5.5</b> Types of histograms</a><ul>
 <li class="chapter" data-level="5.5.1" data-path="histo.html"><a href="histo.html#frequency-or-count"><i class="fa fa-check"></i><b>5.5.1</b> Frequency or count</a></li>
 <li class="chapter" data-level="5.5.2" data-path="histo.html"><a href="histo.html#relative-frequency-historgram"><i class="fa fa-check"></i><b>5.5.2</b> Relative frequency historgram</a></li>
 <li class="chapter" data-level="5.5.3" data-path="histo.html"><a href="histo.html#cumulative-frequency-histogram"><i class="fa fa-check"></i><b>5.5.3</b> Cumulative frequency histogram</a></li>
@@ -283,7 +283,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6.2" data-path="histo.html"><a href="histo.html#bin-number"><i class="fa fa-check"></i><b>5.6.2</b> Bin number</a></li>
 <li class="chapter" data-level="5.6.3" data-path="histo.html"><a href="histo.html#bin-alignment"><i class="fa fa-check"></i><b>5.6.3</b> Bin alignment</a></li>
 </ul></li>
-<li class="chapter" data-level="5.7" data-path="histo.html"><a href="histo.html#external-resources"><i class="fa fa-check"></i><b>5.7</b> External resources</a></li>
+<li class="chapter" data-level="5.7" data-path="histo.html"><a href="histo.html#interactive-histograms-with-ggvis"><i class="fa fa-check"></i><b>5.7</b> Interactive histograms with <code>ggvis</code></a><ul>
+<li class="chapter" data-level="5.7.1" data-path="histo.html"><a href="histo.html#change-binwidth-interactively"><i class="fa fa-check"></i><b>5.7.1</b> Change binwidth interactively</a></li>
+<li class="chapter" data-level="5.7.2" data-path="histo.html"><a href="histo.html#gdp-example"><i class="fa fa-check"></i><b>5.7.2</b> GDP example</a></li>
+<li class="chapter" data-level="5.7.3" data-path="histo.html"><a href="histo.html#change-center-interactively"><i class="fa fa-check"></i><b>5.7.3</b> Change center interactively</a></li>
+<li class="chapter" data-level="5.7.4" data-path="histo.html"><a href="histo.html#change-center-with-data-values-shown"><i class="fa fa-check"></i><b>5.7.4</b> Change center (with data values shown)</a></li>
+<li class="chapter" data-level="5.7.5" data-path="histo.html"><a href="histo.html#change-boundary-interactively"><i class="fa fa-check"></i><b>5.7.5</b> Change boundary interactively</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="histo.html"><a href="histo.html#external-resources"><i class="fa fa-check"></i><b>5.8</b> External resources</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="box.html"><a href="box.html"><i class="fa fa-check"></i><b>6</b> Chart: Boxplot</a><ul>
 <li class="chapter" data-level="6.1" data-path="box.html"><a href="box.html#overview-4"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
@@ -758,8 +765,8 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x)
 <li>For more info about histograms and continuous variables, check out <a href="http://www.gradaanwr.net/content/03-examining-continuous-variables/" target="_blank">Chapter 3</a> of the textbook.</li>
 </ul>
 </div>
-<div id="types-of-histrograms" class="section level2">
-<h2><span class="header-section-number">5.5</span> Types of histrograms</h2>
+<div id="types-of-histograms" class="section level2">
+<h2><span class="header-section-number">5.5</span> Types of histograms</h2>
 <p>Use a histogram to show the distribution of <em>one continuous variable</em>. The y-scale can be represented in a variety of ways to express different results:</p>
 <div id="frequency-or-count" class="section level3">
 <h3><span class="header-section-number">5.5.1</span> Frequency or count</h3>
@@ -848,8 +855,61 @@ p4 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df, <span class=
 <p><strong>Note</strong>: Don’t use both <code>boundary</code> <em>and</em> <code>center</code> for bin alignment. Just pick one.</p>
 </div>
 </div>
+<div id="interactive-histograms-with-ggvis" class="section level2">
+<h2><span class="header-section-number">5.7</span> Interactive histograms with <code>ggvis</code></h2>
+<p>The <code>ggvis</code> package is not currently in development, but does certain things very well, such as adjusting parameters of a histogram interactively while coding.</p>
+<p>Since images cannot be shared by knitting (as with other packages, such as <code>plotly</code>), we present the code here, but not the output. To try them out, copy and paste into an R session.</p>
+<div id="change-binwidth-interactively" class="section level3">
+<h3><span class="header-section-number">5.7.1</span> Change binwidth interactively</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(ggvis)
+faithful <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggvis</span>(<span class="op">~</span>eruptions) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">layer_histograms</span>(fill <span class="op">:</span><span class="er">=</span><span class="st"> &quot;lightblue&quot;</span>, 
+        <span class="dt">width =</span> <span class="kw">input_slider</span>(<span class="fl">0.1</span>, <span class="dv">2</span>, <span class="dt">value =</span> <span class="fl">.1</span>, 
+                             <span class="dt">step =</span> <span class="fl">.1</span>, <span class="dt">label =</span> <span class="st">&quot;width&quot;</span>))</code></pre>
+</div>
+<div id="gdp-example" class="section level3">
+<h3><span class="header-section-number">5.7.2</span> GDP example</h3>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="kw">read.csv</span>(<span class="st">&quot;countries2012.csv&quot;</span>)
+df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggvis</span>(<span class="op">~</span>GDP) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">layer_histograms</span>(fill <span class="op">:</span><span class="er">=</span><span class="st"> &quot;green&quot;</span>, 
+        <span class="dt">width =</span> <span class="kw">input_slider</span>(<span class="dv">500</span>, <span class="dv">10000</span>, <span class="dt">value =</span> <span class="dv">5000</span>, 
+        <span class="dt">step =</span> <span class="dv">500</span>, <span class="dt">label =</span> <span class="st">&quot;width&quot;</span>))</code></pre>
+</div>
+<div id="change-center-interactively" class="section level3">
+<h3><span class="header-section-number">5.7.3</span> Change center interactively</h3>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">51</span>, <span class="dv">53</span>, <span class="dv">55</span>, <span class="dv">56</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">65</span>, <span class="dv">68</span>))
+df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggvis</span>(<span class="op">~</span>x) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">layer_histograms</span>(fill <span class="op">:</span><span class="er">=</span><span class="st"> &quot;red&quot;</span>, 
+        <span class="dt">width =</span> <span class="kw">input_slider</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">value =</span> <span class="dv">5</span>, <span class="dt">step =</span> <span class="dv">1</span>, <span class="dt">label =</span> <span class="st">&quot;width&quot;</span>),
+        <span class="dt">center =</span> <span class="kw">input_slider</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dt">value =</span> <span class="fl">52.5</span>, <span class="dt">step =</span> <span class="fl">.5</span>, <span class="dt">label =</span> <span class="st">&quot;center&quot;</span>))</code></pre>
+</div>
+<div id="change-center-with-data-values-shown" class="section level3">
+<h3><span class="header-section-number">5.7.4</span> Change center (with data values shown)</h3>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">51</span>, <span class="dv">53</span>, <span class="dv">55</span>, <span class="dv">56</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">65</span>, <span class="dv">68</span>), 
+                 <span class="dt">y =</span> <span class="kw">c</span>(.<span class="dv">5</span>, <span class="fl">.5</span>, <span class="fl">.5</span>, <span class="fl">.5</span>, <span class="fl">.5</span>, <span class="fl">.5</span>, <span class="fl">.5</span>, <span class="fl">1.5</span>, <span class="fl">.5</span>))
+df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggvis</span>(<span class="op">~</span>x, <span class="op">~</span>y) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">layer_histograms</span>(fill <span class="op">:</span><span class="er">=</span><span class="st"> &quot;lightcyan&quot;</span>, <span class="dt">width =</span> <span class="dv">5</span>,
+                     <span class="dt">center =</span> <span class="kw">input_slider</span>(<span class="dv">45</span>, <span class="dv">55</span>, <span class="dt">value =</span> <span class="dv">45</span>, 
+                                           <span class="dt">step =</span> <span class="dv">1</span>, <span class="dt">label =</span> <span class="st">&quot;center&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">layer_points</span>(fill <span class="op">:</span><span class="er">=</span><span class="st"> &quot;blue&quot;</span>, size <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">200</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">add_axis</span>(<span class="st">&quot;x&quot;</span>, <span class="dt">properties =</span> <span class="kw">axis_props</span>(<span class="dt">labels =</span> <span class="kw">list</span>(<span class="dt">fontSize =</span> <span class="dv">20</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_numeric</span>(<span class="st">&quot;x&quot;</span>, <span class="dt">domain =</span> <span class="kw">c</span>(<span class="dv">46</span>, <span class="dv">72</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">add_axis</span>(<span class="st">&quot;y&quot;</span>, <span class="dt">values =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">3</span>, 
+           <span class="dt">properties =</span> <span class="kw">axis_props</span>(<span class="dt">labels =</span> <span class="kw">list</span>(<span class="dt">fontSize =</span> <span class="dv">20</span>)))</code></pre>
+</div>
+<div id="change-boundary-interactively" class="section level3">
+<h3><span class="header-section-number">5.7.5</span> Change boundary interactively</h3>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggvis</span>(<span class="op">~</span>x) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">layer_histograms</span>(fill <span class="op">:</span><span class="er">=</span><span class="st"> &quot;red&quot;</span>, 
+        <span class="dt">width =</span> <span class="kw">input_slider</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">value =</span> <span class="dv">5</span>, 
+                             <span class="dt">step =</span> <span class="dv">1</span>, <span class="dt">label =</span> <span class="st">&quot;width&quot;</span>),
+        <span class="dt">boundary =</span> <span class="kw">input_slider</span>(<span class="fl">47.5</span>, <span class="dv">50</span>, <span class="dt">value =</span> <span class="dv">50</span>,
+                                <span class="dt">step =</span> <span class="fl">.5</span>, <span class="dt">label =</span> <span class="st">&quot;boundary&quot;</span>))</code></pre>
+</div>
+</div>
 <div id="external-resources" class="section level2">
-<h2><span class="header-section-number">5.7</span> External resources</h2>
+<h2><span class="header-section-number">5.8</span> External resources</h2>
 <ul>
 <li><a href="https://campus.datacamp.com/courses/data-visualization-with-ggplot2-1/chapter-4-geometries?ex=5" target="_blank">DataCamp ggplot2 Histograms Exercise</a>: Simple interactive example of histograms with ggplot2</li>
 <li><a href="https://www.datacamp.com/community/tutorials/make-histogram-basic-r" target="_blank">DataCamp Histogram with Basic R</a>: “Tutorial for new R users whom need an accessible and easy-to-understand resource on how to create their own histogram with basic R.” ’Nuff said.</li>
