@@ -25,7 +25,7 @@
 <meta name="author" content="Zach Bogart, Joyce Robbins">
 
 
-<meta name="date" content="2019-02-05">
+<meta name="date" content="2019-02-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -708,72 +708,15 @@ function unhover(element) {
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;tidyquant&quot;)</span>
 <span class="kw">library</span>(tidyquant)</code></pre>
 <p>If you want to see which functions are available, you can run the following:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># to see which functions are available</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># to see which functions are available (not run)</span>
 <span class="kw">tq_transmute_fun_options</span>()</code></pre>
-<pre><code>## $zoo
-##  [1] &quot;rollapply&quot;          &quot;rollapplyr&quot;         &quot;rollmax&quot;           
-##  [4] &quot;rollmax.default&quot;    &quot;rollmaxr&quot;           &quot;rollmean&quot;          
-##  [7] &quot;rollmean.default&quot;   &quot;rollmeanr&quot;          &quot;rollmedian&quot;        
-## [10] &quot;rollmedian.default&quot; &quot;rollmedianr&quot;        &quot;rollsum&quot;           
-## [13] &quot;rollsum.default&quot;    &quot;rollsumr&quot;          
-## 
-## $xts
-##  [1] &quot;apply.daily&quot;     &quot;apply.monthly&quot;   &quot;apply.quarterly&quot;
-##  [4] &quot;apply.weekly&quot;    &quot;apply.yearly&quot;    &quot;diff.xts&quot;       
-##  [7] &quot;lag.xts&quot;         &quot;period.apply&quot;    &quot;period.max&quot;     
-## [10] &quot;period.min&quot;      &quot;period.prod&quot;     &quot;period.sum&quot;     
-## [13] &quot;periodicity&quot;     &quot;to_period&quot;       &quot;to.daily&quot;       
-## [16] &quot;to.hourly&quot;       &quot;to.minutes&quot;      &quot;to.minutes10&quot;   
-## [19] &quot;to.minutes15&quot;    &quot;to.minutes3&quot;     &quot;to.minutes30&quot;   
-## [22] &quot;to.minutes5&quot;     &quot;to.monthly&quot;      &quot;to.period&quot;      
-## [25] &quot;to.quarterly&quot;    &quot;to.weekly&quot;       &quot;to.yearly&quot;      
-## 
-## $quantmod
-##  [1] &quot;allReturns&quot;      &quot;annualReturn&quot;    &quot;ClCl&quot;           
-##  [4] &quot;dailyReturn&quot;     &quot;Delt&quot;            &quot;HiCl&quot;           
-##  [7] &quot;Lag&quot;             &quot;LoCl&quot;            &quot;LoHi&quot;           
-## [10] &quot;monthlyReturn&quot;   &quot;Next&quot;            &quot;OpCl&quot;           
-## [13] &quot;OpHi&quot;            &quot;OpLo&quot;            &quot;OpOp&quot;           
-## [16] &quot;periodReturn&quot;    &quot;quarterlyReturn&quot; &quot;seriesAccel&quot;    
-## [19] &quot;seriesDecel&quot;     &quot;seriesDecr&quot;      &quot;seriesHi&quot;       
-## [22] &quot;seriesIncr&quot;      &quot;seriesLo&quot;        &quot;weeklyReturn&quot;   
-## [25] &quot;yearlyReturn&quot;   
-## 
-## $TTR
-##  [1] &quot;adjRatios&quot;          &quot;ADX&quot;                &quot;ALMA&quot;              
-##  [4] &quot;aroon&quot;              &quot;ATR&quot;                &quot;BBands&quot;            
-##  [7] &quot;CCI&quot;                &quot;chaikinAD&quot;          &quot;chaikinVolatility&quot; 
-## [10] &quot;CLV&quot;                &quot;CMF&quot;                &quot;CMO&quot;               
-## [13] &quot;DEMA&quot;               &quot;DonchianChannel&quot;    &quot;DPO&quot;               
-## [16] &quot;DVI&quot;                &quot;EMA&quot;                &quot;EMV&quot;               
-## [19] &quot;EVWMA&quot;              &quot;GMMA&quot;               &quot;growth&quot;            
-## [22] &quot;HMA&quot;                &quot;KST&quot;                &quot;lags&quot;              
-## [25] &quot;MACD&quot;               &quot;MFI&quot;                &quot;momentum&quot;          
-## [28] &quot;OBV&quot;                &quot;PBands&quot;             &quot;ROC&quot;               
-## [31] &quot;rollSFM&quot;            &quot;RSI&quot;                &quot;runCor&quot;            
-## [34] &quot;runCov&quot;             &quot;runMAD&quot;             &quot;runMax&quot;            
-## [37] &quot;runMean&quot;            &quot;runMedian&quot;          &quot;runMin&quot;            
-## [40] &quot;runPercentRank&quot;     &quot;runSD&quot;              &quot;runSum&quot;            
-## [43] &quot;runVar&quot;             &quot;SAR&quot;                &quot;SMA&quot;               
-## [46] &quot;SMI&quot;                &quot;SNR&quot;                &quot;stoch&quot;             
-## [49] &quot;TDI&quot;                &quot;TRIX&quot;               &quot;ultimateOscillator&quot;
-## [52] &quot;VHF&quot;                &quot;VMA&quot;                &quot;volatility&quot;        
-## [55] &quot;VWAP&quot;               &quot;VWMA&quot;               &quot;wilderSum&quot;         
-## [58] &quot;williamsAD&quot;         &quot;WMA&quot;                &quot;WPR&quot;               
-## [61] &quot;ZigZag&quot;             &quot;ZLEMA&quot;             
-## 
-## $PerformanceAnalytics
-## [1] &quot;Return.annualized&quot;        &quot;Return.annualized.excess&quot;
-## [3] &quot;Return.clean&quot;             &quot;Return.cumulative&quot;       
-## [5] &quot;Return.excess&quot;            &quot;Return.Geltner&quot;          
-## [7] &quot;zerofill&quot;</code></pre>
 </div>
 <div id="single-timeseries" class="section level2">
 <h2><span class="header-section-number">20.4</span> Single timeseries</h2>
 <p>Obtain historical data for single stock (for example, Google):</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get historical data for single stock. e.g. google</span>
 <span class="kw">tq_get</span>(<span class="st">&quot;GOOGL&quot;</span>, <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>)</code></pre>
-<pre><code>## # A tibble: 2,538 x 7
+<pre><code>## # A tibble: 2,541 x 7
 ##    date        open  high   low close   volume adjusted
 ##    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 2009-01-02  154.  161.  153.  161.  7213700     161.
@@ -786,7 +729,7 @@ function unhover(element) {
 ##  8 2009-01-13  156.  160.  155.  157.  8856100     157.
 ##  9 2009-01-14  155.  157.  149.  151. 10924800     151.
 ## 10 2009-01-15  149.  152.  144.  150. 11857100     150.
-## # … with 2,528 more rows</code></pre>
+## # … with 2,531 more rows</code></pre>
 <p>Calculate monthly return of single stock:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate monthly return of single stock</span>
 <span class="kw">tq_get</span>(<span class="kw">c</span>(<span class="st">&quot;GOOGL&quot;</span>), <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>) <span class="op">%&gt;%</span>
@@ -830,7 +773,7 @@ function unhover(element) {
 <p>Obtain historical data for multiple stocks (for example, GAFA):</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get historical data for multiple stocks. e.g. GAFA</span>
 <span class="kw">tq_get</span>(<span class="kw">c</span>(<span class="st">&quot;GOOGL&quot;</span>,<span class="st">&quot;AMZN&quot;</span>,<span class="st">&quot;FB&quot;</span>,<span class="st">&quot;AAPL&quot;</span>), <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>)</code></pre>
-<pre><code>## # A tibble: 9,301 x 8
+<pre><code>## # A tibble: 9,313 x 8
 ##    symbol date        open  high   low close   volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 GOOGL  2009-01-02  154.  161.  153.  161.  7213700     161.
@@ -843,7 +786,7 @@ function unhover(element) {
 ##  8 GOOGL  2009-01-13  156.  160.  155.  157.  8856100     157.
 ##  9 GOOGL  2009-01-14  155.  157.  149.  151. 10924800     151.
 ## 10 GOOGL  2009-01-15  149.  152.  144.  150. 11857100     150.
-## # … with 9,291 more rows</code></pre>
+## # … with 9,303 more rows</code></pre>
 <p>Create a multiple line chart of the closing prices of multiple stocks (again, GAFA). We can show each stock in a different color on the same graph:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a multiple line chart of the closing prices of the four stocks,</span>
 <span class="co"># showing each stock in a different color on the same graph.</span>

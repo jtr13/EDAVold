@@ -25,68 +25,8 @@ library(tidyquant)
 If you want to see which functions are available, you can run the following:
 
 ```r
-# to see which functions are available
+# to see which functions are available (not run)
 tq_transmute_fun_options()
-```
-
-```
-## $zoo
-##  [1] "rollapply"          "rollapplyr"         "rollmax"           
-##  [4] "rollmax.default"    "rollmaxr"           "rollmean"          
-##  [7] "rollmean.default"   "rollmeanr"          "rollmedian"        
-## [10] "rollmedian.default" "rollmedianr"        "rollsum"           
-## [13] "rollsum.default"    "rollsumr"          
-## 
-## $xts
-##  [1] "apply.daily"     "apply.monthly"   "apply.quarterly"
-##  [4] "apply.weekly"    "apply.yearly"    "diff.xts"       
-##  [7] "lag.xts"         "period.apply"    "period.max"     
-## [10] "period.min"      "period.prod"     "period.sum"     
-## [13] "periodicity"     "to_period"       "to.daily"       
-## [16] "to.hourly"       "to.minutes"      "to.minutes10"   
-## [19] "to.minutes15"    "to.minutes3"     "to.minutes30"   
-## [22] "to.minutes5"     "to.monthly"      "to.period"      
-## [25] "to.quarterly"    "to.weekly"       "to.yearly"      
-## 
-## $quantmod
-##  [1] "allReturns"      "annualReturn"    "ClCl"           
-##  [4] "dailyReturn"     "Delt"            "HiCl"           
-##  [7] "Lag"             "LoCl"            "LoHi"           
-## [10] "monthlyReturn"   "Next"            "OpCl"           
-## [13] "OpHi"            "OpLo"            "OpOp"           
-## [16] "periodReturn"    "quarterlyReturn" "seriesAccel"    
-## [19] "seriesDecel"     "seriesDecr"      "seriesHi"       
-## [22] "seriesIncr"      "seriesLo"        "weeklyReturn"   
-## [25] "yearlyReturn"   
-## 
-## $TTR
-##  [1] "adjRatios"          "ADX"                "ALMA"              
-##  [4] "aroon"              "ATR"                "BBands"            
-##  [7] "CCI"                "chaikinAD"          "chaikinVolatility" 
-## [10] "CLV"                "CMF"                "CMO"               
-## [13] "DEMA"               "DonchianChannel"    "DPO"               
-## [16] "DVI"                "EMA"                "EMV"               
-## [19] "EVWMA"              "GMMA"               "growth"            
-## [22] "HMA"                "KST"                "lags"              
-## [25] "MACD"               "MFI"                "momentum"          
-## [28] "OBV"                "PBands"             "ROC"               
-## [31] "rollSFM"            "RSI"                "runCor"            
-## [34] "runCov"             "runMAD"             "runMax"            
-## [37] "runMean"            "runMedian"          "runMin"            
-## [40] "runPercentRank"     "runSD"              "runSum"            
-## [43] "runVar"             "SAR"                "SMA"               
-## [46] "SMI"                "SNR"                "stoch"             
-## [49] "TDI"                "TRIX"               "ultimateOscillator"
-## [52] "VHF"                "VMA"                "volatility"        
-## [55] "VWAP"               "VWMA"               "wilderSum"         
-## [58] "williamsAD"         "WMA"                "WPR"               
-## [61] "ZigZag"             "ZLEMA"             
-## 
-## $PerformanceAnalytics
-## [1] "Return.annualized"        "Return.annualized.excess"
-## [3] "Return.clean"             "Return.cumulative"       
-## [5] "Return.excess"            "Return.Geltner"          
-## [7] "zerofill"
 ```
 
 ## Single timeseries
@@ -98,7 +38,7 @@ tq_get("GOOGL", get="stock.prices")
 ```
 
 ```
-## # A tibble: 2,538 x 7
+## # A tibble: 2,541 x 7
 ##    date        open  high   low close   volume adjusted
 ##    <date>     <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl>
 ##  1 2009-01-02  154.  161.  153.  161.  7213700     161.
@@ -111,7 +51,7 @@ tq_get("GOOGL", get="stock.prices")
 ##  8 2009-01-13  156.  160.  155.  157.  8856100     157.
 ##  9 2009-01-14  155.  157.  149.  151. 10924800     151.
 ## 10 2009-01-15  149.  152.  144.  150. 11857100     150.
-## # … with 2,528 more rows
+## # … with 2,531 more rows
 ```
 
 Calculate monthly return of single stock:
@@ -177,7 +117,7 @@ tq_get(c("GOOGL","AMZN","FB","AAPL"), get="stock.prices")
 ```
 
 ```
-## # A tibble: 9,301 x 8
+## # A tibble: 9,313 x 8
 ##    symbol date        open  high   low close   volume adjusted
 ##    <chr>  <date>     <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl>
 ##  1 GOOGL  2009-01-02  154.  161.  153.  161.  7213700     161.
@@ -190,7 +130,7 @@ tq_get(c("GOOGL","AMZN","FB","AAPL"), get="stock.prices")
 ##  8 GOOGL  2009-01-13  156.  160.  155.  157.  8856100     157.
 ##  9 GOOGL  2009-01-14  155.  157.  149.  151. 10924800     151.
 ## 10 GOOGL  2009-01-15  149.  152.  144.  150. 11857100     150.
-## # … with 9,291 more rows
+## # … with 9,303 more rows
 ```
 
 Create a multiple line chart of the closing prices of multiple stocks (again, GAFA). We can show each stock in a different color on the same graph:
