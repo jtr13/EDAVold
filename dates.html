@@ -25,7 +25,7 @@
 <meta name="author" content="Zach Bogart, Joyce Robbins">
 
 
-<meta name="date" content="2019-02-07">
+<meta name="date" content="2019-02-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -636,9 +636,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="30.6" data-path="github.html"><a href="github.html#branching-out"><i class="fa fa-check"></i><b>30.6</b> Branching out</a></li>
 <li class="chapter" data-level="30.7" data-path="github.html"><a href="github.html#going-deeper-1"><i class="fa fa-check"></i><b>30.7</b> Going deeper</a></li>
 </ul></li>
-<li class="chapter" data-level="31" data-path="chapter-index.html"><a href="chapter-index.html"><i class="fa fa-check"></i><b>31</b> Chapter Index by Resource Type</a><ul>
-<li class="chapter" data-level="31.1" data-path="chapter-index.html"><a href="chapter-index.html#overview-24"><i class="fa fa-check"></i><b>31.1</b> Overview</a></li>
-<li class="chapter" data-level="31.2" data-path="chapter-index.html"><a href="chapter-index.html#index"><i class="fa fa-check"></i><b>31.2</b> Index</a></li>
+<li class="chapter" data-level="31" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>31</b> Workflow Notes</a></li>
+<li class="chapter" data-level="32" data-path="chapter-index.html"><a href="chapter-index.html"><i class="fa fa-check"></i><b>32</b> Chapter Index by Resource Type</a><ul>
+<li class="chapter" data-level="32.1" data-path="chapter-index.html"><a href="chapter-index.html#overview-24"><i class="fa fa-check"></i><b>32.1</b> Overview</a></li>
+<li class="chapter" data-level="32.2" data-path="chapter-index.html"><a href="chapter-index.html#index"><i class="fa fa-check"></i><b>32.2</b> Index</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -730,7 +731,7 @@ ddate &lt;-<span class="st"> </span><span class="kw">as.Date</span>(dchar)</code
 <pre><code>## [1] TRUE</code></pre>
 <p>Note that <code>Sys.Date()</code> returns today’s date as a <code>Date</code> class:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.Date</span>()</code></pre>
-<pre><code>## [1] &quot;2019-02-07&quot;</code></pre>
+<pre><code>## [1] &quot;2019-02-14&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="kw">Sys.Date</span>())</code></pre>
 <pre><code>## [1] &quot;Date&quot;</code></pre>
 <p>R has functions to pull particular pieces of information from a date:</p>
@@ -750,16 +751,16 @@ ddate &lt;-<span class="st"> </span><span class="kw">as.Date</span>(dchar)</code
 lubridate<span class="op">::</span><span class="kw">year</span>(today)</code></pre>
 <pre><code>## [1] 2019</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">yday</span>(today)</code></pre>
-<pre><code>## [1] 38</code></pre>
+<pre><code>## [1] 45</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">month</span>(today)</code></pre>
 <pre><code>## [1] 2</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">month</span>(today, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## [1] Feb
 ## 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">mday</span>(today)</code></pre>
-<pre><code>## [1] 7</code></pre>
+<pre><code>## [1] 14</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">week</span>(today)</code></pre>
-<pre><code>## [1] 6</code></pre>
+<pre><code>## [1] 7</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">wday</span>(today)</code></pre>
 <pre><code>## [1] 5</code></pre>
 </div>
