@@ -151,21 +151,20 @@ Let's take the example of `Water Consumption In The New York City`, which is on 
 To securely access the web data, we can use the `RCurl` package (for more resources, see [The RCurl Package](http://www.omegahat.net/RCurl/){target="_blank"}. To be more flexible, we can first download the data to local hard drive and then read them as local files. To download the file, we can use the commands like `curl` : [Downloading files with curl](http://www.compciv.org/recipes/cli/downloading-with-curl/){target="_blank"}, `wget` : [Wget Command Examples](https://www.rosehosting.com/blog/wget-command-examples/){target="_blank"}. You can also download it with the browser.
 
 
-```
-##   Year New.York.City.Population NYC.Consumption.Million.gallons.per.day.
-## 1 1979                  7102100                                     1512
-## 2 1980                  7071639                                     1506
-## 3 1981                  7089241                                     1309
-## 4 1982                  7109105                                     1382
-## 5 1983                  7181224                                     1424
-## 6 1984                  7234514                                     1465
-##   Per.Capita.Gallons.per.person.per.day.
-## 1                                    213
-## 2                                    213
-## 3                                    185
-## 4                                    194
-## 5                                    198
-## 6                                    203
+```r
+# not run {eval = FALSE} not working on some machines
+
+library('RCurl')
+
+# specify the url link to the data source
+url <- "https://data.cityofnewyork.us/api/views/ia2d-e54m/rows.csv"
+
+# read the data to memory
+url_data <- getURI(url)
+
+# we use textConnection to tell R to read data in text format
+df <- read.csv(textConnection(url_data), sep = ",", header = TRUE)
+head(df)
 ```
 
 ### Directly read web source into the workspace

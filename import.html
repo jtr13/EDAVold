@@ -25,7 +25,7 @@
 <meta name="author" content="Zach Bogart, Joyce Robbins">
 
 
-<meta name="date" content="2019-02-14">
+<meta name="date" content="2019-02-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -261,7 +261,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.2" data-path="contribute.html"><a href="contribute.html#submit-an-issue"><i class="fa fa-check"></i><b>4.3.2</b> Submit an issue</a></li>
 <li class="chapter" data-level="4.3.3" data-path="contribute.html"><a href="contribute.html#solve-an-open-issue"><i class="fa fa-check"></i><b>4.3.3</b> Solve an open issue</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="contribute.html"><a href="contribute.html#resources-1"><i class="fa fa-check"></i><b>4.4</b> Resources</a></li>
+<li class="chapter" data-level="4.4" data-path="contribute.html"><a href="contribute.html#ways-you-can-contribute-need-to-use-git"><i class="fa fa-check"></i><b>4.4</b> Ways you can contribute (need to use Git)</a></li>
+<li class="chapter" data-level="4.5" data-path="contribute.html"><a href="contribute.html#resources-1"><i class="fa fa-check"></i><b>4.5</b> Resources</a></li>
 </ul></li>
 <li class="part"><span><b>II Continuous Variables</b></span></li>
 <li class="chapter" data-level="5" data-path="histo.html"><a href="histo.html"><i class="fa fa-check"></i><b>5</b> Chart: Histogram</a><ul>
@@ -796,20 +797,19 @@ df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(raw_json_
 <div id="scrape-web-data-to-local-spacememory-before-importing-it" class="section level3">
 <h3><span class="header-section-number">21.4.1</span> Scrape web data to local space/memory before importing it</h3>
 <p>To securely access the web data, we can use the <code>RCurl</code> package (for more resources, see <a href="http://www.omegahat.net/RCurl/" target="_blank">The RCurl Package</a>. To be more flexible, we can first download the data to local hard drive and then read them as local files. To download the file, we can use the commands like <code>curl</code> : <a href="http://www.compciv.org/recipes/cli/downloading-with-curl/" target="_blank">Downloading files with curl</a>, <code>wget</code> : <a href="https://www.rosehosting.com/blog/wget-command-examples/" target="_blank">Wget Command Examples</a>. You can also download it with the browser.</p>
-<pre><code>##   Year New.York.City.Population NYC.Consumption.Million.gallons.per.day.
-## 1 1979                  7102100                                     1512
-## 2 1980                  7071639                                     1506
-## 3 1981                  7089241                                     1309
-## 4 1982                  7109105                                     1382
-## 5 1983                  7181224                                     1424
-## 6 1984                  7234514                                     1465
-##   Per.Capita.Gallons.per.person.per.day.
-## 1                                    213
-## 2                                    213
-## 3                                    185
-## 4                                    194
-## 5                                    198
-## 6                                    203</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># not run {eval = FALSE} not working on some machines</span>
+
+<span class="kw">library</span>(<span class="st">&#39;RCurl&#39;</span>)
+
+<span class="co"># specify the url link to the data source</span>
+url &lt;-<span class="st"> &quot;https://data.cityofnewyork.us/api/views/ia2d-e54m/rows.csv&quot;</span>
+
+<span class="co"># read the data to memory</span>
+url_data &lt;-<span class="st"> </span><span class="kw">getURI</span>(url)
+
+<span class="co"># we use textConnection to tell R to read data in text format</span>
+df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">textConnection</span>(url_data), <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+<span class="kw">head</span>(df)</code></pre>
 </div>
 <div id="directly-read-web-source-into-the-workspace" class="section level3">
 <h3><span class="header-section-number">21.4.2</span> Directly read web source into the workspace</h3>

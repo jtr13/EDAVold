@@ -25,7 +25,7 @@
 <meta name="author" content="Zach Bogart, Joyce Robbins">
 
 
-<meta name="date" content="2019-02-14">
+<meta name="date" content="2019-02-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -261,7 +261,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.2" data-path="contribute.html"><a href="contribute.html#submit-an-issue"><i class="fa fa-check"></i><b>4.3.2</b> Submit an issue</a></li>
 <li class="chapter" data-level="4.3.3" data-path="contribute.html"><a href="contribute.html#solve-an-open-issue"><i class="fa fa-check"></i><b>4.3.3</b> Solve an open issue</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="contribute.html"><a href="contribute.html#resources-1"><i class="fa fa-check"></i><b>4.4</b> Resources</a></li>
+<li class="chapter" data-level="4.4" data-path="contribute.html"><a href="contribute.html#ways-you-can-contribute-need-to-use-git"><i class="fa fa-check"></i><b>4.4</b> Ways you can contribute (need to use Git)</a></li>
+<li class="chapter" data-level="4.5" data-path="contribute.html"><a href="contribute.html#resources-1"><i class="fa fa-check"></i><b>4.5</b> Resources</a></li>
 </ul></li>
 <li class="part"><span><b>II Continuous Variables</b></span></li>
 <li class="chapter" data-level="5" data-path="histo.html"><a href="histo.html"><i class="fa fa-check"></i><b>5</b> Chart: Histogram</a><ul>
@@ -776,23 +777,20 @@ q <span class="op">+</span><span class="st"> </span><span class="kw">theme_minim
 <p><strong>ggthemr</strong> is used to set the theme of ggplot graphs. It has 17 different themes to change the way ggplot graphs look. Use of ggthemr is different from other other packages. We set the theme <em>before</em> using it.</p>
 <div id="ggthemr-examples" class="section level3">
 <h3><span class="header-section-number">28.5.1</span> ggthemr examples</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggthemr</span>(<span class="st">&quot;sky&quot;</span>)</code></pre>
-<pre><code>## Warning: New theme missing the following elements: panel.grid, plot.tag,
-## plot.tag.position</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggthemr</span>(<span class="st">&quot;sky&quot;</span>)
+
+<span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">2.5</span>, <span class="dt">alpha =</span> <span class="fl">0.75</span>)</code></pre>
 <p><img src="themes_and_colors_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggthemr</span>(<span class="st">&quot;flat&quot;</span>)</code></pre>
-<pre><code>## Warning: New theme missing the following elements: panel.grid, plot.tag,
-## plot.tag.position</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggthemr</span>(<span class="st">&quot;flat&quot;</span>)
+
+<span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">2.5</span>, <span class="dt">alpha =</span> <span class="fl">0.75</span>)</code></pre>
 <p><img src="themes_and_colors_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Interestingly, we can set more parameters to change the themes:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggthemr</span>(<span class="st">&quot;lilac&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;outer&quot;</span>, <span class="dt">layout =</span> <span class="st">&quot;scientific&quot;</span>, <span class="dt">spacing =</span> <span class="dv">2</span>)</code></pre>
-<pre><code>## Warning: New theme missing the following elements: panel.grid, plot.tag,
-## plot.tag.position</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggthemr</span>(<span class="st">&quot;lilac&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;outer&quot;</span>, <span class="dt">layout =</span> <span class="st">&quot;scientific&quot;</span>, <span class="dt">spacing =</span> <span class="dv">2</span>)
+
+<span class="kw">ggplot</span>(subset, <span class="kw">aes</span>(<span class="dt">x =</span> clarity, <span class="dt">y =</span> carat, <span class="dt">color =</span> cut)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">2.5</span>, <span class="dt">alpha =</span> <span class="fl">0.75</span>)</code></pre>
 <p><img src="themes_and_colors_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>

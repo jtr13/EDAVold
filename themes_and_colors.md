@@ -147,14 +147,7 @@ show_col(colorblind_pal()(6))
 
 ```r
 ggthemr("sky")
-```
 
-```
-## Warning: New theme missing the following elements: panel.grid, plot.tag,
-## plot.tag.position
-```
-
-```r
 ggplot(subset, aes(x = clarity, y = carat, color = cut)) +
   geom_point(size = 2.5, alpha = 0.75)
 ```
@@ -164,14 +157,7 @@ ggplot(subset, aes(x = clarity, y = carat, color = cut)) +
 
 ```r
 ggthemr("flat")
-```
 
-```
-## Warning: New theme missing the following elements: panel.grid, plot.tag,
-## plot.tag.position
-```
-
-```r
 ggplot(subset, aes(x = clarity, y = carat, color = cut)) +
   geom_point(size = 2.5, alpha = 0.75)
 ```
@@ -183,14 +169,7 @@ Interestingly, we can set more parameters to change the themes:
 
 ```r
 ggthemr("lilac", type = "outer", layout = "scientific", spacing = 2)
-```
 
-```
-## Warning: New theme missing the following elements: panel.grid, plot.tag,
-## plot.tag.position
-```
-
-```r
 ggplot(subset, aes(x = clarity, y = carat, color = cut)) +
   geom_point(size = 2.5, alpha = 0.75)
 ```

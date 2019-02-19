@@ -25,7 +25,7 @@
 <meta name="author" content="Zach Bogart, Joyce Robbins">
 
 
-<meta name="date" content="2019-02-14">
+<meta name="date" content="2019-02-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -261,7 +261,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.2" data-path="contribute.html"><a href="contribute.html#submit-an-issue"><i class="fa fa-check"></i><b>4.3.2</b> Submit an issue</a></li>
 <li class="chapter" data-level="4.3.3" data-path="contribute.html"><a href="contribute.html#solve-an-open-issue"><i class="fa fa-check"></i><b>4.3.3</b> Solve an open issue</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="contribute.html"><a href="contribute.html#resources-1"><i class="fa fa-check"></i><b>4.4</b> Resources</a></li>
+<li class="chapter" data-level="4.4" data-path="contribute.html"><a href="contribute.html#ways-you-can-contribute-need-to-use-git"><i class="fa fa-check"></i><b>4.4</b> Ways you can contribute (need to use Git)</a></li>
+<li class="chapter" data-level="4.5" data-path="contribute.html"><a href="contribute.html#resources-1"><i class="fa fa-check"></i><b>4.5</b> Resources</a></li>
 </ul></li>
 <li class="part"><span><b>II Continuous Variables</b></span></li>
 <li class="chapter" data-level="5" data-path="histo.html"><a href="histo.html"><i class="fa fa-check"></i><b>5</b> Chart: Histogram</a><ul>
@@ -731,15 +732,15 @@ ddate &lt;-<span class="st"> </span><span class="kw">as.Date</span>(dchar)</code
 <pre><code>## [1] TRUE</code></pre>
 <p>Note that <code>Sys.Date()</code> returns today’s date as a <code>Date</code> class:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.Date</span>()</code></pre>
-<pre><code>## [1] &quot;2019-02-14&quot;</code></pre>
+<pre><code>## [1] &quot;2019-02-19&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="kw">Sys.Date</span>())</code></pre>
 <pre><code>## [1] &quot;Date&quot;</code></pre>
 <p>R has functions to pull particular pieces of information from a date:</p>
 <pre class="sourceCode r"><code class="sourceCode r">today &lt;-<span class="st"> </span><span class="kw">Sys.Date</span>()
 <span class="kw">weekdays</span>(today)</code></pre>
-<pre><code>## [1] &quot;Thursday&quot;</code></pre>
+<pre><code>## [1] &quot;Tuesday&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">weekdays</span>(today, <span class="dt">abbreviate =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre><code>## [1] &quot;Thu&quot;</code></pre>
+<pre><code>## [1] &quot;Tue&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">months</span>(today)</code></pre>
 <pre><code>## [1] &quot;February&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">months</span>(today, <span class="dt">abbreviate =</span> <span class="ot">TRUE</span>)</code></pre>
@@ -751,18 +752,18 @@ ddate &lt;-<span class="st"> </span><span class="kw">as.Date</span>(dchar)</code
 lubridate<span class="op">::</span><span class="kw">year</span>(today)</code></pre>
 <pre><code>## [1] 2019</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">yday</span>(today)</code></pre>
-<pre><code>## [1] 45</code></pre>
+<pre><code>## [1] 50</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">month</span>(today)</code></pre>
 <pre><code>## [1] 2</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">month</span>(today, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## [1] Feb
 ## 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">mday</span>(today)</code></pre>
-<pre><code>## [1] 14</code></pre>
+<pre><code>## [1] 19</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">week</span>(today)</code></pre>
-<pre><code>## [1] 7</code></pre>
+<pre><code>## [1] 8</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">wday</span>(today)</code></pre>
-<pre><code>## [1] 5</code></pre>
+<pre><code>## [1] 3</code></pre>
 </div>
 <div id="plotting-with-a-date-class-variable" class="section level2">
 <h2><span class="header-section-number">25.4</span> Plotting with a <code>Date</code> class variable</h2>
