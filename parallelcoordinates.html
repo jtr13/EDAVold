@@ -357,7 +357,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.3" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#using-splines"><i class="fa fa-check"></i><b>10.7.3</b> Using splines</a></li>
 <li class="chapter" data-level="10.7.4" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#adding-boxplots-to-the-graph"><i class="fa fa-check"></i><b>10.7.4</b> Adding boxplots to the graph</a></li>
 </ul></li>
-<li class="chapter" data-level="10.8" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#external-resources-4"><i class="fa fa-check"></i><b>10.8</b> External Resources</a></li>
+<li class="chapter" data-level="10.8" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#other-packages"><i class="fa fa-check"></i><b>10.8</b> Other Packages</a></li>
+<li class="chapter" data-level="10.9" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#external-resources-4"><i class="fa fa-check"></i><b>10.9</b> External Resources</a></li>
 </ul></li>
 <li class="part"><span><b>III Categorical Variables</b></span></li>
 <li class="chapter" data-level="11" data-path="bar.html"><a href="bar.html"><i class="fa fa-check"></i><b>11</b> Chart: Bar Chart</a><ul>
@@ -701,7 +702,7 @@ function unhover(element) {
 <em>This chapter originated as a community contribution created by <a href="https://github.com/aashnakanuga" target="_blank">aashnakanuga</a></em></p>
 <div id="overview-7" class="section level2">
 <h2><span class="header-section-number">10.1</span> Overview</h2>
-<p>This section covers how to create parallel coordinate plots</p>
+<p>This section covers how to create parallel coordinate plots with the <code>GGally</code> package.</p>
 </div>
 <div id="tldr-3" class="section level2">
 <h2><span class="header-section-number">10.2</span> tl;dr</h2>
@@ -868,8 +869,18 @@ g8&lt;-<span class="kw">ggparcoord</span>(df2, <span class="dt">columns =</span>
 <p>You can add boxplots to your graph, which can be useful for observing the trend of median values. Generally, they are added to data with a lot of variables - for example, if we plot time series data.</p>
 </div>
 </div>
+<div id="other-packages" class="section level2">
+<h2><span class="header-section-number">10.8</span> Other Packages</h2>
+<p>There are a number of packages that have functions for creating parallel coordinate plots: [to do: add links]</p>
+<ul>
+<li><a href="http://www.buildingwidgets.com/blog/2015/1/30/week-04-interactive-parallel-coordinates-1"><code>parcoords::parcoords()</code></a> – great interactive option <br> use <code>devtools::install_github(“timelyportfolio/parcoords”)</code> <br></li>
+<li><code>ggplot2::geom_line()</code> – not specific to parallel coordinate plots but easy to create with the <code>group=</code> parameter.</li>
+<li><code>lattice::parallelplot()</code></li>
+<li><code>MASS::parcoord()</code></li>
+</ul>
+</div>
 <div id="external-resources-4" class="section level2">
-<h2><span class="header-section-number">10.8</span> External Resources</h2>
+<h2><span class="header-section-number">10.9</span> External Resources</h2>
 <ul>
 <li><a href="https://www.rdocumentation.org/packages/GGally/versions/1.4.0/topics/ggparcoord" target="_blank">Introduction to parallel coordinate plots</a>: An excellent resource giving details of all attributes and possible values. Also has some good examples.</li>
 <li><a href="https://plot.ly/r/parallel-coordinates-plot/" target="_blank">How to create interactive parallel coordinate plots</a>: a nice walkthrough on using plotly to create an interactive parallel coordinate plot.</li>
