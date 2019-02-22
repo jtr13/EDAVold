@@ -72,8 +72,9 @@ tidydf <- df %>%
   gather(key = "Test", value = "Mean", "Reading", "Math", "Writing")
 
 ggplot(tidydf, aes(Mean, `School Name`, color = Test)) +
-  geom_point() + theme_dotplot +
-  ggtitle("Schools are sorted alphabetically", sub = "not the best option")
+  geom_point() +
+  ggtitle("Schools are sorted alphabetically", sub = "not the best option") + ylab("") +
+  theme_dotplot
 ```
 
 <img src="cleveland_files/figure-html/unnamed-chunk-2-1.png" width="672" />
@@ -91,7 +92,7 @@ Suppose we wish to sort the schools by mean reading score. We can do this by lim
 ggplot(tidydf, 
        aes(Mean, fct_reorder2(`School Name`, Test=="Reading", Mean, .desc = FALSE),
            color = Test)) +
-  geom_point() + ggtitle("Schools sorted by Reading mean") +
+  geom_point() + ggtitle("Schools sorted by Reading mean") + ylab("") +
   theme_dotplot 
 ```
 
@@ -108,7 +109,8 @@ If a factor level is not specified, `fct_reorder2()` by default will sort on the
 ggplot(tidydf, 
        aes(Mean, fct_reorder2(`School Name`, Test, Mean, .desc = FALSE),
            color = Test)) +
-  geom_point() + ggtitle("Schools sorted by Writing mean") + theme_dotplot
+  geom_point() + ggtitle("Schools sorted by Writing mean") + ylab("") +
+  theme_dotplot
 ```
 
 <img src="cleveland_files/figure-html/unnamed-chunk-4-1.png" width="672" />
@@ -124,7 +126,7 @@ Change the default sorting function, `last2()`, to `first2()`:
 ggplot(tidydf, 
        aes(Mean, fct_reorder2(`School Name`, Test, Mean, .fun = first2, .desc = FALSE),
            color = Test)) +
-  geom_point() + ggtitle("Schools sorted by Math mean") + 
+  geom_point() + ggtitle("Schools sorted by Math mean") + ylab("") +
   theme_dotplot
 ```
 
