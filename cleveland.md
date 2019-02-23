@@ -98,7 +98,7 @@ ggplot(tidydf,
 
 <img src="cleveland_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
-(Thanks to ___ ___ for suggesting this simple method, which does not require the reordering of factor levels.)
+(Many thanks to Zeyu Qiu for the tip on setting `.x` directly to the factor level, a much better approach than reordering factor levels to conform with `fct_reorder2()` defaults, as discussed below.)
 
 While this is the go-to method, there may be cases in which it's easier to specify that you wish to sort by the first or the last factor level of the first sorting variable (`Test`), without spelling it out. 
 

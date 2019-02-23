@@ -764,7 +764,7 @@ tidydf &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Schools sorted by Reading mean&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span>
 <span class="st">  </span>theme_dotplot </code></pre>
 <p><img src="cleveland_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>(Thanks to ___ ___ for suggesting this simple method, which does not require the reordering of factor levels.)</p>
+<p>(Many thanks to Zeyu Qiu for the tip on setting <code>.x</code> directly to the factor level, a much better approach than reordering factor levels to conform with <code>fct_reorder2()</code> defaults, as discussed below.)</p>
 <p>While this is the go-to method, there may be cases in which it’s easier to specify that you wish to sort by the first or the last factor level of the first sorting variable (<code>Test</code>), without spelling it out.</p>
 <p>If a factor level is not specified, <code>fct_reorder2()</code> by default will sort on the <em>last</em> factor level of <code>.x</code>. In this case, “Writing” is the last factor level of <code>Test</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(tidydf, 
