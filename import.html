@@ -25,7 +25,7 @@
 <meta name="author" content="Zach Bogart, Joyce Robbins">
 
 
-<meta name="date" content="2019-02-26">
+<meta name="date" content="2019-02-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -523,8 +523,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="22.3.3" data-path="import.html"><a href="import.html#import-json-file"><i class="fa fa-check"></i><b>22.3.3</b> Import JSON file</a></li>
 </ul></li>
 <li class="chapter" data-level="22.4" data-path="import.html"><a href="import.html#import-web-data"><i class="fa fa-check"></i><b>22.4</b> Import web data</a><ul>
-<li class="chapter" data-level="22.4.1" data-path="import.html"><a href="import.html#scrape-web-data-to-local-spacememory-before-importing-it"><i class="fa fa-check"></i><b>22.4.1</b> Scrape web data to local space/memory before importing it</a></li>
-<li class="chapter" data-level="22.4.2" data-path="import.html"><a href="import.html#directly-read-web-source-into-the-workspace"><i class="fa fa-check"></i><b>22.4.2</b> Directly read web source into the workspace</a></li>
+<li class="chapter" data-level="22.4.1" data-path="import.html"><a href="import.html#read-a-data-file-directly-into-the-workspace"><i class="fa fa-check"></i><b>22.4.1</b> Read a data file directly into the workspace</a></li>
+<li class="chapter" data-level="22.4.2" data-path="import.html"><a href="import.html#scrape-an-html-table-using-rvest"><i class="fa fa-check"></i><b>22.4.2</b> Scrape an HTML table using <code>rvest</code></a></li>
 </ul></li>
 <li class="chapter" data-level="22.5" data-path="import.html"><a href="import.html#import-data-from-database"><i class="fa fa-check"></i><b>22.5</b> Import data from database</a></li>
 <li class="chapter" data-level="22.6" data-path="import.html"><a href="import.html#more-resources"><i class="fa fa-check"></i><b>22.6</b> More resources</a></li>
@@ -719,35 +719,28 @@ function unhover(element) {
 <div id="import-built-in-dataset" class="section level2">
 <h2><span class="header-section-number">22.2</span> Import built-in dataset</h2>
 <p>R comes with quite a lot of built-in datasets, which R users can play around with. You are probably familiar with many of the built-in datasets like <code>iris</code>, <code>mtcars</code>, <code>beavers</code>, <code>dataset</code>, etc. Since datasets are preloaded, we can manipulate them directly. To see a full list of built-in R datasets and their descriptions, please refer to <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html" target="_blank">The R Datasets Package</a>. We can also run <code>data()</code> to view the full list.</p>
-<p>After we find the dataset we want, we can use the function <code>data(package_name)</code> to load the built-in dataset into our workspace. For example, here we want to load the <code>iris</code> dataset:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load data</span>
-<span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)
-<span class="kw">head</span>(iris)</code></pre>
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1          5.1         3.5          1.4         0.2  setosa
-## 2          4.9         3.0          1.4         0.2  setosa
-## 3          4.7         3.2          1.3         0.2  setosa
-## 4          4.6         3.1          1.5         0.2  setosa
-## 5          5.0         3.6          1.4         0.2  setosa
-## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
-<p>Besides the datasets above, there are other datasets within specific R packages. To see a full list of data in various packages, run <code>??datasets</code> in the RStudio console.
-For exmaple, say we want to load the <code>diamonds</code> dataset from the <code>ggplot2</code> package. To load the <code>diamonds</code> data, first we need to load the <code>ggplot2</code> library:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-
-<span class="kw">data</span>(<span class="st">&quot;diamonds&quot;</span>)
-<span class="kw">head</span>(diamonds)</code></pre>
-<pre><code>## # A tibble: 6 x 10
-##   carat cut       color clarity depth table price     x     y     z
-##   &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 0.23  Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
-## 2 0.21  Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
-## 3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31
-## 4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
-## 5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75
-## 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48</code></pre>
+<p>Most datasets are <a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Data-in-packages">lazy-loaded</a>, which means that although they don’t appear as objects in the global environment, they are there when you reference them:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(iris)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<p>However there are some packages that do not use lazy loading, and therefore you must use <code>data()</code> to access them:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lawstat)</code></pre>
+<pre><code>## Error in library(lawstat): there is no package called &#39;lawstat&#39;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(zuni)</code></pre>
+<pre><code>## Error in str(zuni): object &#39;zuni&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(zuni)
+<span class="kw">str</span>(zuni)</code></pre>
+<pre><code>## Error in str(zuni): object &#39;zuni&#39; not found</code></pre>
+<p>Packages that we use that fall in this category include: <code>lawstat</code>, <code>pgmm</code>, and others. (Submit a PR to add to this list.)</p>
+<p>Besides the datasets above, there are other datasets within specific R packages. To see a full list of data in various packages, run <code>??datasets</code> in the RStudio console.</p>
 </div>
 <div id="import-local-data" class="section level2">
 <h2><span class="header-section-number">22.3</span> Import local data</h2>
+<p>This section covers base R functions for reading data. For tidyverse versions (<code>read_csv</code>, <code>read_delim</code>, <code>read_table</code>, etc.) see the <a href="https://r4ds.had.co.nz/data-import.html">Data Import chapter</a> of *R for Data Science.)</p>
 <div id="import-text-file" class="section level3">
 <h3><span class="header-section-number">22.3.1</span> Import text file</h3>
 <p>The function <code>read.table()</code> is the most general function for reading text files. To use this function, we need to specify how we read the file. In other words, we need to specify some basic parameters like <code>sep</code>, <code>header</code>, etc. <code>sep</code> represents the separator, and <code>header</code> is set to <code>TRUE</code> if we want to read the first line as the header information. Other parameters are also useful in different cases. For example, <code>na.strings</code> indicates strings should be regarded as NA values.</p>
@@ -808,48 +801,84 @@ df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(raw_json_
 </div>
 <div id="import-web-data" class="section level2">
 <h2><span class="header-section-number">22.4</span> Import web data</h2>
-<p>We can import data from the web, as long as we have the link to the dataset. Basically, there are two ways to import web data. One way is to scrape the dataset with the link before we import that data into the R workspace. The other way is to import the dataset from the web to our workspace directly.</p>
+<div id="read-a-data-file-directly-into-the-workspace" class="section level3">
+<h3><span class="header-section-number">22.4.1</span> Read a data file directly into the workspace</h3>
 <p>Let’s take the example of <code>Water Consumption In The New York City</code>, which is on the <a href="https://data.cityofnewyork.us/Environment/Water-Consumption-In-The-New-York-City/ia2d-e54m" target="&quot;_blank">NYC Open Data website</a>.</p>
-<div id="scrape-web-data-to-local-spacememory-before-importing-it" class="section level3">
-<h3><span class="header-section-number">22.4.1</span> Scrape web data to local space/memory before importing it</h3>
-<p>To securely access the web data, we can use the <code>RCurl</code> package (for more resources, see <a href="http://www.omegahat.net/RCurl/" target="_blank">The RCurl Package</a>. To be more flexible, we can first download the data to local hard drive and then read them as local files. To download the file, we can use the commands like <code>curl</code> : <a href="http://www.compciv.org/recipes/cli/downloading-with-curl/" target="_blank">Downloading files with curl</a>, <code>wget</code> : <a href="https://www.rosehosting.com/blog/wget-command-examples/" target="_blank">Wget Command Examples</a>. You can also download it with the browser.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># not run {eval = FALSE} not working on some machines</span>
+<p>We can import data from a URL just as we do with local data files.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 
-<span class="kw">library</span>(<span class="st">&#39;RCurl&#39;</span>)
-
-<span class="co"># specify the url link to the data source</span>
-url &lt;-<span class="st"> &quot;https://data.cityofnewyork.us/api/views/ia2d-e54m/rows.csv&quot;</span>
-
-<span class="co"># read the data to memory</span>
-url_data &lt;-<span class="st"> </span><span class="kw">getURI</span>(url)
-
-<span class="co"># we use textConnection to tell R to read data in text format</span>
-df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">textConnection</span>(url_data), <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-<span class="kw">head</span>(df)</code></pre>
-</div>
-<div id="directly-read-web-source-into-the-workspace" class="section level3">
-<h3><span class="header-section-number">22.4.2</span> Directly read web source into the workspace</h3>
-<p>We still use the water consumption data as an example. First, we specify the correct data URL, and then read the data just like reading the local dataset:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># specify the URL link to the data source</span>
+<span class="co"># specify the URL link to the data source</span>
 url &lt;-<span class="st"> &quot;https://data.cityofnewyork.us/api/views/ia2d-e54m/rows.csv&quot;</span>
 
 <span class="co"># read the URL</span>
-df &lt;-<span class="st"> </span><span class="kw">read.table</span>(url, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+df &lt;-<span class="st"> </span><span class="kw">read_csv</span>(url)
 <span class="kw">head</span>(df)</code></pre>
-<pre><code>##   Year New.York.City.Population NYC.Consumption.Million.gallons.per.day.
-## 1 1979                  7102100                                     1512
-## 2 1980                  7071639                                     1506
-## 3 1981                  7089241                                     1309
-## 4 1982                  7109105                                     1382
-## 5 1983                  7181224                                     1424
-## 6 1984                  7234514                                     1465
-##   Per.Capita.Gallons.per.person.per.day.
-## 1                                    213
-## 2                                    213
-## 3                                    185
-## 4                                    194
-## 5                                    198
-## 6                                    203</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##    Year `New York City Pop… `NYC Consumption(Millio… `Per Capita(Gallons p…
+##   &lt;dbl&gt;               &lt;dbl&gt;                    &lt;dbl&gt;                  &lt;dbl&gt;
+## 1  1979             7102100                     1512                    213
+## 2  1980             7071639                     1506                    213
+## 3  1981             7089241                     1309                    185
+## 4  1982             7109105                     1382                    194
+## 5  1983             7181224                     1424                    198
+## 6  1984             7234514                     1465                    203</code></pre>
+</div>
+<div id="scrape-an-html-table-using-rvest" class="section level3">
+<h3><span class="header-section-number">22.4.2</span> Scrape an HTML table using <code>rvest</code></h3>
+<p>Sometimes we wish to import data that appears as an HTML table on a web page. It might be a little messy, so best to first check if there’s another means for importing the data before moving forward. If not, <code>rvest</code> makes the process as painless as possible.</p>
+<p>Here’s a simple example. Suppose we wish to work with the borough data found on Wikipedia’s <a href="https://en.wikipedia.org/wiki/Boroughs_of_New_York_City">Boroughs of New York City</a> page.</p>
+<p>First we read the page, find the tables, and then parse them with <code>html_table</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(rvest)
+nyctables &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://en.wikipedia.org/wiki/Boroughs_of_New_York_City&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;table&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">html_table</span>(<span class="dt">fill =</span> <span class="ot">TRUE</span>)</code></pre>
+<p><code>nyctables</code> is a list with three elements, one for each table on the page.</p>
+<p>Next we can check each list item until we find what we want, consulting the original web page to get a sense of where our table is located. (There are other methods for identifying what you need from a web page in more complex situations.)</p>
+<p>It turns out that the table we want is the first list element:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mytable &lt;-<span class="st"> </span>nyctables[[<span class="dv">1</span>]]
+<span class="kw">head</span>(mytable, <span class="dv">3</span>)</code></pre>
+<pre><code>##   New York City&#39;s five boroughsvte New York City&#39;s five boroughsvte
+## 1                     Jurisdiction                     Jurisdiction
+## 2                          Borough                           County
+## 3                        The Bronx                            Bronx
+##   New York City&#39;s five boroughsvte New York City&#39;s five boroughsvte
+## 1                       Population           Gross Domestic Product
+## 2               Estimate (2017)[3]                 billions(US$)[4]
+## 3                        1,471,160                           28.787
+##   New York City&#39;s five boroughsvte New York City&#39;s five boroughsvte
+## 1           Gross Domestic Product                        Land area
+## 2                  per capita(US$)                     square miles
+## 3                           19,570                            42.10
+##   New York City&#39;s five boroughsvte New York City&#39;s five boroughsvte
+## 1                        Land area                          Density
+## 2                         squarekm                 persons / sq. mi
+## 3                           109.04                           34,653
+##   New York City&#39;s five boroughsvte
+## 1                          Density
+## 2                  persons /sq. km
+## 3                           13,231</code></pre>
+<p>We can see that the column names are all the same due to the merged header in the original. We’ll fix the column names and remove the rows we don’t need:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(mytable) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;borough&quot;</span>, <span class="st">&quot;county&quot;</span>, <span class="st">&quot;population&quot;</span>, <span class="st">&quot;gdp_total&quot;</span>, <span class="st">&quot;gdp_per_capita&quot;</span>,
+                       <span class="st">&quot;land_sq_miles&quot;</span>, <span class="st">&quot;land_sq_km&quot;</span>, <span class="st">&quot;density_sq_miles&quot;</span>, <span class="st">&quot;density_sq_km&quot;</span>)
+
+<span class="co"># remove unneeded rows </span>
+mytable &lt;-<span class="st"> </span>mytable <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">10</span>))
+
+<span class="co"># convert character to numeric data where appropriate</span>
+mytable &lt;-<span class="st"> </span>mytable <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(population<span class="op">:</span>density_sq_km), parse_number)</code></pre>
+<p>Now we’re good to go. Let’s draw a plot!</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">999</span>) <span class="co"># turn off scientific notation</span>
+mytable <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(borough, gdp_per_capita, land_sq_miles, population) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(var, value, <span class="op">-</span>borough) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value, <span class="kw">fct_reorder2</span>(borough, var<span class="op">==</span><span class="st">&quot;gdp_per_capita&quot;</span>, value, <span class="dt">.desc =</span> <span class="ot">FALSE</span>),
+             <span class="dt">color =</span> borough)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>var, <span class="dt">ncol =</span> <span class="dv">1</span>, <span class="dt">scales =</span> <span class="st">&quot;free_x&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="ot">FALSE</span>)</code></pre>
+<p><img src="import_data_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 </div>
 <div id="import-data-from-database" class="section level2">

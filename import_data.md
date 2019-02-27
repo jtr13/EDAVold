@@ -15,49 +15,58 @@ This section covers how to import data from built-in R sources, local files, web
 
 R comes with quite a lot of built-in datasets, which R users can play around with. You are probably familiar with many of the built-in datasets like `iris`, `mtcars`, `beavers`, `dataset`, etc. Since datasets are preloaded, we can manipulate them directly. To see a full list of built-in R datasets and their descriptions, please refer to [The R Datasets Package](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html){target="_blank"}. We can also run `data()` to view the full list.
 
-After we find the dataset we want, we can use the function `data(package_name)` to load the built-in dataset into our workspace. For example, here we want to load the `iris` dataset:
+Most datasets are [lazy-loaded](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Data-in-packages), which means that although they don't appear as objects in the global environment, they are there when you reference them:
 
 
 ```r
-# load data
-data("iris")
-head(iris)
+str(iris)
 ```
 
 ```
-##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1          5.1         3.5          1.4         0.2  setosa
-## 2          4.9         3.0          1.4         0.2  setosa
-## 3          4.7         3.2          1.3         0.2  setosa
-## 4          4.6         3.1          1.5         0.2  setosa
-## 5          5.0         3.6          1.4         0.2  setosa
-## 6          5.4         3.9          1.7         0.4  setosa
+## 'data.frame':	150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
 ```
+
+However there are some packages that do not use lazy loading, and therefore you must use `data()` to access them:
+
+
+```r
+library(lawstat)
+```
+
+```
+## Error in library(lawstat): there is no package called 'lawstat'
+```
+
+```r
+str(zuni)
+```
+
+```
+## Error in str(zuni): object 'zuni' not found
+```
+
+```r
+data(zuni)
+str(zuni)
+```
+
+```
+## Error in str(zuni): object 'zuni' not found
+```
+
+Packages that we use that fall in this category include: `lawstat`, `pgmm`, and others. (Submit a PR to add to this list.)
 
 Besides the datasets above, there are other datasets within specific R packages. To see a full list of data in various packages, run `??datasets` in the RStudio console.
-For exmaple, say we want to load the `diamonds` dataset from the `ggplot2` package. To load the `diamonds` data, first we need to load the `ggplot2` library:
 
-
-```r
-library(ggplot2)
-
-data("diamonds")
-head(diamonds)
-```
-
-```
-## # A tibble: 6 x 10
-##   carat cut       color clarity depth table price     x     y     z
-##   <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl>
-## 1 0.23  Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
-## 2 0.21  Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
-## 3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31
-## 4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
-## 5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75
-## 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
-```
 
 ## Import local data
+
+This section covers base R functions for reading data. For tidyverse versions (`read_csv`, `read_delim`, `read_table`, etc.) see the [Data Import chapter](https://r4ds.had.co.nz/data-import.html) of *R for Data Science.)
 
 ### Import text file
 
@@ -142,61 +151,121 @@ head(df)
 
 ## Import web data
 
-We can import data from the web, as long as we have the link to the dataset. Basically, there are two ways to import web data. One way is to scrape the dataset with the link before we import that data into the R workspace. The other way is to import the dataset from the web to our workspace directly. 
+### Read a data file directly into the workspace
 
 Let's take the example of `Water Consumption In The New York City`, which is on the [NYC Open Data website](https://data.cityofnewyork.us/Environment/Water-Consumption-In-The-New-York-City/ia2d-e54m){target="_blank}. 
 
-### Scrape web data to local space/memory before importing it
-
-To securely access the web data, we can use the `RCurl` package (for more resources, see [The RCurl Package](http://www.omegahat.net/RCurl/){target="_blank"}. To be more flexible, we can first download the data to local hard drive and then read them as local files. To download the file, we can use the commands like `curl` : [Downloading files with curl](http://www.compciv.org/recipes/cli/downloading-with-curl/){target="_blank"}, `wget` : [Wget Command Examples](https://www.rosehosting.com/blog/wget-command-examples/){target="_blank"}. You can also download it with the browser.
+We can import data from a URL just as we do with local data files.
 
 
 ```r
-# not run {eval = FALSE} not working on some machines
+library(tidyverse)
 
-library('RCurl')
-
-# specify the url link to the data source
-url <- "https://data.cityofnewyork.us/api/views/ia2d-e54m/rows.csv"
-
-# read the data to memory
-url_data <- getURI(url)
-
-# we use textConnection to tell R to read data in text format
-df <- read.csv(textConnection(url_data), sep = ",", header = TRUE)
-head(df)
-```
-
-### Directly read web source into the workspace
-
-We still use the water consumption data as an example. First, we specify the correct data URL, and then read the data just like reading the local dataset:
-
-
-```r
 # specify the URL link to the data source
 url <- "https://data.cityofnewyork.us/api/views/ia2d-e54m/rows.csv"
 
 # read the URL
-df <- read.table(url, sep = ",", header = TRUE)
+df <- read_csv(url)
 head(df)
 ```
 
 ```
-##   Year New.York.City.Population NYC.Consumption.Million.gallons.per.day.
-## 1 1979                  7102100                                     1512
-## 2 1980                  7071639                                     1506
-## 3 1981                  7089241                                     1309
-## 4 1982                  7109105                                     1382
-## 5 1983                  7181224                                     1424
-## 6 1984                  7234514                                     1465
-##   Per.Capita.Gallons.per.person.per.day.
-## 1                                    213
-## 2                                    213
-## 3                                    185
-## 4                                    194
-## 5                                    198
-## 6                                    203
+## # A tibble: 6 x 4
+##    Year `New York City Pop… `NYC Consumption(Millio… `Per Capita(Gallons p…
+##   <dbl>               <dbl>                    <dbl>                  <dbl>
+## 1  1979             7102100                     1512                    213
+## 2  1980             7071639                     1506                    213
+## 3  1981             7089241                     1309                    185
+## 4  1982             7109105                     1382                    194
+## 5  1983             7181224                     1424                    198
+## 6  1984             7234514                     1465                    203
 ```
+
+### Scrape an HTML table using `rvest`
+
+Sometimes we wish to import data that appears as an HTML table on a web page. It might be a little messy, so best to first check if there's another means for importing the data before moving forward. If not, `rvest` makes the process as painless as possible.
+
+Here's a simple example. Suppose we wish to work with the borough data found on Wikipedia's [Boroughs of New York City](https://en.wikipedia.org/wiki/Boroughs_of_New_York_City) page.
+
+First we read the page, find the tables, and then parse them with `html_table`:
+
+
+```r
+library(tidyverse)
+library(rvest)
+nyctables <- read_html("https://en.wikipedia.org/wiki/Boroughs_of_New_York_City") %>% 
+  html_nodes("table") %>% 
+  html_table(fill = TRUE)
+```
+
+`nyctables` is a list with three elements, one for each table on the page.
+
+Next we can check each list item until we find what we want, consulting the original web page to get a sense of where our table is located. (There are other methods for identifying what you need from a web page in more complex situations.)
+
+It turns out that the table we want is the first list element:
+
+
+```r
+mytable <- nyctables[[1]]
+head(mytable, 3)
+```
+
+```
+##   New York City's five boroughsvte New York City's five boroughsvte
+## 1                     Jurisdiction                     Jurisdiction
+## 2                          Borough                           County
+## 3                        The Bronx                            Bronx
+##   New York City's five boroughsvte New York City's five boroughsvte
+## 1                       Population           Gross Domestic Product
+## 2               Estimate (2017)[3]                 billions(US$)[4]
+## 3                        1,471,160                           28.787
+##   New York City's five boroughsvte New York City's five boroughsvte
+## 1           Gross Domestic Product                        Land area
+## 2                  per capita(US$)                     square miles
+## 3                           19,570                            42.10
+##   New York City's five boroughsvte New York City's five boroughsvte
+## 1                        Land area                          Density
+## 2                         squarekm                 persons / sq. mi
+## 3                           109.04                           34,653
+##   New York City's five boroughsvte
+## 1                          Density
+## 2                  persons /sq. km
+## 3                           13,231
+```
+
+We can see that the column names are all the same due to the merged header in the original. We'll fix the column names and remove the rows we don't need:
+
+
+```r
+colnames(mytable) <- c("borough", "county", "population", "gdp_total", "gdp_per_capita",
+                       "land_sq_miles", "land_sq_km", "density_sq_miles", "density_sq_km")
+
+# remove unneeded rows 
+mytable <- mytable %>% slice(-c(1, 2, 10))
+
+# convert character to numeric data where appropriate
+mytable <- mytable %>%
+  mutate_at(vars(population:density_sq_km), parse_number)
+```
+
+Now we're good to go. Let's draw a plot!
+
+
+```r
+options(scipen = 999) # turn off scientific notation
+mytable %>% 
+  slice(1:5) %>% 
+  select(borough, gdp_per_capita, land_sq_miles, population) %>% 
+  gather(var, value, -borough) %>% 
+  ggplot(aes(value, fct_reorder2(borough, var=="gdp_per_capita", value, .desc = FALSE),
+             color = borough)) + geom_point() + ylab("") +
+  facet_wrap(~var, ncol = 1, scales = "free_x") +
+  guides(color = FALSE)
+```
+
+<img src="import_data_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+
+
 
 ## Import data from database
 

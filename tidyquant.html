@@ -25,7 +25,7 @@
 <meta name="author" content="Zach Bogart, Joyce Robbins">
 
 
-<meta name="date" content="2019-02-26">
+<meta name="date" content="2019-02-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -523,8 +523,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="22.3.3" data-path="import.html"><a href="import.html#import-json-file"><i class="fa fa-check"></i><b>22.3.3</b> Import JSON file</a></li>
 </ul></li>
 <li class="chapter" data-level="22.4" data-path="import.html"><a href="import.html#import-web-data"><i class="fa fa-check"></i><b>22.4</b> Import web data</a><ul>
-<li class="chapter" data-level="22.4.1" data-path="import.html"><a href="import.html#scrape-web-data-to-local-spacememory-before-importing-it"><i class="fa fa-check"></i><b>22.4.1</b> Scrape web data to local space/memory before importing it</a></li>
-<li class="chapter" data-level="22.4.2" data-path="import.html"><a href="import.html#directly-read-web-source-into-the-workspace"><i class="fa fa-check"></i><b>22.4.2</b> Directly read web source into the workspace</a></li>
+<li class="chapter" data-level="22.4.1" data-path="import.html"><a href="import.html#read-a-data-file-directly-into-the-workspace"><i class="fa fa-check"></i><b>22.4.1</b> Read a data file directly into the workspace</a></li>
+<li class="chapter" data-level="22.4.2" data-path="import.html"><a href="import.html#scrape-an-html-table-using-rvest"><i class="fa fa-check"></i><b>22.4.2</b> Scrape an HTML table using <code>rvest</code></a></li>
 </ul></li>
 <li class="chapter" data-level="22.5" data-path="import.html"><a href="import.html#import-data-from-database"><i class="fa fa-check"></i><b>22.5</b> Import data from database</a></li>
 <li class="chapter" data-level="22.6" data-path="import.html"><a href="import.html#more-resources"><i class="fa fa-check"></i><b>22.6</b> More resources</a></li>
@@ -734,7 +734,7 @@ function unhover(element) {
 <p>Obtain historical data for single stock (for example, Google):</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get historical data for single stock. e.g. google</span>
 <span class="kw">tq_get</span>(<span class="st">&quot;GOOGL&quot;</span>, <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>)</code></pre>
-<pre><code>## # A tibble: 2,553 x 7
+<pre><code>## # A tibble: 2,554 x 7
 ##    date        open  high   low close   volume adjusted
 ##    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 2009-01-02  154.  161.  153.  161.  7213700     161.
@@ -747,7 +747,7 @@ function unhover(element) {
 ##  8 2009-01-13  156.  160.  155.  157.  8856100     157.
 ##  9 2009-01-14  155.  157.  149.  151. 10924800     151.
 ## 10 2009-01-15  149.  152.  144.  150. 11857100     150.
-## # … with 2,543 more rows</code></pre>
+## # … with 2,544 more rows</code></pre>
 <p>Calculate monthly return of single stock:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate monthly return of single stock</span>
 <span class="kw">tq_get</span>(<span class="kw">c</span>(<span class="st">&quot;GOOGL&quot;</span>), <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>) <span class="op">%&gt;%</span>
@@ -791,7 +791,7 @@ function unhover(element) {
 <p>Obtain historical data for multiple stocks (for example, GAFA):</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get historical data for multiple stocks. e.g. GAFA</span>
 <span class="kw">tq_get</span>(<span class="kw">c</span>(<span class="st">&quot;GOOGL&quot;</span>,<span class="st">&quot;AMZN&quot;</span>,<span class="st">&quot;FB&quot;</span>,<span class="st">&quot;AAPL&quot;</span>), <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>)</code></pre>
-<pre><code>## # A tibble: 9,361 x 8
+<pre><code>## # A tibble: 9,365 x 8
 ##    symbol date        open  high   low close   volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 GOOGL  2009-01-02  154.  161.  153.  161.  7213700     161.
@@ -804,7 +804,7 @@ function unhover(element) {
 ##  8 GOOGL  2009-01-13  156.  160.  155.  157.  8856100     157.
 ##  9 GOOGL  2009-01-14  155.  157.  149.  151. 10924800     151.
 ## 10 GOOGL  2009-01-15  149.  152.  144.  150. 11857100     150.
-## # … with 9,351 more rows</code></pre>
+## # … with 9,355 more rows</code></pre>
 <p>Create a multiple line chart of the closing prices of multiple stocks (again, GAFA). We can show each stock in a different color on the same graph:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a multiple line chart of the closing prices of the four stocks,</span>
 <span class="co"># showing each stock in a different color on the same graph.</span>
