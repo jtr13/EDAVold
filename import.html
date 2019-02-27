@@ -719,24 +719,11 @@ function unhover(element) {
 <div id="import-built-in-dataset" class="section level2">
 <h2><span class="header-section-number">22.2</span> Import built-in dataset</h2>
 <p>R comes with quite a lot of built-in datasets, which R users can play around with. You are probably familiar with many of the built-in datasets like <code>iris</code>, <code>mtcars</code>, <code>beavers</code>, <code>dataset</code>, etc. Since datasets are preloaded, we can manipulate them directly. To see a full list of built-in R datasets and their descriptions, please refer to <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html" target="_blank">The R Datasets Package</a>. We can also run <code>data()</code> to view the full list.</p>
-<p>Most datasets are <a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Data-in-packages">lazy-loaded</a>, which means that although they don’t appear as objects in the global environment, they are there when you reference them:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(iris)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
-##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
-##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
-##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
-##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
-##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
-<p>However there are some packages that do not use lazy loading, and therefore you must use <code>data()</code> to access them:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lawstat)</code></pre>
-<pre><code>## Error in library(lawstat): there is no package called &#39;lawstat&#39;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(zuni)</code></pre>
-<pre><code>## Error in str(zuni): object &#39;zuni&#39; not found</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(zuni)
-<span class="kw">str</span>(zuni)</code></pre>
-<pre><code>## Error in str(zuni): object &#39;zuni&#39; not found</code></pre>
-<p>Packages that we use that fall in this category include: <code>lawstat</code>, <code>pgmm</code>, and others. (Submit a PR to add to this list.)</p>
-<p>Besides the datasets above, there are other datasets within specific R packages. To see a full list of data in various packages, run <code>??datasets</code> in the RStudio console.</p>
+<p>The most convenient option for viewing is <code>??datasets</code> since provides a list of datasets in the Help pane. Clicking on a dataset will bring up its help file. There’s lots of important information about the sources of the data and the meaning of the variables in these help files, so be sure to check them out.</p>
+<p>Most datasets are <a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Data-in-packages">lazy-loaded</a>, which means that although they don’t appear as objects in the global environment, they are there when you reference them. However, for some packages, you must use <code>data()</code> to access the datasets, as follows:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pgmm)
+<span class="kw">data</span>(wine)</code></pre>
+<p>This is a common source of frustration for students: “I installed the library and loaded the package but the data’s not there!” Forewarned is forearmed. Packages that we use that fall in this category include: <code>lawstat</code>, <code>pgmm</code>, and others. (Submit a PR to add to this list.)</p>
 </div>
 <div id="import-local-data" class="section level2">
 <h2><span class="header-section-number">22.3</span> Import local data</h2>
@@ -878,7 +865,7 @@ mytable <span class="op">%&gt;%</span><span class="st"> </span>
              <span class="dt">color =</span> borough)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>var, <span class="dt">ncol =</span> <span class="dv">1</span>, <span class="dt">scales =</span> <span class="st">&quot;free_x&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="ot">FALSE</span>)</code></pre>
-<p><img src="import_data_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="import_data_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 </div>
 <div id="import-data-from-database" class="section level2">

@@ -15,53 +15,17 @@ This section covers how to import data from built-in R sources, local files, web
 
 R comes with quite a lot of built-in datasets, which R users can play around with. You are probably familiar with many of the built-in datasets like `iris`, `mtcars`, `beavers`, `dataset`, etc. Since datasets are preloaded, we can manipulate them directly. To see a full list of built-in R datasets and their descriptions, please refer to [The R Datasets Package](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html){target="_blank"}. We can also run `data()` to view the full list.
 
-Most datasets are [lazy-loaded](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Data-in-packages), which means that although they don't appear as objects in the global environment, they are there when you reference them:
+The most convenient option for viewing is `??datasets` since provides a list of datasets in the Help pane. Clicking on a dataset will bring up its help file. There's lots of important information about the sources of the data and the meaning of the variables in these help files, so be sure to check them out.
+
+Most datasets are [lazy-loaded](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Data-in-packages), which means that although they don't appear as objects in the global environment, they are there when you reference them. However, for some packages, you must use `data()` to access the datasets, as follows:
 
 
 ```r
-str(iris)
+library(pgmm)
+data(wine)
 ```
 
-```
-## 'data.frame':	150 obs. of  5 variables:
-##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
-##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
-##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
-##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
-##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
-```
-
-However there are some packages that do not use lazy loading, and therefore you must use `data()` to access them:
-
-
-```r
-library(lawstat)
-```
-
-```
-## Error in library(lawstat): there is no package called 'lawstat'
-```
-
-```r
-str(zuni)
-```
-
-```
-## Error in str(zuni): object 'zuni' not found
-```
-
-```r
-data(zuni)
-str(zuni)
-```
-
-```
-## Error in str(zuni): object 'zuni' not found
-```
-
-Packages that we use that fall in this category include: `lawstat`, `pgmm`, and others. (Submit a PR to add to this list.)
-
-Besides the datasets above, there are other datasets within specific R packages. To see a full list of data in various packages, run `??datasets` in the RStudio console.
+This is a common source of frustration for students: "I installed the library and loaded the package but the data's not there!" Forewarned is forearmed. Packages that we use that fall in this category include: `lawstat`, `pgmm`, and others. (Submit a PR to add to this list.)
 
 
 ## Import local data
@@ -263,7 +227,7 @@ mytable %>%
   guides(color = FALSE)
 ```
 
-<img src="import_data_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="import_data_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 
 
