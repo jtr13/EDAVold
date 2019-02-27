@@ -164,7 +164,7 @@ nyctables <- read_html("https://en.wikipedia.org/wiki/Boroughs_of_New_York_City"
 
 `nyctables` is a list with three elements, one for each table on the page.
 
-Next we can check each list item until we find what we want, consulting the original web page to get a sense of where our table is located. (There are other methods for identifying what you need from a web page in more complex situations.)
+Next we can check each list item until we find what we want, consulting the original web page to get a sense of where our table is located. (There are other methods for identifying what you need from a web page in more complex situations. See Additional Resources below.)
 
 It turns out that the table we want is the first list element:
 
@@ -229,7 +229,8 @@ mytable %>%
 
 <img src="import_data_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
-
+**Additional Resources**
+[Excellent webinar from RStudio on using `rvest`](https://www.rstudio.com/resources/webinars/extracting-data-from-the-web-part-2/) -- covers how to use the structure of the HTML and CSS on the page to scrape the information that you need, as well as using additional `rvest` functions such as `html_text()`, `html_name()`, `html_attrs()`, `html_children()`, etc.
 
 ## Import data from database
 
