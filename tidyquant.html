@@ -25,7 +25,7 @@
 <meta name="author" content="Zach Bogart, Joyce Robbins">
 
 
-<meta name="date" content="2019-02-28">
+<meta name="date" content="2019-03-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -734,7 +734,7 @@ function unhover(element) {
 <p>Obtain historical data for single stock (for example, Google):</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get historical data for single stock. e.g. google</span>
 <span class="kw">tq_get</span>(<span class="st">&quot;GOOGL&quot;</span>, <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>)</code></pre>
-<pre><code>## # A tibble: 2,555 x 7
+<pre><code>## # A tibble: 2,557 x 7
 ##    date        open  high   low close   volume adjusted
 ##    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 2009-01-02  154.  161.  153.  161.  7213700     161.
@@ -747,7 +747,7 @@ function unhover(element) {
 ##  8 2009-01-13  156.  160.  155.  157.  8856100     157.
 ##  9 2009-01-14  155.  157.  149.  151. 10924800     151.
 ## 10 2009-01-15  149.  152.  144.  150. 11857100     150.
-## # … with 2,545 more rows</code></pre>
+## # … with 2,547 more rows</code></pre>
 <p>Calculate monthly return of single stock:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate monthly return of single stock</span>
 <span class="kw">tq_get</span>(<span class="kw">c</span>(<span class="st">&quot;GOOGL&quot;</span>), <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>) <span class="op">%&gt;%</span>
@@ -755,7 +755,7 @@ function unhover(element) {
                <span class="dt">mutate_fun=</span>periodReturn,
                <span class="dt">period=</span><span class="st">&quot;monthly&quot;</span>,
                <span class="dt">col_rename =</span> <span class="st">&quot;monthly_return&quot;</span>)</code></pre>
-<pre><code>## # A tibble: 122 x 2
+<pre><code>## # A tibble: 123 x 2
 ##    date       monthly_return
 ##    &lt;date&gt;              &lt;dbl&gt;
 ##  1 2009-01-30        0.0536 
@@ -768,7 +768,7 @@ function unhover(element) {
 ##  8 2009-08-31        0.0420 
 ##  9 2009-09-30        0.0740 
 ## 10 2009-10-30        0.0812 
-## # … with 112 more rows</code></pre>
+## # … with 113 more rows</code></pre>
 <p>Create a line chart of the <em>closing price</em> for single stock:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># showing closing price for single stock</span>
 <span class="kw">tq_get</span>(<span class="kw">c</span>(<span class="st">&quot;GOOGL&quot;</span>), <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>) <span class="op">%&gt;%</span>
@@ -791,7 +791,7 @@ function unhover(element) {
 <p>Obtain historical data for multiple stocks (for example, GAFA):</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get historical data for multiple stocks. e.g. GAFA</span>
 <span class="kw">tq_get</span>(<span class="kw">c</span>(<span class="st">&quot;GOOGL&quot;</span>,<span class="st">&quot;AMZN&quot;</span>,<span class="st">&quot;FB&quot;</span>,<span class="st">&quot;AAPL&quot;</span>), <span class="dt">get=</span><span class="st">&quot;stock.prices&quot;</span>)</code></pre>
-<pre><code>## # A tibble: 9,369 x 8
+<pre><code>## # A tibble: 9,377 x 8
 ##    symbol date        open  high   low close   volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 GOOGL  2009-01-02  154.  161.  153.  161.  7213700     161.
@@ -804,7 +804,7 @@ function unhover(element) {
 ##  8 GOOGL  2009-01-13  156.  160.  155.  157.  8856100     157.
 ##  9 GOOGL  2009-01-14  155.  157.  149.  151. 10924800     151.
 ## 10 GOOGL  2009-01-15  149.  152.  144.  150. 11857100     150.
-## # … with 9,359 more rows</code></pre>
+## # … with 9,367 more rows</code></pre>
 <p>Create a multiple line chart of the closing prices of multiple stocks (again, GAFA). We can show each stock in a different color on the same graph:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a multiple line chart of the closing prices of the four stocks,</span>
 <span class="co"># showing each stock in a different color on the same graph.</span>
@@ -830,7 +830,7 @@ function unhover(element) {
                <span class="dt">mutate_fun=</span>periodReturn,
                <span class="dt">period=</span><span class="st">&quot;monthly&quot;</span>,
                <span class="dt">col_rename =</span> <span class="st">&quot;monthly_return&quot;</span>)</code></pre>
-<pre><code>## # A tibble: 448 x 3
+<pre><code>## # A tibble: 452 x 3
 ## # Groups:   symbol [4]
 ##    symbol date       monthly_return
 ##    &lt;chr&gt;  &lt;date&gt;              &lt;dbl&gt;
@@ -844,7 +844,7 @@ function unhover(element) {
 ##  8 GOOGL  2009-08-31        0.0420 
 ##  9 GOOGL  2009-09-30        0.0740 
 ## 10 GOOGL  2009-10-30        0.0812 
-## # … with 438 more rows</code></pre>
+## # … with 442 more rows</code></pre>
 <p>Create a multiple line chart of monthly return of the four stocks. Again, we can show each stock in a different color on the same graph:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a multiple line chart of monthly return of the four stocks,</span>
 <span class="co"># showing each stock in a different color on the same graph</span>

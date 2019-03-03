@@ -38,7 +38,7 @@ tq_get("GOOGL", get="stock.prices")
 ```
 
 ```
-## # A tibble: 2,555 x 7
+## # A tibble: 2,557 x 7
 ##    date        open  high   low close   volume adjusted
 ##    <date>     <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl>
 ##  1 2009-01-02  154.  161.  153.  161.  7213700     161.
@@ -51,7 +51,7 @@ tq_get("GOOGL", get="stock.prices")
 ##  8 2009-01-13  156.  160.  155.  157.  8856100     157.
 ##  9 2009-01-14  155.  157.  149.  151. 10924800     151.
 ## 10 2009-01-15  149.  152.  144.  150. 11857100     150.
-## # … with 2,545 more rows
+## # … with 2,547 more rows
 ```
 
 Calculate monthly return of single stock:
@@ -66,7 +66,7 @@ tq_get(c("GOOGL"), get="stock.prices") %>%
 ```
 
 ```
-## # A tibble: 122 x 2
+## # A tibble: 123 x 2
 ##    date       monthly_return
 ##    <date>              <dbl>
 ##  1 2009-01-30        0.0536 
@@ -79,7 +79,7 @@ tq_get(c("GOOGL"), get="stock.prices") %>%
 ##  8 2009-08-31        0.0420 
 ##  9 2009-09-30        0.0740 
 ## 10 2009-10-30        0.0812 
-## # … with 112 more rows
+## # … with 113 more rows
 ```
 
 Create a line chart of the *closing price* for single stock:
@@ -117,7 +117,7 @@ tq_get(c("GOOGL","AMZN","FB","AAPL"), get="stock.prices")
 ```
 
 ```
-## # A tibble: 9,369 x 8
+## # A tibble: 9,377 x 8
 ##    symbol date        open  high   low close   volume adjusted
 ##    <chr>  <date>     <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl>
 ##  1 GOOGL  2009-01-02  154.  161.  153.  161.  7213700     161.
@@ -130,7 +130,7 @@ tq_get(c("GOOGL","AMZN","FB","AAPL"), get="stock.prices")
 ##  8 GOOGL  2009-01-13  156.  160.  155.  157.  8856100     157.
 ##  9 GOOGL  2009-01-14  155.  157.  149.  151. 10924800     151.
 ## 10 GOOGL  2009-01-15  149.  152.  144.  150. 11857100     150.
-## # … with 9,359 more rows
+## # … with 9,367 more rows
 ```
 
 Create a multiple line chart of the closing prices of multiple stocks (again, GAFA). We can show each stock in a different color on the same graph:
@@ -173,7 +173,7 @@ tq_get(c("GOOGL","AMZN","FB","AAPL"), get="stock.prices") %>%
 ```
 
 ```
-## # A tibble: 448 x 3
+## # A tibble: 452 x 3
 ## # Groups:   symbol [4]
 ##    symbol date       monthly_return
 ##    <chr>  <date>              <dbl>
@@ -187,7 +187,7 @@ tq_get(c("GOOGL","AMZN","FB","AAPL"), get="stock.prices") %>%
 ##  8 GOOGL  2009-08-31        0.0420 
 ##  9 GOOGL  2009-09-30        0.0740 
 ## 10 GOOGL  2009-10-30        0.0812 
-## # … with 438 more rows
+## # … with 442 more rows
 ```
 
 Create a multiple line chart of monthly return of the four stocks. Again, we can show each stock in a different color on the same graph:
