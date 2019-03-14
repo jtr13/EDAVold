@@ -716,7 +716,7 @@ function unhover(element) {
 <div id="singlemultiple-time-series" class="section level2">
 <h2><span class="header-section-number">20.2</span> Single/Multiple Time Series</h2>
 <p>We can draw time series using <strong>geom_line()</strong> with time on the x-axis. X-axis should be an object in the <a href="date.html">Date class</a>, assuming there is no hour/minute/second data.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 
 <span class="kw">ggplot</span>(<span class="dt">data =</span> economics, <span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> pop))<span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span>
@@ -724,9 +724,15 @@ function unhover(element) {
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;population&quot;</span>)</code></pre>
 <p><img src="timeseriesbasic_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>We can also draw multiple time series on one plot for comparison purpose:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-df &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/mortgage.csv&quot;</span>)
-df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(<span class="dt">key =</span> TYPE, <span class="dt">value =</span> RATE, <span class="op">-</span>DATE) <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/mortgage.csv&quot;</span>)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   DATE = col_date(format = &quot;&quot;),
+##   `5/1 ARM` = col_double(),
+##   `15 YR FIXED` = col_double(),
+##   `30 YR FIXED` = col_double()
+## )</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(<span class="dt">key =</span> TYPE, <span class="dt">value =</span> RATE, <span class="op">-</span>DATE) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">TYPE =</span> forcats<span class="op">::</span><span class="kw">fct_reorder2</span>(TYPE, DATE, RATE)) <span class="co"># puts legend in correct order</span>
 
 
@@ -738,35 +744,8 @@ g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df, <span class="
 g</code></pre>
 <p><img src="timeseriesbasic_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>The following exmaple shows the closing price for four big technology companies in the US. When analyzing GDP, salary level and stock prices, it is often difficult to compare trends since the scales are so different. For example, since AAPL and MSFT prices per share are so much lower than GOOG’s price per share, it’s hard to discern the trends:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyquant)</code></pre>
-<pre><code>## Loading required package: lubridate</code></pre>
-<pre><code>## 
-## Attaching package: &#39;lubridate&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:base&#39;:
-## 
-##     date</code></pre>
-<pre><code>## Loading required package: PerformanceAnalytics</code></pre>
-<pre><code>## Loading required package: xts</code></pre>
-<pre><code>## Loading required package: zoo</code></pre>
-<pre><code>## 
-## Attaching package: &#39;zoo&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     as.Date, as.Date.numeric</code></pre>
-<pre><code>## 
-## Attaching package: &#39;xts&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
-## 
-##     first, last</code></pre>
-<pre><code>## 
-## Attaching package: &#39;PerformanceAnalytics&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:graphics&#39;:
-## 
-##     legend</code></pre>
-<pre><code>## Loading required package: quantmod</code></pre>
-<pre><code>## Loading required package: TTR</code></pre>
-<pre><code>## Version 0.4-0 included new data defaults. See ?getSymbols.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">stocks &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AAPL&quot;</span>, <span class="st">&quot;GOOG&quot;</span>, <span class="st">&quot;IBM&quot;</span>, <span class="st">&quot;MSFT&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyquant)
+stocks &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AAPL&quot;</span>, <span class="st">&quot;GOOG&quot;</span>, <span class="st">&quot;IBM&quot;</span>, <span class="st">&quot;MSFT&quot;</span>)
 df &lt;-<span class="st"> </span><span class="kw">tq_get</span>(stocks, <span class="dt">from =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2013-01-01&quot;</span>),
              <span class="dt">to =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2013-12-31&quot;</span>))
 

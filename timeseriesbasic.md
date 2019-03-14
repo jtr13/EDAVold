@@ -14,7 +14,7 @@ This section discusses drawing graphics for time series data.
 We can draw time series using **geom_line()** with time on the x-axis. X-axis should be an object in the [Date class](date.html), assuming there is no hour/minute/second data.
 
 ```r
-library(ggplot2)
+library(tidyverse)
 
 ggplot(data = economics, aes(x = date, y = pop))+
   geom_line(color = "blue") +
@@ -28,8 +28,20 @@ We can also draw multiple time series on one plot for comparison purpose:
 
 
 ```r
-library(tidyverse)
 df <- read_csv("data/mortgage.csv")
+```
+
+```
+## Parsed with column specification:
+## cols(
+##   DATE = col_date(format = ""),
+##   `5/1 ARM` = col_double(),
+##   `15 YR FIXED` = col_double(),
+##   `30 YR FIXED` = col_double()
+## )
+```
+
+```r
 df <- df %>% gather(key = TYPE, value = RATE, -DATE) %>% 
   mutate(TYPE = forcats::fct_reorder2(TYPE, DATE, RATE)) # puts legend in correct order
 
@@ -50,81 +62,6 @@ The following exmaple shows the closing price for four big technology companies 
 
 ```r
 library(tidyquant)
-```
-
-```
-## Loading required package: lubridate
-```
-
-```
-## 
-## Attaching package: 'lubridate'
-```
-
-```
-## The following object is masked from 'package:base':
-## 
-##     date
-```
-
-```
-## Loading required package: PerformanceAnalytics
-```
-
-```
-## Loading required package: xts
-```
-
-```
-## Loading required package: zoo
-```
-
-```
-## 
-## Attaching package: 'zoo'
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     as.Date, as.Date.numeric
-```
-
-```
-## 
-## Attaching package: 'xts'
-```
-
-```
-## The following objects are masked from 'package:dplyr':
-## 
-##     first, last
-```
-
-```
-## 
-## Attaching package: 'PerformanceAnalytics'
-```
-
-```
-## The following object is masked from 'package:graphics':
-## 
-##     legend
-```
-
-```
-## Loading required package: quantmod
-```
-
-```
-## Loading required package: TTR
-```
-
-```
-## Version 0.4-0 included new data defaults. See ?getSymbols.
-```
-
-```r
 stocks <- c("AAPL", "GOOG", "IBM", "MSFT")
 df <- tq_get(stocks, from = as.Date("2013-01-01"),
              to = as.Date("2013-12-31"))
