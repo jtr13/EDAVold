@@ -110,7 +110,7 @@ Sys.Date()
 ```
 
 ```
-## [1] "2019-03-05"
+## [1] "2019-03-14"
 ```
 
 ```r
@@ -130,7 +130,7 @@ weekdays(today)
 ```
 
 ```
-## [1] "Tuesday"
+## [1] "Thursday"
 ```
 
 ```r
@@ -138,7 +138,7 @@ weekdays(today, abbreviate = TRUE)
 ```
 
 ```
-## [1] "Tue"
+## [1] "Thu"
 ```
 
 ```r
@@ -182,7 +182,7 @@ lubridate::yday(today)
 ```
 
 ```
-## [1] 64
+## [1] 73
 ```
 
 ```r
@@ -207,7 +207,7 @@ lubridate::mday(today)
 ```
 
 ```
-## [1] 5
+## [1] 14
 ```
 
 ```r
@@ -215,7 +215,7 @@ lubridate::week(today)
 ```
 
 ```
-## [1] 10
+## [1] 11
 ```
 
 ```r
@@ -223,7 +223,7 @@ lubridate::wday(today)
 ```
 
 ```
-## [1] 3
+## [1] 5
 ```
 
 ## Plotting with a `Date` class variable
