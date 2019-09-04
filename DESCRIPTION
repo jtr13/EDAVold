@@ -38,3 +38,5 @@ Imports:
   viridis,
   viridisLite,
   visNetwork
+URL: https://github.com/jtr13/EDAVold
+BugReports: https://github.com/jtr13/EDAVold/issues
